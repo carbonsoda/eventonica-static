@@ -4,8 +4,9 @@ class Eventonica {
         // Adds a new Event
     }
 
-    updateEvent(event) {
-        // Update existing Event
+    // Update existing Event
+    updateEvent(updateProperty, eventID, [...changes]) {
+        // Use a switch case with updateProperty to call appropriate func
     }
 
     deleteEvent(event) {
