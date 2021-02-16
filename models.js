@@ -42,38 +42,73 @@ class Event {
         this.name = name;
         this.date = new Date(date);
         this.time = time; // could be all day too
-        this.category = category;
+        this.category = new Set().add(category);
         this.location = location;
         this.details = details;
 
         Event.all.push(this); // keep track of all created instances
     }
 
-    static findByDate() {
-        return [];
+    static findByDate(searchDate) {
+        let results = []
+
+        // Assuming same timezone for now
+        // Need to make sure date only includes date, not time
+        // ie set time to 00:00:00.00
+        for (let event in all) {
+            if (event.date.valueOf() == searchDate.valueOf()) {
+                results.add(event);
+            }
+        }
+
+        return results;
     }
 
-    static findByCategory() {
-        return [];
+    // Returns filtered array of events that have given category label
+    static findByCategory(searchCategory) {
+        let results = []
+
+        // TODO: Consider when to format search-term
+        for (let event in all) {
+            if (event.category.has(searchCategory)) {
+                results.add(event);
+            }
+        }
+
+        return results;
     }
 
     // Update event name
-    updateName(newName) { }
+    updateName(newName) {
+        this.name = newName;
+    }
     
     // update event date
-    updateDate(newDate) { }
+    updateDate(newDate) {
+        this.date = new Date(newDate);
+    }
 
     // update event time
-    updateTime(newTime) { }
+    updateTime(newTime) {
+        // needs consideration of passed-in format
+        // ie make sure its in UTC 
+        this.time = newTime;
+    }
     
     // update event category labels
-    updateCategory(newCategory) { }
+    updateCategory(newCategory) {
+        this.category.add(newCategory);
+    }
     
     // update event location
-    updateLocation(newLocation) { }
+    updateLocation(newLocation) {
+        this.location = newLocation;
+    }
 
     // update event details/description
-    updateDetails(newDetails) { }
+    updateDetails(newDetails) {
+        this.details = newDetails;
+    }
     
 }
 
@@ -84,8 +119,9 @@ class User {
     constructor(name) {
         this.id = User._nextId++;
         this.name = name;
-        // for now just using array, to store event ids
-        this.favorites = [];
+        // for now just using Set, to store event ids
+        // not sure if this is ideal hashmap though
+        this.favorites = new Set();
         
         User.all.push(this); // keep track of all created instances
     }
@@ -94,8 +130,12 @@ class User {
         this.name = newName;
     }
     
-    addFavorite(eventID) { }
+    addFavorite(eventID) {
+        this.favorites.add(eventID);
+    }
 
-    removeFavorite(eventID) { }
+    removeFavorite(eventID) {
+        this.favorites.delete(eventID);
+    }
 
 }
