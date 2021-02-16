@@ -1,25 +1,26 @@
 class Eventonica {
-    addEvent(/* arguments you decide go here */) {
+
+    addEvent(name, date, time = '', category = '', location = '', details = '') {
         // Adds a new Event
     }
 
-    updateEvent() {
+    updateEvent(event) {
         // Update existing Event
     }
 
-    deleteEvent() {
+    deleteEvent(event) {
         // Deletes Event
     }
 
-    findEventsByDate() {
+    findEventsByDate(findDate) {
         // Return items in Event.all with a specified date
     }
 
-    findEventsbyCategory() {
+    findEventsbyCategory(findCategory) {
         // Return items in Event.all with a specified category
     }
 
-    addUser() {
+    addUser(name) {
         // Adds a new User
     }
 
@@ -36,9 +37,15 @@ class Event {
     static all = [];
     static _nextId = 100;
 
-    constructor() {
+    constructor(name, date, time, category, location, details) {
         this.id = Event._nextId++;
-        // decide what properties are required
+        this.name = name;
+        this.date = new Date(date);
+        this.time = time; // could be all day too
+        this.category = category;
+        this.location = location;
+        this.details = details;
+
         Event.all.push(this); // keep track of all created instances
     }
 
@@ -49,15 +56,46 @@ class Event {
     static findByCategory() {
         return [];
     }
+
+    // Update event name
+    updateName(newName) { }
+    
+    // update event date
+    updateDate(newDate) { }
+
+    // update event time
+    updateTime(newTime) { }
+    
+    // update event category labels
+    updateCategory(newCategory) { }
+    
+    // update event location
+    updateLocation(newLocation) { }
+
+    // update event details/description
+    updateDetails(newDetails) { }
+    
 }
 
 class User {
     static all = [];
     static _nextId = 200;
 
-    constructor() {
+    constructor(name) {
         this.id = User._nextId++;
-        // decide what properties are required on an instance
+        this.name = name;
+        // for now just using array, to store event ids
+        this.favorites = [];
+        
         User.all.push(this); // keep track of all created instances
     }
+
+    updateName(newName) {
+        this.name = newName;
+    }
+    
+    addFavorite(eventID) { }
+
+    removeFavorite(eventID) { }
+
 }
