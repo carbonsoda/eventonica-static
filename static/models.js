@@ -51,6 +51,9 @@ class Eventonica {
             case "name":
                 User.all[userID - 200].updateName(...changes);
                 break;
+            case "favorites":
+                User.all[userID - 200].updateFavorites(...changes);
+                break;
             default:
                 break;
         }
@@ -159,6 +162,7 @@ class User {
         this.name = name;
         // for now just using Set, to store event ids
         // not sure if this is ideal hashmap though
+        // should not store event objects itself
         this.favorites = new Set();
 
         // later features: password + permission levels
@@ -170,12 +174,12 @@ class User {
         this.name = newName;
     }
     
-    addFavorite(eventID) {
-        this.favorites.add(eventID);
-    }
-
-    removeFavorite(eventID) {
-        this.favorites.delete(eventID);
+    updateFavorites(eventID) {
+        if (this.favorites.has(eventID)) {
+            this.favorites.delete(eventID);
+        } else {
+            this.favorites.add(eventID);
+        }
     }
 
 }
