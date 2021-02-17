@@ -1,12 +1,30 @@
+// TO-DO: determine how users+events will be accessed/looked up
+// Looking up in the array doesn't seem like best idea right now
+
 class Eventonica {
 
     addEvent(name, date, time = '', category = '', location = '', details = '') {
-        // Adds a new Event
+        let newEvent = new Event(name, date, time, category, location, details);
+        // some sort of success message?
     }
 
     // Update existing Event
-    updateEvent(updateProperty, eventID, [...changes]) {
+    updateEvent(updateProperty, eventID, ...changes) {
         // Use a switch case with updateProperty to call appropriate func
+        switch (updateProperty) {
+            case 'name':
+                break;
+            case 'date':
+                break;
+            case 'time':
+                break;
+            case 'category':
+                break;
+            case 'location':
+                break;
+            case 'details':
+                break;
+        }
     }
 
     deleteEvent(event) {
@@ -21,16 +39,35 @@ class Eventonica {
         // Return items in Event.all with a specified category
     }
 
+    // Add new User
     addUser(name) {
-        // Adds a new User
+        let newUser = new User(name);
+        return `User #${newUser.id} ${newUser.name} registered.`;
     }
 
-    updateUser() {
-        // Update existing User
+    // Update existing User
+    updateUser(userID, updateProperty, ...changes) {
+        switch (updateProperty) {
+            case "name":
+                User.all[userID - 200].updateName(...changes);
+                break;
+            default:
+                break;
+        }
     }
 
-    deleteUser() {
-        // Deletes User
+    // Deletes User
+    deleteUser(userID) {
+        let deleteID;
+        for (let user of User.all) {
+            if (user.id == userID) {
+                deleteID = user.id;
+                break;
+            }
+        }
+        if (deleteID) {
+            User.all[userID - 200] = null;
+        }
     }
 }
 
@@ -123,6 +160,8 @@ class User {
         // for now just using Set, to store event ids
         // not sure if this is ideal hashmap though
         this.favorites = new Set();
+
+        // later features: password + permission levels
         
         User.all.push(this); // keep track of all created instances
     }
