@@ -29,15 +29,25 @@ class Eventonica {
 
     // Deletes Event
     deleteEvent(eventID) {
-        // Deletes Event
+        let eventIdx = this.indexLookup(Event.all, eventID)
+
+        // if event correctly found
+        if (eventIdx >= 0) {
+            Event.all.splice(eventIdx, 1);
+        } else {
+            // some error message here
+        }
     }
 
+    // Return items in Event.all with a specified date
     findEventsByDate(findDate) {
-        // Return items in Event.all with a specified date
+        // TO-DO: ensure findDate's format
+        return Event.findbyDate(findDate);
     }
 
     findEventsbyCategory(findCategory) {
         // Return items in Event.all with a specified category
+        return Event.findByCategory(findCategory);
     }
 
     // Add new User
@@ -48,6 +58,7 @@ class Eventonica {
 
     // Update existing User
     updateUser(userID, updateProperty, ...changes) {
+        let userIdx = indexLookup(userID);
 
         switch (updateProperty) {
             case "name":
@@ -65,7 +76,7 @@ class Eventonica {
     deleteUser(userID) {
         let userIdx = indexLookup(User.all, userID);
 
-        // if userID correctly found
+        // if user correctly found
         if (userIdx >= 0) {
             User.all.splice(userIdx, 1);
         } else {
