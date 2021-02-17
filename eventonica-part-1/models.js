@@ -27,7 +27,8 @@ class Eventonica {
         }
     }
 
-    deleteEvent(event) {
+    // Deletes Event
+    deleteEvent(eventID) {
         // Deletes Event
     }
 
@@ -47,6 +48,7 @@ class Eventonica {
 
     // Update existing User
     updateUser(userID, updateProperty, ...changes) {
+
         switch (updateProperty) {
             case "name":
                 User.all[userID - 200].updateName(...changes);
@@ -61,16 +63,38 @@ class Eventonica {
 
     // Deletes User
     deleteUser(userID) {
-        let deleteID;
-        for (let user of User.all) {
-            if (user.id == userID) {
-                deleteID = user.id;
-                break;
+        let userIdx = indexLookup(User.all, userID);
+
+        // if userID correctly found
+        if (userIdx >= 0) {
+            User.all.splice(userIdx, 1);
+        } else {
+            // some error message here
+        }
+    }
+
+    // Find the index of a user or event object
+    // using binary search and object's id
+    indexLookup(arrAllObjs, findID) {
+        // Set lowest and highest possible indexes
+        let minIdx = 0;
+        let maxIdx = arrAllObjs.length - 1;
+
+        while (minIdx <= maxIdx) {
+            // check at middle
+            let midIdx = Math.floor((maxIdx + minIdx) / 2);
+            let guessID = arrAllObjs[midIdx].id;
+
+            if (guessID == findID) {
+                return midIdx;
+            } else if (guessID > findID) {
+                maxIdx = midIdx - 1;
+            } else {
+                minIdx = midIdx + 1;
             }
         }
-        if (deleteID) {
-            User.all[userID - 200] = null;
-        }
+
+        return -1;
     }
 }
 
@@ -183,3 +207,4 @@ class User {
     }
 
 }
+
