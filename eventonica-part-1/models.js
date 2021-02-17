@@ -9,7 +9,7 @@ class Eventonica {
     }
 
     // Update existing Event
-    updateEvent(updateProperty, eventID, ...changes) {
+    updateEvent(eventID, updateProperty, ...changes) {
         // Use a switch case with updateProperty to call appropriate func
         switch (updateProperty) {
             case 'name':
@@ -154,7 +154,7 @@ class Event {
         return results;
     }
 
-    // Update event name
+    // update event name
     updateName(newName) {
         this.name = newName;
     }
@@ -219,3 +219,10 @@ class User {
 
 }
 
+
+// For Jasmine testing
+module.exports = { Eventonica, User, Event }
+
+if (typeof module !== "undefined") {
+    module.exports = { Eventonica, User, Event };
+}
