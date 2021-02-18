@@ -1,14 +1,10 @@
-/**
- * Paste your code from Part 1 into this file but keep the module check at the very end.
- * (The following is a just a small subset for the Add Event form on the example page to work)
- */
 
 class Eventonica {
 
     // Add event
     // Name is required
     // Default date is current date, empty values for rest
-    addEvent(name, date = new Date(), time = '', category = '', location = '', details = '') {
+    addEvent(name, date= new Date(), time = '', category = '', location = '', details = '') {
         return new Event(name, date, time, category, location, details);
     }
 
@@ -41,7 +37,7 @@ class Eventonica {
 
     // Deletes Event
     deleteEvent(eventID) {
-        let eventIdx = indexLookup(Event.all, eventID);
+        let eventIdx = this.indexLookup(Event.all, eventID)
 
         // if event correctly found
         if (eventIdx >= 0) {
@@ -57,7 +53,7 @@ class Eventonica {
         return Event.findByDate(findDate);
     }
 
-    findEventsbyCategory(findCategory) {
+    findEventsByCategory(findCategory) {
         // Return items in Event.all with a specified category
         return Event.findByCategory(findCategory);
     }
@@ -72,7 +68,7 @@ class Eventonica {
         let userIdx = indexLookup(userID);
 
         // User not found
-        if (userIdx < 0) return;
+        if(userIdx < 0) return;
 
         switch (updateProperty) {
             case "name":
@@ -88,8 +84,7 @@ class Eventonica {
 
     // Deletes User
     deleteUser(userID) {
-        console.log(this);
-        let userIdx = this.indexLookup(User.all, userID);
+        let userIdx = indexLookup(User.all, userID);
 
         // if user correctly found
         if (userIdx >= 0) {
@@ -172,7 +167,7 @@ class Event {
     updateName(newName) {
         this.name = newName;
     }
-
+    
     // update event date
     // typeof(newDate) == Date object
     updateDate(newDate) {
@@ -185,12 +180,12 @@ class Event {
         // ie make sure its in UTC 
         this.time = newTime;
     }
-
+    
     // update event category labels
     updateCategory(newCategory) {
         this.category.add(newCategory);
     }
-
+    
     // update event location
     updateLocation(newLocation) {
         this.location = newLocation;
@@ -200,7 +195,7 @@ class Event {
     updateDetails(newDetails) {
         this.details = newDetails;
     }
-
+    
 }
 
 class User {
@@ -216,14 +211,14 @@ class User {
         this.favorites = new Set();
 
         // later features: password + permission levels
-
+        
         User.all.push(this); // keep track of all created instances
     }
 
     updateName(newName) {
         this.name = newName;
     }
-
+    
     updateFavorites(eventID) {
         if (this.favorites.has(eventID)) {
             this.favorites.delete(eventID);
@@ -235,10 +230,8 @@ class User {
 }
 
 
-if (typeof module !== "undefined") {
-    module.exports = { Eventonica, User, Event };
-}
-
+// For Jasmine testing
+module.exports = { Eventonica, User, Event }
 
 // Example events for now
 
@@ -250,4 +243,3 @@ new User('Avery');
 new User('Mark');
 new User('Seo Young');
 new User('Cool-Beans');
-
