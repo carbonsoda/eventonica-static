@@ -9,8 +9,6 @@ new Event('Outside Yoga Lesson');
 
 // Constructor
 
-// indexLookup(eventID)
-
 // findByDate(searchDate)
 
 // findByCategory(searchCategory)

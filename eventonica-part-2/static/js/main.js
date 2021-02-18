@@ -6,40 +6,52 @@ document.addEventListener("DOMContentLoaded", () => {
     // Use this to call all the logic we already created
     const app = new Eventonica();
 
-    // Builds HTML list for all event. You must call this function after you
-    // change, add, or remove any events.
+
+    /** 
+     * HTML LIST BUILDERS:
+     * Call these functions after you change, add, or remove corresponding object
+     */
+
+    // Builds HTML list for all events. 
     const refreshEventsList = () => {
         document.querySelector("#events-list").innerHTML = Event.all
             .map((event) => `<li>${event.name}</li>`)
             .join("\n");
     };
 
-    // Builds HTML list for all users. You must call this function after you
-    // change, add, or remove any events.
+    // Builds HTML list for all users.
     const refreshUserList = () => {
         document.querySelector("#users-list").innerHTML = User.all
             .map((user) => `<li>${user.name}</li>`)
             .join("\n");
     };
 
-    // Set to load when page loads first time
+    // Loading page for first time
     refreshEventsList();
     refreshUserList();
-    
 
+
+    // Handle EVENT form submit by calling our instance of Eventonica, `app`
+    const eventHandle = (submitEvent, eventAction, eventSelector, logMsg) => {
+        submitEvent.preventDefault();
+        const eventID = document.querySelector(eventSelector).value;
+        if (eventID) {
+            const event = eventAction(eventID);
+            console.log(logMsg, event);
+            refreshEventsList();
+        }
+    };
+
+    // EVENT ACTIONS
     const addEventForm = document.querySelector("#add-event");
 
-    // Handle add event form submit by calling our instance of Eventonica, `app`
-    addEventForm.addEventListener("submit", (submitEvent) => {
-        submitEvent.preventDefault();
-        const name = document.querySelector("#add-event-name").value;
-        const event = app.addEvent(name);
-        console.log("Added event ", event);
-        refreshEventsList();
+    addEventForm.addEventListener('submit', (submitEvent) => {
+        eventHandle(submitEvent, app.addEvent, "#add-event-name", 'Added event');
         addEventForm.reset();
     });
 
 
+    // Handle USER form submit by calling our instance of Eventonica, `app`
     const userHandle = (submitEvent, userAction, nameSelector, logMsg) => {
         submitEvent.preventDefault();
         const nameID = document.querySelector(nameSelector).value;
@@ -52,15 +64,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     };
 
+    // USER FIELDS
     const addUserForm = document.querySelector('#add-user');
+    const removeUserForm = document.querySelector('#delete-user');
 
-    // Handle add user form submit by calling our instance of Eventonica, `app`
     addUserForm.addEventListener('submit', (submitEvent) => {
         userHandle(submitEvent, app.addUser, "#add-user-name", 'Added user ');
         addUserForm.reset();
     });
-
-    const removeUserForm = document.querySelector('#delete-user');
 
     removeUserForm.addEventListener('submit', (submitEvent) => {
         userHandle(submitEvent, app.deleteUser, "#delete-user-id", 'Removed user ');
