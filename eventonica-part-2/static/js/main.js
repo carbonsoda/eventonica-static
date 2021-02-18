@@ -44,9 +44,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // EVENT ACTIONS
     const addEventForm = document.querySelector("#add-event");
+    const removeEventForm = document.querySelector('#delete-event')
 
     addEventForm.addEventListener('submit', (submitEvent) => {
         eventHandle(submitEvent, app.addEvent, "#add-event-name", 'Added event');
+        addEventForm.reset();
+    });
+
+    removeEventForm.addEventListener('submit', (submitEvent) => {
+        eventHandle(submitEvent, app.deleteEvent, "#delete-event-id", 'Deleted event');
         addEventForm.reset();
     });
 
