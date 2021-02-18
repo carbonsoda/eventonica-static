@@ -243,6 +243,8 @@ if (typeof module !== "undefined") {
 
 new Event('Virtual Guided Meditation');
 new Event('Outside Yoga Lesson');
+
+
 new User('Avery');
 new User('Mark');
 new User('Seo Young');

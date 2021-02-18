@@ -14,6 +14,19 @@ document.addEventListener("DOMContentLoaded", () => {
             .join("\n");
     };
 
+    // Builds HTML list for all users. You must call this function after you
+    // change, add, or remove any events.
+    const refreshUserList = () => {
+        document.querySelector("#users-list").innerHTML = User.all
+            .map((user) => `<li>${user.name}</li>`)
+            .join("\n");
+    };
+
+    // Set to load when page loads first time
+    refreshEventsList();
+    refreshUserList();
+    
+
     const addEventForm = document.querySelector("#add-event");
 
     // Handle add event form submit by calling our instance of Eventonica, `app`
@@ -26,23 +39,31 @@ document.addEventListener("DOMContentLoaded", () => {
         addEventForm.reset();
     });
 
-    // Builds HTML list for all users. You must call this function after you
-    // change, add, or remove any events.
-    const refreshUserList = () => {
-        document.querySelector("#users-list").innerHTML = User.all
-            .map((user) => `<li>${user.name}</li>`)
-            .join("\n");
+
+    const userEvent = (submitEvent, userAction, nameSelector, logMsg) => {
+        submitEvent.preventDefault();
+        const nameID = document.querySelector(nameSelector).value;
+        if (nameID) {
+            const user = userAction(nameID);
+            console.log(logMsg, user);
+            refreshUserList();
+        }
+
+
     };
 
     const addUserForm = document.querySelector('#add-user');
 
     // Handle add user form submit by calling our instance of Eventonica, `app`
-    addUserForm.addEventListener("submit", (submitEvent) => {
-        submitEvent.preventDefault();
-        const name = document.querySelector("#add-user-name").value;
-        const user = app.addUser(name);
-        console.log("Added user ", user);
-        refreshUserList();
+    addUserForm.addEventListener('submit', (submitEvent) => {
+        userEvent(submitEvent, app.addUser, "#add-user-name", 'Added user ');
         addUserForm.reset();
+    });
+
+    const removeUserForm = document.querySelector('#delete-user');
+
+    removeUserForm.addEventListener('submit', (submitEvent) => {
+        userEvent(submitEvent, app.deleteUser, "#delete-user-id", 'Removed user ');
+        removeUserForm.reset();
     });
 });

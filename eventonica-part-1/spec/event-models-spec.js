@@ -4,8 +4,12 @@ const event = models.Event;
 
 // Event class only
 
+new Event('Virtual Guided Meditation');
+new Event('Outside Yoga Lesson');
+
 // Constructor
 
+// indexLookup(eventID)
 
 // findByDate(searchDate)
 
