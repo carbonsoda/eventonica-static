@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    const userEvent = (submitEvent, userAction, nameSelector, logMsg) => {
+    const userHandle = (submitEvent, userAction, nameSelector, logMsg) => {
         submitEvent.preventDefault();
         const nameID = document.querySelector(nameSelector).value;
         if (nameID) {
@@ -56,14 +56,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Handle add user form submit by calling our instance of Eventonica, `app`
     addUserForm.addEventListener('submit', (submitEvent) => {
-        userEvent(submitEvent, app.addUser, "#add-user-name", 'Added user ');
+        userHandle(submitEvent, app.addUser, "#add-user-name", 'Added user ');
         addUserForm.reset();
     });
 
     const removeUserForm = document.querySelector('#delete-user');
 
     removeUserForm.addEventListener('submit', (submitEvent) => {
-        userEvent(submitEvent, app.deleteUser, "#delete-user-id", 'Removed user ');
+        userHandle(submitEvent, app.deleteUser, "#delete-user-id", 'Removed user ');
         removeUserForm.reset();
     });
 });
