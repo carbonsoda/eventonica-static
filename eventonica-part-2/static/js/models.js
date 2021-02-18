@@ -239,3 +239,13 @@ module.exports = { Eventonica, User, Event }
 if (typeof module !== "undefined") {
     module.exports = { Eventonica, User, Event };
 }
+
+
+// Example events for now
+
+new Event('Virtual Guided Meditation');
+new Event('Outside Yoga Lesson');
+new User('Avery');
+new User('Mark');
+new User('Seo Young');
+new User('Cool-Beans');
