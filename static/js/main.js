@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // USER FORM'S EVENT LISTENERS
     addUserForm.addEventListener('submit', (submitEvent) => {
-        userHandle(submitEvent,'addUser', "#add-user-name", 'Added user ');
+        userHandle(submitEvent, 'addUser', "#add-user-name", 'Added user ');
         addUserForm.reset();
     });
 

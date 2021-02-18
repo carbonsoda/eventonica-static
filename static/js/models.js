@@ -4,7 +4,7 @@ class Eventonica {
     // Add event
     // Name is required
     // Default date is current date, empty values for rest
-    addEvent(name, date= new Date(), time = '', category = '', location = '', details = '') {
+    addEvent(name, date = new Date(), time = '', category = '', location = '', details = '') {
         return new Event(name, date, time, category, location, details);
     }
 
@@ -68,7 +68,7 @@ class Eventonica {
         let userIdx = indexLookup(userID);
 
         // User not found
-        if(userIdx < 0) return;
+        if (userIdx < 0) return;
 
         switch (updateProperty) {
             case "name":
@@ -167,7 +167,7 @@ class Event {
     updateName(newName) {
         this.name = newName;
     }
-    
+
     // update event date
     // typeof(newDate) == Date object
     updateDate(newDate) {
@@ -180,12 +180,12 @@ class Event {
         // ie make sure its in UTC 
         this.time = newTime;
     }
-    
+
     // update event category labels
     updateCategory(newCategory) {
         this.category.add(newCategory);
     }
-    
+
     // update event location
     updateLocation(newLocation) {
         this.location = newLocation;
@@ -195,7 +195,7 @@ class Event {
     updateDetails(newDetails) {
         this.details = newDetails;
     }
-    
+
 }
 
 class User {
@@ -211,14 +211,14 @@ class User {
         this.favorites = new Set();
 
         // later features: password + permission levels
-        
+
         User.all.push(this); // keep track of all created instances
     }
 
     updateName(newName) {
         this.name = newName;
     }
-    
+
     updateFavorites(eventID) {
         if (this.favorites.has(eventID)) {
             this.favorites.delete(eventID);
