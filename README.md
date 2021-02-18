@@ -12,7 +12,8 @@ This project is a part of Techtonica's curriculum ([source]("https://github.com/
 
 The project is split into seven parts.
 
-### Progress:
-- User and event classes are set for now, but Eventonica still needs work on event support.
+### Progress
+
+- Models.js has three main classes: Eventonica, Event, and User. They have basic implementations for now.
 - Jasmine tests are partially setup (formally part 2, now part 7)
 
