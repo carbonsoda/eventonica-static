@@ -231,7 +231,7 @@ class User {
 
 
 if (typeof module !== 'undefined') {
-    module.exports = { EventRecommender, User, Event };
+    module.exports = { Eventonica, User, Event };
 }
 
 // Example events + users for now
