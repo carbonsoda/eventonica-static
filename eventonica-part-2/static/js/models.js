@@ -234,8 +234,6 @@ class User {
 }
 
 
-module.exports = { Eventonica, User, Event }
-
 if (typeof module !== "undefined") {
     module.exports = { Eventonica, User, Event };
 }
@@ -249,3 +247,4 @@ new User('Avery');
 new User('Mark');
 new User('Seo Young');
 new User('Cool-Beans');
+

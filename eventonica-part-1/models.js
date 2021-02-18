@@ -235,6 +235,3 @@ class User {
 // For Jasmine testing
 module.exports = { Eventonica, User, Event }
 
-if (typeof module !== "undefined") {
-    module.exports = { Eventonica, User, Event };
-}
