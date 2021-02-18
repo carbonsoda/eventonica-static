@@ -17,29 +17,33 @@
     </header>
 
     <main>
-        <div class="user-and-events">
+        <!--EVENTS SECTION-->
+        <div class="event-management">
             <section class="event-management">
                 <h2>Event Management</h2>
-                <div>
+
+                <!--View all events + individual details-->
+                <div class="events-overview">
                     <h3>All Events</h3>
                     <ul id="events-list">
                         <!-- Display all Events here -->
                         <li>...</li>
                     </ul>
+                </div>
 
+                <!--FORMS FOR ALL EVENT CHANGES-->
+                <div class="event-changes">
                     <h3>Add Event</h3>
                     <form id="add-event" action="#">
                         <fieldset>
                             <label>Name</label>
                             <input type="text" id="add-event-name" placeholder="Virtual corgi meetup" />
                         </fieldset>
-
+                    
                         <!-- Add more form fields here -->
                         <input type="submit" />
                     </form>
-                </div>
 
-                <div>
                     <h3>Delete Event</h3>
                     <form id="delete-event" action="#">
                         <fieldset>
@@ -51,14 +55,18 @@
                 </div>
             </section>
 
+        </div>
+
+        <!--USER SECTION-->
+        <div class="user-management">
             <section class="user-management">
                 <h2>User Management</h2>
-
+            
                 <ul id="users-list">
                     <!-- display all existing Users here -->
                     <li>...</li>
                 </ul>
-
+            
                 <div>
                     <h3>Add User</h3>
                     <form id="add-user" action="#">
@@ -66,12 +74,12 @@
                             <label>Name</label>
                             <input type="text" id="add-user-name" />
                         </fieldset>
-
+            
                         <!-- Add more form fields here -->
                         <input type="submit" value="Add" />
                     </form>
                 </div>
-
+            
                 <div>
                     <h3>Delete User</h3>
                     <form id="delete-user" action="#">
