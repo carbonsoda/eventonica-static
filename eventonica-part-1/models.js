@@ -7,8 +7,7 @@ class Eventonica {
     // Name is required
     // Default date is current date, empty values for rest
     addEvent(name, date= new Date(), time = '', category = '', location = '', details = '') {
-        let newEvent = new Event(name, date, time, category, location, details);
-        // some sort of success message?
+        return new Event(name, date, time, category, location, details);
     }
 
     // Update existing Event
@@ -63,8 +62,7 @@ class Eventonica {
 
     // Add new User
     addUser(name) {
-        let newUser = new User(name);
-        return `User #${newUser.id} ${newUser.name} registered.`;
+        return new User(name);
     }
 
     // Update existing User
