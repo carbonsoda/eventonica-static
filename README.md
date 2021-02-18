@@ -4,7 +4,7 @@
 ## Contents
 
   - [Description](#description)
-  - [Part 1 - Model](#part-1---model)
+  - [Progress](#progress)
 
 
 ### Description
@@ -12,8 +12,7 @@ This project is a part of Techtonica's curriculum ([source]("https://github.com/
 
 The project is split into seven parts.
 
-
-### Part 1 - Model
-
-To complete after finishing up part 1
+### Progress:
+- User and event classes are set for now, but Eventonica still needs work on event support.
+- Jasmine tests are partially setup (formally part 2, now part 7)
 

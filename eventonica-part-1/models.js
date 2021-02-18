@@ -3,26 +3,37 @@
 
 class Eventonica {
 
-    addEvent(name, date, time = '', category = '', location = '', details = '') {
+    // Add event
+    // Name is required
+    // Default date is current date, empty values for rest
+    addEvent(name, date= new Date(), time = '', category = '', location = '', details = '') {
         let newEvent = new Event(name, date, time, category, location, details);
         // some sort of success message?
     }
 
     // Update existing Event
     updateEvent(eventID, updateProperty, ...changes) {
+        let eventIdx = indexLookup(Event.all, eventID);
+
         // Use a switch case with updateProperty to call appropriate func
         switch (updateProperty) {
             case 'name':
+                Event.all[eventIdx].updateName(...changes);
                 break;
             case 'date':
+                Event.all[eventIdx].updateDate(...changes);
                 break;
             case 'time':
+                Event.all[eventIdx].updateTime(...changes);
                 break;
             case 'category':
+                Event.all[eventIdx].updateCategory(...changes);
                 break;
             case 'location':
+                Event.all[eventIdx].updateLocation(...changes);
                 break;
             case 'details':
+                Event.all[eventIdx].updateDetails(...changes);
                 break;
         }
     }
@@ -42,7 +53,7 @@ class Eventonica {
     // Return items in Event.all with a specified date
     findEventsByDate(findDate) {
         // TO-DO: ensure findDate's format
-        return Event.findbyDate(findDate);
+        return Event.findByDate(findDate);
     }
 
     findEventsbyCategory(findCategory) {
@@ -60,12 +71,15 @@ class Eventonica {
     updateUser(userID, updateProperty, ...changes) {
         let userIdx = indexLookup(userID);
 
+        // User not found
+        if(userIdx < 0) return;
+
         switch (updateProperty) {
             case "name":
-                User.all[userID - 200].updateName(...changes);
+                User.all[userIdx].updateName(...changes);
                 break;
             case "favorites":
-                User.all[userID - 200].updateFavorites(...changes);
+                User.all[userIdx].updateFavorites(...changes);
                 break;
             default:
                 break;
@@ -116,7 +130,7 @@ class Event {
     constructor(name, date, time, category, location, details) {
         this.id = Event._nextId++;
         this.name = name;
-        this.date = new Date(date);
+        this.date = date; // should be Date object
         this.time = time; // could be all day too
         this.category = new Set().add(category);
         this.location = location;
@@ -144,7 +158,6 @@ class Event {
     static findByCategory(searchCategory) {
         let results = []
 
-        // TODO: Consider when to format search-term
         for (let event in all) {
             if (event.category.has(searchCategory)) {
                 results.add(event);
@@ -160,8 +173,9 @@ class Event {
     }
     
     // update event date
+    // typeof(newDate) == Date object
     updateDate(newDate) {
-        this.date = new Date(newDate);
+        this.date = newDate;
     }
 
     // update event time
