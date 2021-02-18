@@ -41,7 +41,7 @@ class Eventonica {
 
     // Deletes Event
     deleteEvent(eventID) {
-        let eventIdx = this.indexLookup(Event.all, eventID)
+        let eventIdx = indexLookup(Event.all, eventID);
 
         // if event correctly found
         if (eventIdx >= 0) {
@@ -88,7 +88,8 @@ class Eventonica {
 
     // Deletes User
     deleteUser(userID) {
-        let userIdx = indexLookup(User.all, userID);
+        console.log(this);
+        let userIdx = this.indexLookup(User.all, userID);
 
         // if user correctly found
         if (userIdx >= 0) {
