@@ -6,6 +6,7 @@ const event = models.Event;
 
 // Constructor
 
+
 // findByDate(searchDate)
 
 // findByCategory(searchCategory)
