@@ -206,13 +206,13 @@ class User {
         this.id = User._nextId++;
         this.name = name;
         // for now just using Set, to store event ids
-        // not sure if this is ideal hashmap though
         // should not store event objects itself
         this.favorites = new Set();
 
         // later features: password + permission levels
 
-        User.all.push(this); // keep track of all created instances
+        // keep track of all created instances
+        User.all.push(this);
     }
 
     updateName(newName) {
@@ -234,7 +234,7 @@ if (typeof module !== 'undefined') {
     module.exports = { EventRecommender, User, Event };
 }
 
-// Example events for now
+// Example events + users for now
 
 new Event('Virtual Guided Meditation');
 new Event('Outside Yoga Lesson');
@@ -242,5 +242,5 @@ new Event('Outside Yoga Lesson');
 
 new User('Avery');
 new User('Mark');
-new User('Seo Young');
+new User('Tanya');
 new User('Cool-Beans');
