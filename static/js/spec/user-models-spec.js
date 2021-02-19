@@ -9,15 +9,15 @@ let c = new User('Carol');
 let d = new User('Bill');
 
 
+// Constructor
 describe('User ', () => {
 
-    // Constructor
     it('Carol id == 202', () => {
         expect(c.id).toBe(202);
     });
     it('all list should have 4 users', () => {
         expect(User.all.length).toBe(4);
-    });  
+    });
     it('with same names are separate objects', () => {
         expect(b == c).toBe(false);
     });
@@ -25,19 +25,21 @@ describe('User ', () => {
     it('b == User b', () => {
         expect(b == b).toBe(true);
     });
+});
 
-    // updateName(newName)
+// updateName(newName)
+describe('updateName() User:', () => {
+
     c.updateName('Caroline');
     it('Carol is now Caroline', () => {
         expect(c.name).toBe('Caroline');
     });
 
     c.updateName('Caroline');
-    it('Caroline is now Caroline', () => {
+    it('Caroline is still Caroline', () => {
         expect(c.name).toBe('Caroline');
     });
-
-    // TO-DO updateFavorites(eventID)
-
 });
+
+// TO-DO updateFavorites(eventID)
 

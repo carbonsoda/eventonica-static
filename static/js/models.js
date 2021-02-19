@@ -3,9 +3,8 @@ class Eventonica {
 
     // Add event
     // Name is required
-    // Default date is current date, empty values for rest
-    addEvent(name, date = new Date(), time = '', category = '', location = '', details = '') {
-        return new Event(name, date, time, category, location, details);
+    addEvent(name, ...moreDetails) {
+        return new Event(name, ...moreDetails);
     }
 
     // Update existing Event
@@ -123,7 +122,8 @@ class Event {
     static all = [];
     static _nextId = 100;
 
-    constructor(name, date, time, category, location, details) {
+    // empty values for now
+    constructor(name, date = '', time = '', category = '', location = '', details = '') {
         this.id = Event._nextId++;
         this.name = name;
         this.date = date; // should be Date object
@@ -229,18 +229,19 @@ class User {
 
 }
 
-
+// JASMINE TESTING
 if (typeof module !== 'undefined') {
     module.exports = { Eventonica, User, Event };
 }
 
+// COMMENT OUT BEFORE JASMINE TESTS
 // Example events + users for now
 
-new Event('Virtual Guided Meditation');
-new Event('Outside Yoga Lesson');
+// new Event('Virtual Guided Meditation');
+// new Event('Outside Yoga Lesson');
 
 
-new User('Avery');
-new User('Mark');
-new User('Tanya');
-new User('Cool-Beans');
+// new User('Avery');
+// new User('Mark');
+// new User('Tanya');
+// new User('Cool-Beans');
