@@ -8,21 +8,17 @@ const event = models.Event;
 let meditate = new event('Virtual Guided Meditation');
 let yoga = new event('Outside Yoga Lesson');
 
-// Constructor
+// General
 describe('Event ', () => {
 
-    it('meditate ', () => {
-        expect(c.id).toBe(202);
+    it('meditate.id == 100', () => {
+        expect(meditate.id).toBe(100);
     });
-    it('all list should have 4 users', () => {
-        expect(User.all.length).toBe(4);
+    it('meditate is first one in Event.all[]', () => {
+        expect(event.all[0]).toEqual(meditate);
     });
-    it('with same names are separate objects', () => {
-        expect(b == c).toBe(false);
-    });
-    // Making sure previous one tests as intended
-    it('b == User b', () => {
-        expect(b == b).toBe(true);
+    it('all[] contains 2 events', () => {
+        expect(event.all.length).toBe(2);
     });
 });
 
