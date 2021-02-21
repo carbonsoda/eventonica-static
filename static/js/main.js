@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // nameID == entered value, either an event name or event ID
         const nameID = document.querySelector(eventSelector).value;
         if (nameID) {
-            const event = app[eventAction](eventID);
+            const event = app[eventAction](nameID);
             console.log(logMsg, event);
             refreshEventsList();
         }

@@ -3,6 +3,7 @@ const User  = models.User;
 
 
 // User Class only
+
 let a = new User('Avery');
 let b = new User('Bill');
 let c = new User('Carol');

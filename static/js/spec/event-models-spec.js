@@ -1,7 +1,5 @@
 const models = require('../models.js');
 const event = models.Event; 
-// for some reason if I don't do it like this
-// it won't work
 
 // Event class only
 
@@ -23,6 +21,7 @@ describe('Event ', () => {
 });
 
 // findByDate(searchDate)
+
 
 // findByCategory(searchCategory)
 
