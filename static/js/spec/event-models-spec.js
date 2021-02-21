@@ -21,25 +21,42 @@ describe('Event ', () => {
 });
 
 // updateName(newName)
-describe('Event updateName', () => {
+describe('Event.updateName():', () => {
     
     it('Outside Yoga Lesson is now Virtual Yoga Lesson', () => {
         yoga.updateName('Virtual Yoga Lesson')
         expect(yoga.name).toBe('Virtual Yoga Lesson');
     });
 
-    it('passes blank arg, yoga.name doesnt change', () => {
-        yoga.updateName('')
+    it('passing in blank arg does not change name', () => {
+        yoga.updateName('');
         expect(yoga.name).toBe('Virtual Yoga Lesson');
     });
 
 });
 
 // updateDate(newDate)
+describe('Event.updateDate():', () => {
+    let tempDate = new Date('1/18/2021');
+    it('meditate happened 1/18/2021 ', () => {
+        meditate.updateDate('1/18/2021');
+
+        expect(meditate.date.toDateString()).toBe(tempDate.toDateString());
+    });
+
+    it('passing in a date object will have same result as passing in a string', () => {
+        yoga.updateDate(tempDate);
+
+        expect(yoga.date.toDateString()).toBe(tempDate.toDateString());
+    });
+
+});
 
 // updateTime(newTime)
 
+
 // updateCategory(newCategory)
+
 
 // updateLocation(newLocation)
 

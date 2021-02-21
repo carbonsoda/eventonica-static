@@ -165,19 +165,20 @@ class Event {
 
     // update event name
     updateName(newName) {
-        if (newName.length < 1) return;
+        if (!newName) return;
         this.name = newName;
     }
 
     // update event date
-    // typeof(newDate) == Date object
     updateDate(newDate) {
-        this.date = newDate;
+        if (!newDate) return;
+
+        this.date = new Date(newDate);
     }
 
     // update event time
     updateTime(newTime) {
-        if (newTime.length < 1) return;
+        if (!newTime) return;
         // needs consideration of passed-in format
         // ie make sure its in UTC 
         this.time = newTime;
@@ -185,19 +186,18 @@ class Event {
 
     // update event category labels
     updateCategory(newCategory) {
-
         this.category.add(newCategory);
     }
 
     // update event location
     updateLocation(newLocation) {
-        if (newLocation.length < 1) return;
+        if (!newLocation) return;
         this.location = newLocation;
     }
 
     // update event details/description
     updateDetails(newDetails) {
-        if (newDetails.length < 1) return;
+        if (!newDetails) return;
         this.details = newDetails;
     }
 
@@ -221,16 +221,17 @@ class User {
     }
 
     updateName(newName) {
-        if (newName.length > 0) {
-            this.name = newName;
-        }
-        
+        if (!newName) return;
+        this.name = newName;        
     }
 
+    // Add/removes an event from user.favorites
     updateFavorites(eventID) {
+        // remove event from favorites
         if (this.favorites.has(eventID)) {
             this.favorites.delete(eventID);
         } else {
+            // add event to favorites
             this.favorites.add(eventID);
         }
     }
