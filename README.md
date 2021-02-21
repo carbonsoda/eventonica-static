@@ -15,5 +15,5 @@ The project is split into seven parts.
 ### Progress
 
 - Models.js has three main classes: Eventonica, Event, and User. They have basic implementations for now.
+  - At this time I won't worry about event location and time
 - Jasmine tests are partially setup (formally part 2, now part 7)
-

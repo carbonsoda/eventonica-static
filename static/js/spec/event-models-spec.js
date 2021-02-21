@@ -24,7 +24,7 @@ describe('Event ', () => {
 describe('Event.updateName():', () => {
     
     it('Outside Yoga Lesson is now Virtual Yoga Lesson', () => {
-        yoga.updateName('Virtual Yoga Lesson')
+        yoga.updateName('Virtual Yoga Lesson');
         expect(yoga.name).toBe('Virtual Yoga Lesson');
     });
 
@@ -38,6 +38,7 @@ describe('Event.updateName():', () => {
 // updateDate(newDate)
 describe('Event.updateDate():', () => {
     let tempDate = new Date('1/18/2021');
+
     it('meditate happened 1/18/2021 ', () => {
         meditate.updateDate('1/18/2021');
 
@@ -50,23 +51,37 @@ describe('Event.updateDate():', () => {
         expect(yoga.date.toDateString()).toBe(tempDate.toDateString());
     });
 
+    it('passing nothing will change nothing', () => {
+        yoga.updateDate('');
+
+        expect(yoga.date.toDateString()).toBe((new Date()).toDateString());
+    });
+
 });
 
+
 // updateTime(newTime)
-
-
-// updateCategory(newCategory)
-
-
 // updateLocation(newLocation)
 
+
+// TO-DO
+// updateCategory(newCategory)
 // updateDetails(newDetails)
 
 
 // FINDER FUNCTIONS:
 
 // findByDate(searchDate)
+describe('findByDate():', () => {
+    let searchDate = '02/20/2021';
+    yoga.updateDate(searchDate);
 
+    it('02/20/2021 should return 1 event', () => {
+
+        expect(event.findByDate(searchDate)).toEqual([yoga]);
+    });
+
+});
 
 // findByCategory(searchCategory)
 

@@ -123,25 +123,24 @@ class Event {
     static _nextId = 100;
 
     // empty values for now
-    constructor(name, date = '', time = '', category = '', location = '', details = '') {
+    constructor(name, date = new Date(), time = '', category = '', location = '', details = '') {
         this.id = Event._nextId++;
         this.name = name;
-        this.date = date; // should be Date object
+        this.date = date;
         this.time = time; // could be all day too
         this.category = new Set().add(category);
         this.location = location;
         this.details = details;
 
-        Event.all.push(this); // keep track of all created instances
+        Event.all.push(this);
+        // keep track of all created instances
     }
 
     static findByDate(searchDate) {
         let results = []
 
         // Assuming same timezone for now
-        // Need to make sure date only includes date, not time
-        // ie set time to 00:00:00.00
-        for (let event in all) {
+        for (let event in this.all) {
             if (event.date.valueOf() == searchDate.valueOf()) {
                 results.add(event);
             }
