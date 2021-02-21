@@ -165,6 +165,7 @@ class Event {
 
     // update event name
     updateName(newName) {
+        if (newName.length < 1) return;
         this.name = newName;
     }
 
@@ -176,6 +177,7 @@ class Event {
 
     // update event time
     updateTime(newTime) {
+        if (newTime.length < 1) return;
         // needs consideration of passed-in format
         // ie make sure its in UTC 
         this.time = newTime;
@@ -183,16 +185,19 @@ class Event {
 
     // update event category labels
     updateCategory(newCategory) {
+
         this.category.add(newCategory);
     }
 
     // update event location
     updateLocation(newLocation) {
+        if (newLocation.length < 1) return;
         this.location = newLocation;
     }
 
     // update event details/description
     updateDetails(newDetails) {
+        if (newDetails.length < 1) return;
         this.details = newDetails;
     }
 
@@ -216,7 +221,10 @@ class User {
     }
 
     updateName(newName) {
-        this.name = newName;
+        if (newName.length > 0) {
+            this.name = newName;
+        }
+        
     }
 
     updateFavorites(eventID) {
@@ -237,11 +245,11 @@ if (typeof module !== 'undefined') {
 // COMMENT OUT BEFORE JASMINE TESTS
 // Example events + users for now
 
-new Event('Virtual Guided Meditation');
-new Event('Outside Yoga Lesson');
+// new Event('Virtual Guided Meditation');
+// new Event('Outside Yoga Lesson');
 
 
-new User('Avery');
-new User('Mark');
-new User('Tanya');
-new User('Cool-Beans');
+// new User('Avery');
+// new User('Mark');
+// new User('Tanya');
+// new User('Cool-Beans');

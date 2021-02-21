@@ -20,12 +20,20 @@ describe('Event ', () => {
     });
 });
 
-// findByDate(searchDate)
-
-
-// findByCategory(searchCategory)
-
 // updateName(newName)
+describe('Event updateName', () => {
+    
+    it('Outside Yoga Lesson is now Virtual Yoga Lesson', () => {
+        yoga.updateName('Virtual Yoga Lesson')
+        expect(yoga.name).toBe('Virtual Yoga Lesson');
+    });
+
+    it('passes blank arg, yoga.name doesnt change', () => {
+        yoga.updateName('')
+        expect(yoga.name).toBe('Virtual Yoga Lesson');
+    });
+
+});
 
 // updateDate(newDate)
 
@@ -36,5 +44,13 @@ describe('Event ', () => {
 // updateLocation(newLocation)
 
 // updateDetails(newDetails)
+
+
+// FINDER FUNCTIONS:
+
+// findByDate(searchDate)
+
+
+// findByCategory(searchCategory)
 
 
