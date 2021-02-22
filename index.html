@@ -30,6 +30,7 @@
                 </ul>
             </div>
 
+            
             <!--FORMS FOR ALL EVENT CHANGES-->
             <div class="event-changes">
                 <h3>Add Event</h3>
@@ -56,10 +57,10 @@
                 <form id="update-event" action="#">
                     <fieldset>
                         <label>Event ID</label>
-                        <input type="number" min="1" id="update-event" />
+                        <input type="number" min="1" id="update-event-ID" />
 
-                    <!--Activates once event ID entered-->
-                        <!-- <label for="update-event-select">Update </label>
+                    <!--Activate once event ID entered-->
+                        <label for="update-event-select">Update </label>
                         <select id="update-event-select">
                             <option value="">--Choose an event field--</option>
                             <option value="name">Name</option>
@@ -68,13 +69,12 @@
                             <option value="location">Location</option>
                             <option value="category">Category</option>
                             <option value="details">Details</option>
-                        </select> -->
+                        </select>
                     </fieldset>
 
 
                     <fieldset id="update-fields">
-                        <!--Populate fields based on what user selected-->
-                        <!--Adding them for now -->
+                        <!--Ideally populate fields based on what user selected in dropdown-->
                         <label for="name-update">Name</label>
                         <input type="text" id="event-name-update" />
                         <label for="event-date-update">Date</label>

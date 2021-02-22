@@ -1,7 +1,3 @@
-fieldset {
-    border: none;
-    margin: 1rem 0;
-}
 
 header {
     /* For more about flexbox, see https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
@@ -18,7 +14,7 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-left: 1em;
+    margin: 0 5% 0 5%;
 }
 
 aside {
@@ -37,12 +33,20 @@ footer {
 
 .event-changes {
     border: 2px gray dotted;
-    padding: 5px;
+    padding: 10px;
+}
+
+
+#update-event {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.5em;
+    max-width: 15em;
 }
 
 #update-fields {
     border: 2px gray dotted;
     display: flex;
     flex-direction: column;
-    max-width: 15em;
 }
