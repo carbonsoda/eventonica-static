@@ -57,11 +57,9 @@
                     <fieldset>
                         <label>Event ID</label>
                         <input type="number" min="1" id="update-event" />
-                    </fieldset>
 
                     <!--Activates once event ID entered-->
-                    <fieldset>
-                        <label for="update-event-select">Update </label>
+                        <!-- <label for="update-event-select">Update </label>
                         <select id="update-event-select">
                             <option value="">--Choose an event field--</option>
                             <option value="name">Name</option>
@@ -70,15 +68,17 @@
                             <option value="location">Location</option>
                             <option value="category">Category</option>
                             <option value="details">Details</option>
-                        </select>
+                        </select> -->
                     </fieldset>
 
 
                     <fieldset id="update-fields">
                         <!--Populate fields based on what user selected-->
                         <!--Adding them for now -->
-                        <label for="date-update">Date</label>
-                        <input type="date" id="date-update" placeholder="YYYY-MM-DD" />
+                        <label for="name-update">Name</label>
+                        <input type="text" id="event-name-update" />
+                        <label for="event-date-update">Date</label>
+                        <input type="date" id="event-date-update" placeholder="YYYY-MM-DD" />
                     </fieldset>
 
                     <input type="submit" />

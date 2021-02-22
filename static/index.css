@@ -14,11 +14,11 @@ header img {
     margin-right: 1em;
 }
 
-
 main {
     display: flex;
-    /* flex-direction:column; */
+    flex-direction: column;
     justify-content: space-between;
+    margin-left: 1em;
 }
 
 aside {
@@ -29,4 +29,20 @@ footer {
     margin-top: 1rem;
     font-size: small;
     color: gray;
+}
+
+.events-overview {
+    border: 2px gray solid;
+}
+
+.event-changes {
+    border: 2px gray dotted;
+    padding: 5px;
+}
+
+#update-fields {
+    border: 2px gray dotted;
+    display: flex;
+    flex-direction: column;
+    max-width: 15em;
 }
