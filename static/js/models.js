@@ -9,7 +9,7 @@ class Eventonica {
 
     // Update existing Event
     updateEvent(eventID, updateProperty, ...changes) {
-        let eventIdx = indexLookup(Event.all, eventID);
+        let eventIdx = this.indexLookup(Event.all, eventID);
 
         // Use a switch case with updateProperty to call appropriate func
         switch (updateProperty) {
@@ -64,7 +64,7 @@ class Eventonica {
 
     // Update existing User
     updateUser(userID, updateProperty, ...changes) {
-        let userIdx = indexLookup(userID);
+        let userIdx = this.indexLookup(userID);
 
         // User not found
         if (userIdx < 0) return;
