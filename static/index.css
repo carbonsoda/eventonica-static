@@ -41,6 +41,7 @@ button, input[type=submit] {
     padding: .65em 1em;
     margin: 0 .5rem 0 .5rem;
     border-radius: .5em;
+    
 }
 
 .current-user {
@@ -51,6 +52,11 @@ button, input[type=submit] {
 
 fieldset {
     max-width: 15em;
+    margin-left: 8px;
+}
+
+input, select {
+    font-family: 'Roboto', sans-serif;
 }
 
 .events-overview {
