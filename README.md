@@ -17,5 +17,6 @@ The project is split into seven parts.
 - Models.js has three main classes: Eventonica, Event, and User. They have basic implementations for now.
   - At this time I won't worry about event location and time
     - In HTML5 the input type="time" is [unsupported in Safari](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time#browser_compatibility). I'll need to further consider input and validation.
-  - The findByDate and event.date is somewhat inconsistent, but I think that once I finalize the input format, it should be easier to debug
-- Jasmine tests are partially setup (formally part 2, now part 7)
+  - The findByDate and findByCategory are still a work in progress
+  - I want to display events as a [listbox](https://a11y-guidelines.orange.com/en/web/components-examples/listbox/), ideally one with [checkboxes](https://a11y-guidelines.orange.com/en/web/components-examples/listbox-with-checkboxes/). The a11y reference materials use jQuery and the [MDN documents](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/listbox_role) have a setup of the sorts, so I need to study them further to figure out how to implement it without jQuery.
+- Jasmine tests are partially setup
