@@ -26,6 +26,15 @@ footer {
     color: gray;
 }
 
+button, input[type=submit] {
+    /* color: white; */
+    /* background: #440154FF; */
+    font-size: .85em;
+    padding: .65em 1em;
+    margin: 0 .5rem 0 .5rem;
+    border-radius: .5em;
+}
+
 .current-user {
     display: flex;
     justify-content: space-between;
