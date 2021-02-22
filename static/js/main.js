@@ -2,6 +2,11 @@
  * Add all your DOM event handlers and other UI code in this file.
  */
 
+ /**
+  * HELPER FUNCTIONS
+  * To make the DOMContentLoaded section easier to read
+  * + make formatting easier to manage
+  */
 function eventOutputFormat(eventObj) {
     let output = `${eventObj.name} (id: ${eventObj.id})`;
 
@@ -42,7 +47,9 @@ function dropdownFormat(allObjs, defaultOption) {
     return htmlSelect;
 }
 
-
+/**
+ * MAIN
+ */
 document.addEventListener("DOMContentLoaded", () => {
     const app = new Eventonica();
 
@@ -60,6 +67,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (Event.all.length < 1) {
             document.querySelector("#events-list").
                 innerHTML = 'No events planned yet';
+        } else {
+            // also refresh all users select-dropdowns
+            setSelectOptions('.event-select', Event.all, 'an event');
         }
     };
 
@@ -86,19 +96,44 @@ document.addEventListener("DOMContentLoaded", () => {
     refreshEventsList();
     refreshUserList();
 
-    // Handle EVENT form submit by calling our instance of Eventonica, `app`
-    const eventHandle = (submitEvent, eventAction, eventSelector, logMsg, ...otherChanges) => {
+
+    /** EVENTLISTENER HANDLERS
+     * 
+     * Handles User/Event form submits by calling our instance of Eventonica, `app`
+     */
+
+    // handles generic input
+    const defaultHandler = (submitEvent, eventAction, eventSelector, logMsg, ...otherChanges) => {
         submitEvent.preventDefault();
-        // nameID == entered value, either an event name or event ID
+        // nameID == either a user/event name or ID
         const nameID = document.querySelector(eventSelector).value;
         if (nameID) {
-            const event = app[eventAction](nameID, ...otherChanges);
-            console.log(logMsg, event);
-            refreshEventsList();
+            const itemChanged = app[eventAction](nameID, ...otherChanges);
+            console.log(logMsg, itemChanged, nameID);
+            // true = refresh list
+            return true;
         }
     };
 
-    // EVENT ACTIONS
+    // handles select menu inputs
+    function selectHandler(submitEvent, appAction, selectorTag, logMsg) {
+        submitEvent.preventDefault();
+        const selectItems = document.querySelector(selectorTag);
+        const item = selectItems.options[selectItems.selectedIndex];
+
+        if (item.value) {
+            app[appAction](item.value);
+            console.log(logMsg, item.value);
+            // true = refresh list
+            return true;
+        }
+    }
+
+    /** 
+     * EVENT ELEMENTS
+     */
+    
+    // EVENT-RELATED FORMS
     const addEventForm = document.querySelector("#add-event");
     const removeEventForm = document.querySelector('#delete-event')
 
@@ -106,29 +141,22 @@ document.addEventListener("DOMContentLoaded", () => {
     addEventForm.addEventListener('submit', (submitEvent) => {
         let eventDate = document.querySelector('#add-event-date').value;
 
-        eventHandle(submitEvent, 'addEvent', "#add-event-name", 'Added event', eventDate);
+        defaultHandler(submitEvent, 'addEvent', "#add-event-name", 'Added event', eventDate);
+        refreshEventsList();
         addEventForm.reset();
     });
 
     removeEventForm.addEventListener('submit', (submitEvent) => {
-        eventHandle(submitEvent, 'deleteEvent', "#delete-event-id", 'Deleted event');
+        selectHandler(submitEvent, 'deleteEvent', "#delete-event-id", 'Deleted event');
+        refreshEventsList();
         addEventForm.reset();
     });
 
+    /**
+     * USER ELEMENTS
+     */
 
-    // Handle USER form submit by calling our instance of Eventonica, `app`
-    const userHandle = (submitEvent, userAction, nameSelector, logMsg, ...otherChanges) => {
-        submitEvent.preventDefault();
-        // nameID == entered value, either a User's name or ID
-        const nameID = document.querySelector(nameSelector).value;
-        if (nameID) {
-            const user = app[userAction](nameID, ...otherChanges);
-            console.log(logMsg, user, nameID);
-            refreshUserList();
-        }
-    };
-
-    // USER FIELDS
+    // USER-RELATED FORMS
     const addUserForm = document.querySelector('#add-user');
     const removeUserForm = document.querySelector('#delete-user');
     const updateUserForm = document.querySelector('#update-user');
@@ -136,39 +164,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // USER FORM'S EVENT LISTENERS
     addUserForm.addEventListener('submit', (submitEvent) => {
-        userHandle(submitEvent, 'addUser', '#add-user-name', 'Added user ');
-        addUserForm.reset();
-    });
+        let newAdded = defaultHandler(submitEvent, 'addUser', '#add-user-name', 'Added user ');
 
-    removeUserForm.addEventListener('submit', (submitEvent) => {
-        submitEvent.preventDefault();
-        const selectUsers = document.querySelector('#delete-user-id');
-        let user = selectUsers.options[selectUsers.selectedIndex];
-
-        if (user.value) {
-            app.deleteUser(user.value);
-            console.log('Deleted user', user.value);
+        if (newAdded) {
             refreshUserList();
+            addUserForm.reset();
         }
     });
 
+    // REMOVE USER
+    removeUserForm.addEventListener('submit', (submitEvent) => {
+        let deleted = selectHandler(submitEvent, 'deleteUser', '#delete-user-id', 'Deleted user');
+        
+        if(deleted) refreshUserList();
+    });
+
+    // UPDATE USER
     updateUserForm.addEventListener('submit', (submitEvent) => {
         const userNewName = document.querySelector('#update-user-name').value;
 
-        userHandle(submitEvent, 'updateUser', '#update-user-id', 'User updated', 'name', userNewName);
-        updateUserForm.reset();
+        let updated = defaultHandler(submitEvent, 'updateUser', '#update-user-id', 'User updated', 'name', userNewName);
+        
+        if (updated) {
+            refreshUserList();
+            updateUserForm.reset();
+        }
     });
-    
-    currentUserForm.addEventListener('submit', (submitEvent) => {
-        submitEvent.preventDefault();
-        const selectUsers = document.querySelector('#current-user-select');
-        let user = selectUsers.options[selectUsers.selectedIndex];
 
-        if (user.value) {
-            app.setCurrentUser(user.value);
-            if (app.currentUser) {
-                document.querySelector('#display-current-user').innerHTML += `${app.currentUser.name}`;
-            }
+    // CHANGE CURRENT USER
+    currentUserForm.addEventListener('submit', (submitEvent) => {
+
+        let newCurrent = selectHandler(submitEvent, 'setCurrentUser', '#current-user-select', 'Current user now');
+        
+        if (newCurrent && app.currentUser) {
+            document.querySelector('#display-current-user').innerHTML += `${app.currentUser.name}`;
         }
     });
 
