@@ -132,6 +132,9 @@ class Event {
         this.location = location;
         this.details = details;
 
+        // if actual date string passed in
+        if (this.date) this.date = new Date(date);
+
         Event.all.push(this);
         // keep track of all created instances
     }
