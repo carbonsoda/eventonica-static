@@ -30,7 +30,7 @@
         <div class="current-user">
             <span id="display-current-user">
                 <strong> Current user: </strong>
-                
+
             </span>
 
             <a href="#change-user">
@@ -57,72 +57,79 @@
             <section class="events-manage">
                 <h3>Event Management</h3>
 
-                <h4>Add Event</h4>
-                <form id="add-event" action="#" class="edit-event">
-                    <fieldset>
-                        <label>Name</label>
-                        <input type="text" id="add-event-name" placeholder="Virtual corgi meetup" />
-                        <label for="add-event-date">Date</label>
-                        <input type="date" id="add-event-date" placeholder="YYYY-MM-DD" />
-                    </fieldset>
+                <div>
+                    <h4>Add Event</h4>
+                    <form id="add-event" action="#" class="edit-event">
+                        <fieldset>
+                            <label>Name</label>
+                            <input type="text" id="add-event-name" placeholder="Virtual corgi meetup" />
+                            <label for="add-event-date">Date</label>
+                            <input type="date" id="add-event-date" placeholder="YYYY-MM-DD" />
+                        </fieldset>
 
-                    <!-- Add more form fields here -->
-                    <input type="submit" />
-                </form>
+                        <!-- Add more form fields here -->
+                        <input type="submit" />
+                    </form>
+                </div>
 
-                <h4>Delete Event</h4>
-                <form id="delete-event" action="#" class="edit-event">
-                    <fieldset>
-                        <label>Event ID</label>
-                        <select id="delete-event-id" class='event-select'>
-                            <option value="">----Pick an event-----</option>
-                            <!--Display all events here-->
-                        </select>
-                    </fieldset>
-                    <input type="submit" />
-                </form>
+                <div>
+                    <h4>Delete Event</h4>
+                    <form id="delete-event" action="#" class="edit-event">
+                        <fieldset>
+                            <label>Event</label>
+                            <select id="delete-event-id" class='event-select'>
+                                <option value="">----Pick an event-----</option>
+                                <!--Display all events here-->
+                            </select>
+                        </fieldset>
+                        <input type="submit" />
+                    </form>
+                </div>
 
-                <h4>Update Event</h4>
-                <form id="update-event" action="#" class="edit-event">
-                    <fieldset>
-                        <label>Event ID</label>
-                        <input type="number" min="1" id="update-event-ID" />
+                <div>
+                    <h4>Update Event</h4>
+                    <form id="update-event" action="#" class="edit-event">
+                        <fieldset>
+                            <label>Event ID</label>
+                            <input type="number" min="1" id="update-event-ID" />
 
-                        <!--Activate once event ID entered-->
-                        <label for="update-event-select">Update </label>
-                        <select id="update-event-select">
-                            <option value="">--Choose an event field--</option>
-                            <option value="name">Name</option>
-                            <option value="date">Date</option>
-                            <option value="time">Time</option>
-                            <option value="location">Location</option>
-                            <option value="category">Category</option>
-                            <option value="details">Details</option>
-                        </select>
-                    </fieldset>
-
-
-                    <fieldset id="update-fields">
-                        <!--Ideally populate fields based on what user selected in dropdown-->
-                        <!--TODO: ADD TIME + LOCATION + DETAILS-->
-                        <label for="event-update-name">Name</label>
-                        <input type="text" id="event-update-name" />
+                            <!--Activate once event ID entered-->
+                            <label for="update-event-select">Update </label>
+                            <select id="update-event-select">
+                                <option value="">--Choose an event field--</option>
+                                <option value="name">Name</option>
+                                <option value="date">Date</option>
+                                <option value="time">Time</option>
+                                <option value="location">Location</option>
+                                <option value="category">Category</option>
+                                <option value="details">Details</option>
+                            </select>
+                        </fieldset>
 
 
-                        <label for="event-update-date">Date</label>
-                        <input type="date" id="event-update-date" placeholder="YYYY-MM-DD" />
+                        <fieldset id="update-fields">
+                            <!--Ideally populate fields based on what user selected in dropdown-->
+                            <!--TODO: ADD TIME + LOCATION + DETAILS-->
+                            <label for="event-update-name">Name</label>
+                            <input type="text" id="event-update-name" />
 
-                        <!-- <label for="event-update-time">Time</label>
+
+                            <label for="event-update-date">Date</label>
+                            <input type="date" id="event-update-date" placeholder="YYYY-MM-DD" />
+
+                            <!-- <label for="event-update-time">Time</label>
                         <input type="time" id="event-update-time" required
            pattern="[0-9]{2}:[0-9]{2}" step="60"/> -->
 
-                        <label for="event-update-category">Category</label>
-                        <input type="text" id="event-update-category" />
+                            <label for="event-update-category">Category</label>
+                            <input type="text" id="event-update-category" />
 
-                    </fieldset>
+                        </fieldset>
 
-                    <input type="submit" />
-                </form>
+                        <input type="submit" />
+                    </form>
+                </div>
+
             </section>
         </section>
 
@@ -139,9 +146,9 @@
             <section class="user-changes">
 
                 <!--SWITCH CURRENT USERS-->
-                <div id="change-user" class="edit-user">
+                <div id="change-user">
                     <h3>Set current user</h3>
-                    <form id="set-current-user" action="#">
+                    <form id="set-current-user" action="#" class="edit-user">
                         <fieldset>
                             <label for="current-user-select">Choose user</label>
                             <select id="current-user-select" class='user-select'>
@@ -156,9 +163,9 @@
                 </div>
 
                 <!--ADD NEW USER-->
-                <div class="edit-user">
+                <div>
                     <h3>Add User</h3>
-                    <form id="add-user" action="#">
+                    <form id="add-user" action="#" class="edit-user">
                         <fieldset>
                             <label>Name</label>
                             <input type="text" id="add-user-name" />
@@ -170,9 +177,9 @@
                 </div>
 
                 <!--DELETE USER-->
-                <div class="edit-user">
+                <div>
                     <h3>Delete User</h3>
-                    <form id="delete-user" action="#">
+                    <form id="delete-user" action="#" class="edit-user">
                         <fieldset>
                             <label for="delete-user-id">User ID</label>
                             <select id="delete-user-id" class='user-select'>
@@ -185,9 +192,9 @@
                 </div>
 
                 <!--UPDATE USER'S NAME-->
-                <div class="edit-user">
+                <div>
                     <h3>Update User</h3>
-                    <form id="update-user" action="#">
+                    <form id="update-user" action="#" class="edit-user">
                         <fieldset>
                             <label for="update-user-id">User ID</label>
                             <input type="number" min="200" pattern=".{3,}" id="update-user-id" />
