@@ -73,9 +73,15 @@ button, input[type=submit] {
 
 .current-user {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
+    font-size: 1.1 em;
 }
+
+.current-user #display-current-user {
+    margin-right: 4em;
+}
+
 
 fieldset {
     max-width: 15em;
