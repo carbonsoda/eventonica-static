@@ -74,10 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
             document.querySelector("#users-list").
                 innerHTML = 'No users registered yet';
         } else {
-            // also refresh all users dropdowns
+            // also refresh all users select-dropdowns
             setSelectDropdown('.user-select', User.all, 'a user');
-            // also refresh choose users dropdown
-            // document.querySelector('#current-user-select').innerHTML = dropdownFormat(User.all, 'a user');
         }
     };
 
@@ -149,6 +147,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
         userHandle(submitEvent, 'updateUser', '#update-user-id', 'User updated', 'name', userNewName);
         updateUserForm.reset();
+    });
+    
+    currentUserForm.addEventListener('submit', (submitEvent) => {
+        submitEvent.preventDefault();
+        const selectUsers = document.querySelector('#current-user-select');
+        let user = selectUsers.options[selectUsers.selectedIndex];
+
+        if (user.value) {
+            app.setCurrentUser(user.value);
+            if (app.currentUser) {
+                document.querySelector('#display-current-user').innerHTML += `${app.currentUser.name}`;
+            }
+        }
     });
 
 });
