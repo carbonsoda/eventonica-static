@@ -2,6 +2,8 @@
  * Add all your DOM event handlers and other UI code in this file.
  */
 
+let currentUser = '';
+
 function eventOutputFormat(eventObj) {
     let output = `${eventObj.name} (id: ${eventObj.id})`;
     
@@ -9,6 +11,18 @@ function eventOutputFormat(eventObj) {
         output += ` on ${eventObj.date.toDateString()}`;
     }
     return output;
+}
+
+// Sets dropdown options for either users or events
+// returns formatted html string
+function dropdownFormat(allObjs, defaultOption) {
+    let htmlSelect = `<option value="">----Pick ${defaultOption}-----</option>`;
+
+    htmlSelect += allObjs.map((obj) =>
+        `<option value=${obj.id}> ${obj.name} (id: ${obj.id}) </option>`
+    ).join('\n');
+
+    return htmlSelect;
 }
 
 
@@ -47,13 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 innerHTML = 'No users registered yet';
         } else {
             // also refresh choose users dropdown
-            let htmlUserSelect = `<option value="">----Pick a user-----</option>`;
-
-            htmlUserSelect += User.all.map((user) =>
-                `<option value=${user.id}> ${user.name} (id: ${user.id}) </option>`
-            ).join('\n');
-
-            document.querySelector('#current-user-select').innerHTML = htmlUserSelect;
+            document.querySelector('#current-user-select').innerHTML = dropdownFormat(User.all, 'a user');
         }
     };
 
@@ -108,7 +116,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const removeUserForm = document.querySelector('#delete-user');
     const updateUserForm = document.querySelector('#update-user');
     const currentUserForm = document.querySelector('#set-current-user');
-    let currentUser = '';
 
     // USER FORM'S EVENT LISTENERS
     addUserForm.addEventListener('submit', (submitEvent) => {
@@ -128,7 +135,11 @@ document.addEventListener("DOMContentLoaded", () => {
         updateUserForm.reset();
     });
 
-    // TO - DO
-    // IMPLEMENT SET CURRENT USER EVENT LISTENER
+
+    currentUserForm.addEventListener('submit', (submitEvent) => {
+        submitEvent.preventDefault();
+        const userSelect = document.querySelector('#set-current-user');
+        let select
+    });
 
 });
