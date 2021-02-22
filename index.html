@@ -24,25 +24,25 @@
             </span>
 
             <a href="#change-user"><button>
-                Change user
-            </button></a>
+                    Change user
+                </button></a>
         </div>
+
         <!--EVENTS SECTION-->
         <section class="event-management">
             <h2>Event Management</h2>
 
             <!--View all events + individual details-->
-            <div class="events-overview">
-                <h3>All Events</h3>
+            <section class="events-overview">
                 <ul id="events-list">
                     <!-- Display all Events here -->
                     <li>...</li>
                 </ul>
-            </div>
+            </section>
 
 
             <!--FORMS FOR ALL EVENT CHANGES-->
-            <div class="event-changes">
+            <section class="event-changes">
                 <h3>Add Event</h3>
                 <form id="add-event" action="#">
                     <fieldset>
@@ -103,7 +103,7 @@
 
                     <input type="submit" />
                 </form>
-            </div>
+            </section>
         </section>
 
         <!--USER SECTION-->
@@ -115,45 +115,47 @@
                 <li>...</li>
             </ul>
 
-            <div>
-                <h3>Set current user</h3>
-                <form id="change-user" action="#">
-                    <fieldset>
-                        <label for="current-user-select">Choose user</label>
-                        <select id="current-user-select">
-                            <option value="">----Pick a user-----</option>
-                            <!--Display all users here-->
-                        </select>
-                    </fieldset>
-                    <input type="submit" />
-                </form>
+            <section class="user-changes">
+                <div id="change-user">
+                    <h3>Set current user</h3>
+                    <form id="set-current-user" action="#">
+                        <fieldset>
+                            <label for="current-user-select">Choose user</label>
+                            <select id="current-user-select">
+                                <option value="">----Pick a user-----</option>
+                                <!--Display all users here-->
+                            </select>
+                        </fieldset>
+                        <input type="submit" />
+                    </form>
 
 
-            </div>
+                </div>
 
-            <div>
-                <h3>Add User</h3>
-                <form id="add-user" action="#">
-                    <fieldset>
-                        <label>Name</label>
-                        <input type="text" id="add-user-name" />
-                    </fieldset>
+                <div>
+                    <h3>Add User</h3>
+                    <form id="add-user" action="#">
+                        <fieldset>
+                            <label>Name</label>
+                            <input type="text" id="add-user-name" />
+                        </fieldset>
 
-                    <!-- Add more form fields here -->
-                    <input type="submit" value="Add" />
-                </form>
-            </div>
+                        <!-- Add more form fields here -->
+                        <input type="submit" value="Add" />
+                    </form>
+                </div>
 
-            <div>
-                <h3>Delete User</h3>
-                <form id="delete-user" action="#">
-                    <fieldset>
-                        <label>User ID</label>
-                        <input type="number" min="200" minlength="3" id="delete-user-id" />
-                    </fieldset>
-                    <input type="submit" />
-                </form>
-            </div>
+                <div>
+                    <h3>Delete User</h3>
+                    <form id="delete-user" action="#">
+                        <fieldset>
+                            <label>User ID</label>
+                            <input type="number" min="200" minlength="3" id="delete-user-id" />
+                        </fieldset>
+                        <input type="submit" />
+                    </form>
+                </div>
+            </section>
         </section>
 
         <!--SEARCH-->
