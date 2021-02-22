@@ -3,7 +3,7 @@
  */
 
 
-
+ 
 document.addEventListener("DOMContentLoaded", () => {
     const app = new Eventonica();
 
