@@ -64,16 +64,16 @@ class Eventonica {
 
     // Update existing User
     updateUser(userID, updateProperty, ...changes) {
-        let userIdx = this.indexLookup(userID);
+        let userIdx = this.indexLookup(User.all, userID);
 
         // User not found
         if (userIdx < 0) return;
 
         switch (updateProperty) {
-            case "name":
+            case 'name':
                 User.all[userIdx].updateName(...changes);
                 break;
-            case "favorites":
+            case 'favorites':
                 User.all[userIdx].updateFavorites(...changes);
                 break;
             default:
@@ -113,7 +113,7 @@ class Eventonica {
                 minIdx = midIdx + 1;
             }
         }
-
+        
         return -1;
     }
 }

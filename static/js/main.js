@@ -79,8 +79,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // nameID == entered value, either a User's name or ID
         const nameID = document.querySelector(nameSelector).value;
         if (nameID) {
-            const user = app[userAction](nameID);
-            console.log(logMsg, user);
+            app[userAction](nameID);
+            console.log(logMsg);
             refreshUserList();
         }
     };
@@ -88,6 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // USER FIELDS
     const addUserForm = document.querySelector('#add-user');
     const removeUserForm = document.querySelector('#delete-user');
+    const updateUserForm = document.querySelector('#update-user');
 
     // USER FORM'S EVENT LISTENERS
     addUserForm.addEventListener('submit', (submitEvent) => {
@@ -98,5 +99,18 @@ document.addEventListener("DOMContentLoaded", () => {
     removeUserForm.addEventListener('submit', (submitEvent) => {
         userHandle(submitEvent, 'deleteUser', "#delete-user-id", 'Removed user ');
         removeUserForm.reset();
+    });
+
+    updateUserForm.addEventListener('submit', (submitEvent) => {
+        submitEvent.preventDefault();
+        const userID = document.querySelector('#update-user-id').value;
+        console.log(userID);
+        const userNewName = document.querySelector('#update-user-name').value;
+        if (userID && userNewName) {
+            app['updateUser'](userID, 'name', userNewName);
+            console.log('User updated to ');
+            refreshUserList();
+        }
+        updateUserForm.reset();
     });
 });

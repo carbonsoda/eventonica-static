@@ -58,7 +58,7 @@
                 <h3>Event Management</h3>
 
                 <h4>Add Event</h4>
-                <form id="add-event" action="#" class="change-event">
+                <form id="add-event" action="#" class="edit-event">
                     <fieldset>
                         <label>Name</label>
                         <input type="text" id="add-event-name" placeholder="Virtual corgi meetup" />
@@ -69,7 +69,7 @@
                 </form>
 
                 <h4>Delete Event</h4>
-                <form id="delete-event" action="#" class="change-event">
+                <form id="delete-event" action="#" class="edit-event">
                     <fieldset>
                         <label>Event ID</label>
                         <input type="number" min="1" id="delete-event-id" />
@@ -78,7 +78,7 @@
                 </form>
 
                 <h4>Update Event</h4>
-                <form id="update-event" action="#" class="change-event">
+                <form id="update-event" action="#" class="edit-event">
                     <fieldset>
                         <label>Event ID</label>
                         <input type="number" min="1" id="update-event-ID" />
@@ -130,7 +130,10 @@
                 <li>...</li>
             </ul>
 
+            <!--ALL USER CHANGES/FUNCTIONS-->
             <section class="user-changes">
+
+                <!--SWITCH CURRENT USERS-->
                 <div id="change-user" class="edit-user">
                     <h3>Set current user</h3>
                     <form id="set-current-user" action="#">
@@ -147,6 +150,7 @@
 
                 </div>
 
+                <!--ADD NEW USER-->
                 <div class="edit-user">
                     <h3>Add User</h3>
                     <form id="add-user" action="#">
@@ -160,12 +164,27 @@
                     </form>
                 </div>
 
+                <!--DELETE USER-->
                 <div class="edit-user">
                     <h3>Delete User</h3>
                     <form id="delete-user" action="#">
                         <fieldset>
-                            <label>User ID</label>
+                            <label for="delete-user-id">User ID</label>
                             <input type="number" min="200" pattern=".{3,}" id="delete-user-id" />
+                        </fieldset>
+                        <input type="submit" />
+                    </form>
+                </div>
+
+                <!--UPDATE USER'S NAME-->
+                <div class="edit-user">
+                    <h3>Update User</h3>
+                    <form id="update-user" action="#">
+                        <fieldset>
+                            <label for="update-user-id">User ID</label>
+                            <input type="number" min="200" pattern=".{3,}" id="update-user-id" />
+                            <label for="update-user-name">Name</label>
+                            <input type="text" placeholder="New Name" id="update-user-name" />
                         </fieldset>
                         <input type="submit" />
                     </form>
