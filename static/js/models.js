@@ -95,9 +95,13 @@ class Eventonica {
     }
 
     // Handles adding/removing favorites
-    // ideally passed in a currentUser object
     // eventIDs = array of ids
-    updateUserFavorites(currentUser, eventIDs) { }
+    updateUserFavorites(eventIDs) {
+        // for now make it just single variable
+        if (currentUser && eventIDs.length > 0) {
+            currentUser.updateFavorites(eventIDs);
+        }
+    }
 
     // returns a user object based on a userID
     setCurrentUser(userID) {
