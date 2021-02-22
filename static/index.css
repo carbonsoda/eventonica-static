@@ -1,4 +1,3 @@
-
 header {
     /* For more about flexbox, see https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
     display: flex;
@@ -32,6 +31,10 @@ footer {
     justify-content: space-between;
 }
 
+fieldset {
+    max-width: 15em;
+}
+
 .events-overview {
     border: 2px gray solid;
 }
@@ -40,7 +43,6 @@ footer {
     border: 2px gray dotted;
     padding: 10px;
 }
-
 
 #update-event {
     display: flex;

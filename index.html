@@ -19,10 +19,10 @@
     <main>
         <div class="current-user">
             <span>
-                <strong> Current user: </strong> 
+                <strong> Current user: </strong>
                 ....
             </span>
-            
+
             <button>Change user</button>
         </div>
         <!--EVENTS SECTION-->
@@ -67,7 +67,7 @@
                         <label>Event ID</label>
                         <input type="number" min="1" id="update-event-ID" />
 
-                    <!--Activate once event ID entered-->
+                        <!--Activate once event ID entered-->
                         <label for="update-event-select">Update </label>
                         <select id="update-event-select">
                             <option value="">--Choose an event field--</option>
@@ -112,6 +112,22 @@
                 <!-- display all existing Users here -->
                 <li>...</li>
             </ul>
+
+            <div>
+                <h3>Set current user</h3>
+                <form id="change-user" action="#">
+                    <fieldset>
+                        <label for="current-user-select">Choose user</label>
+                        <select id="current-user-select">
+                            <option value="">----Pick a user-----</option>
+                            <!--Display all users here-->
+                        </select>
+                    </fieldset>
+                    <input type="submit" />
+                </form>
+
+
+            </div>
 
             <div>
                 <h3>Add User</h3>
