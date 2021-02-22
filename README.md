@@ -16,5 +16,6 @@ The project is split into seven parts.
 
 - Models.js has three main classes: Eventonica, Event, and User. They have basic implementations for now.
   - At this time I won't worry about event location and time
+    - In HTML5 the input type="time" is [unsupported in Safari](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time#browser_compatibility). I'll need to further consider input and validation.
   - The findByDate and event.date is somewhat inconsistent, but I think that once I finalize the input format, it should be easier to debug
 - Jasmine tests are partially setup (formally part 2, now part 7)

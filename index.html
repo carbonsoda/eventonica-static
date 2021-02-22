@@ -30,7 +30,7 @@
                 </ul>
             </div>
 
-            
+
             <!--FORMS FOR ALL EVENT CHANGES-->
             <div class="event-changes">
                 <h3>Add Event</h3>
@@ -75,10 +75,20 @@
 
                     <fieldset id="update-fields">
                         <!--Ideally populate fields based on what user selected in dropdown-->
-                        <label for="name-update">Name</label>
-                        <input type="text" id="event-name-update" />
-                        <label for="event-date-update">Date</label>
-                        <input type="date" id="event-date-update" placeholder="YYYY-MM-DD" />
+                        <!--TODO: ADD TIME + LOCATION + DETAILS-->
+                        <label for="event-update-name">Name</label>
+                        <input type="text" id="event-update-name" />
+
+                        <label for="event-update-date">Date</label>
+                        <input type="date" id="event-update-date" placeholder="YYYY-MM-DD" />
+
+                        <!-- <label for="event-update-time">Time</label>
+                        <input type="time" id="event-update-time" required
+           pattern="[0-9]{2}:[0-9]{2}" step="60"/> -->
+
+                        <label for="event-update-category">Category</label>
+                        <input type="text" id="event-update-category" />
+
                     </fieldset>
 
                     <input type="submit" />
