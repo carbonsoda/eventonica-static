@@ -46,12 +46,12 @@ document.addEventListener("DOMContentLoaded", () => {
     refreshUserList();
 
     // Handle EVENT form submit by calling our instance of Eventonica, `app`
-    const eventHandle = (submitEvent, eventAction, eventSelector, logMsg) => {
+    const eventHandle = (submitEvent, eventAction, eventSelector, logMsg, ...otherChanges) => {
         submitEvent.preventDefault();
         // nameID == entered value, either an event name or event ID
         const nameID = document.querySelector(eventSelector).value;
         if (nameID) {
-            const event = app[eventAction](nameID);
+            const event = app[eventAction](nameID, ...otherChanges);
             console.log(logMsg, event);
             refreshEventsList();
         }
@@ -79,8 +79,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // nameID == entered value, either a User's name or ID
         const nameID = document.querySelector(nameSelector).value;
         if (nameID) {
-            app[userAction](nameID, ...otherChanges);
-            console.log(logMsg);
+            const user = app[userAction](nameID, ...otherChanges);
+            console.log(logMsg, user, nameID);
             refreshUserList();
         }
     };
