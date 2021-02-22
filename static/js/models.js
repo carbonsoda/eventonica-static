@@ -1,6 +1,10 @@
 
 class Eventonica {
-    static currentUser;
+
+    constructor() {
+        // used to favorite events per user
+        this.currentUser;
+    }
 
     // Add event
     // Name is required
@@ -106,9 +110,9 @@ class Eventonica {
     // returns a user object based on a userID
     setCurrentUser(userID) {
         let userIdx = this.indexLookup(User.all, userID);
-
+        
         if (userIdx >= 0) {
-            currentUser = User.all[userIdx];
+            this.currentUser = User.all[userIdx];
         }
     }
 
