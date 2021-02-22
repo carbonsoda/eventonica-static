@@ -35,16 +35,17 @@ h2, h3, h4 {
     /* font-family: 'Zilla Slab', serif; */
     font-family: 'Exo', sans-serif;
     text-decoration: underline #b3b3b3 0.2rem;
+    font-size: 1.3em;
 }
 
 h2 {
-    font-size: 1.9rem;
+    font-size: 1.9em!important;
     /* padding-left: 0.5rem; */
 }
 
 h3 {
-    font-size: 1.5rem;
-    margin-top: 0.2rem;
+    font-size: 1.4em;
+    margin-top: 0.2em;
 }
 
 body {
@@ -72,6 +73,8 @@ footer {
     color: gray;
 }
 
+/* Input-interactive styling*/
+
 button, input[type=submit] {
     /* color: white; */
     /* background: #440154FF; */
@@ -80,6 +83,17 @@ button, input[type=submit] {
     margin: 0 .5rem 0 .5rem;
     border-radius: .5em;
 }
+
+fieldset {
+    max-width: 15em;
+    margin-left: 8px;
+}
+
+/* input, select {
+    font-family: 'Roboto', sans-serif;
+} */
+
+/* top of page current user section*/
 
 .current-user {
     display: flex;
@@ -92,14 +106,7 @@ button, input[type=submit] {
     margin-right: 4em;
 }
 
-fieldset {
-    max-width: 15em;
-    margin-left: 8px;
-}
-
-/* input, select {
-    font-family: 'Roboto', sans-serif;
-} */
+/* Event section styling*/
 
 .events-display {
     border: 2px gray solid;
@@ -116,4 +123,10 @@ fieldset {
     justify-content: center;
     line-height: 1.5em;
     max-width: 15em;
+}
+
+/* User section styling*/
+
+.edit-user {
+    padding-top: 1em;
 }
