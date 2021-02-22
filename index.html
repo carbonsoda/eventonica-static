@@ -102,7 +102,7 @@
                         <!--TODO: ADD TIME + LOCATION + DETAILS-->
                         <label for="event-update-name">Name</label>
                         <input type="text" id="event-update-name" /> 
-                        
+
 
                         <label for="event-update-date">Date</label>
                         <input type="date" id="event-update-date" placeholder="YYYY-MM-DD" />
@@ -165,7 +165,7 @@
                     <form id="delete-user" action="#">
                         <fieldset>
                             <label>User ID</label>
-                            <input type="number" min="200" minlength="3" id="delete-user-id" />
+                            <input type="number" min="200" pattern=".{3,}" id="delete-user-id" />
                         </fieldset>
                         <input type="submit" />
                     </form>

@@ -83,7 +83,7 @@ class Eventonica {
 
     // Deletes User
     deleteUser(userID) {
-        let userIdx = indexLookup(User.all, userID);
+        let userIdx = this.indexLookup(User.all, userID);
 
         // if user correctly found
         if (userIdx >= 0) {
