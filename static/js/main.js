@@ -40,11 +40,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 `<li>
                 ${user.name}  <small>(id: ${user.id})</small>
                 </li>`
-        ).join("\n");
+        ).join('\n');
         
         if (User.all.length < 1) {
             document.querySelector("#users-list").
                 innerHTML = 'No users registered yet';
+        } else {
+            // also refresh choose users dropdown
+            let htmlUserSelect = `<option value="">----Pick a user-----</option>`;
+
+            htmlUserSelect += User.all.map((user) =>
+                `<option value=${user.id}> ${user.name} (id: ${user.id}) </option>`
+            ).join('\n');
+
+            document.querySelector('#current-user-select').innerHTML = htmlUserSelect;
         }
     };
 
