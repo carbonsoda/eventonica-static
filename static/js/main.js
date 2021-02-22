@@ -3,24 +3,42 @@
  */
 
 
- 
+
+
 document.addEventListener("DOMContentLoaded", () => {
     const app = new Eventonica();
 
     // Builds HTML list for all events
     // Call after update, add, or remove an event
     const refreshEventsList = () => {
-        document.querySelector("#events-list").innerHTML = Event.all
-            .map((event) => `<li>${event.name}</li>`)
-            .join("\n");
+        
+        document.querySelector("#events-list").
+        innerHTML = Event.all
+            .map((event) =>
+                `<li>
+                ${event.name} (id: ${event.id})
+                </li>`
+            ).join("\n");
+        if (Event.all.length < 1) {
+            document.querySelector("#events-list").
+                innerHTML = 'No events planned yet';
+        }
     };
 
     // Builds HTML list for all users.
     // Call after update, add, or remove a user
     const refreshUserList = () => {
         document.querySelector("#users-list").innerHTML = User.all
-            .map((user) => `<li>${user.name}</li>`)
-            .join("\n");
+            .map((user) =>
+                `<li>
+                ${user.name}  <small>(id: ${user.id})</small>
+                </li>`
+        ).join("\n");
+        
+        if (User.all.length < 1) {
+            document.querySelector("#users-list").
+                innerHTML = 'No users registered yet';
+        }
     };
 
     // Loading page for first time

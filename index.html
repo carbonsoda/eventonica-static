@@ -8,7 +8,7 @@
     <!--FONTS-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
-        href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Exo&family=Roboto:ital,wght@0,100;0,400;1,400&family=Zilla+Slab:wght@300;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Exo&family=Lato:wght@300;400&family=Public+Sans&family=Roboto:ital,wght@0,100;0,400;1,400&display=swap"
         rel="stylesheet">
 
     <!--STYLING + ICON-->
@@ -58,7 +58,7 @@
                 <h3>Event Management</h3>
 
                 <h4>Add Event</h4>
-                <form id="add-event" action="#">
+                <form id="add-event" action="#" class="change-event">
                     <fieldset>
                         <label>Name</label>
                         <input type="text" id="add-event-name" placeholder="Virtual corgi meetup" />
@@ -69,7 +69,7 @@
                 </form>
 
                 <h4>Delete Event</h4>
-                <form id="delete-event" action="#">
+                <form id="delete-event" action="#" class="change-event">
                     <fieldset>
                         <label>Event ID</label>
                         <input type="number" min="1" id="delete-event-id" />
@@ -78,7 +78,7 @@
                 </form>
 
                 <h4>Update Event</h4>
-                <form id="update-event" action="#">
+                <form id="update-event" action="#" class="change-event">
                     <fieldset>
                         <label>Event ID</label>
                         <input type="number" min="1" id="update-event-ID" />
@@ -101,7 +101,8 @@
                         <!--Ideally populate fields based on what user selected in dropdown-->
                         <!--TODO: ADD TIME + LOCATION + DETAILS-->
                         <label for="event-update-name">Name</label>
-                        <input type="text" id="event-update-name" />
+                        <input type="text" id="event-update-name" /> 
+                        
 
                         <label for="event-update-date">Date</label>
                         <input type="date" id="event-update-date" placeholder="YYYY-MM-DD" />

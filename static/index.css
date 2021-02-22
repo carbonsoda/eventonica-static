@@ -50,10 +50,12 @@ h3 {
 
 body {
     background-color: #3b2c35ff;
+    font-family: 'Public Sans', sans-serif;
+    /* font-family: 'Roboto', sans-serif; */
+    font-size: 1.2em;
 }
 
 main {
-    font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -90,7 +92,8 @@ fieldset {
 }
 
 /* input, select {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif; 
+    float:right;
 } */
 
 /* top of page current user section*/
@@ -117,12 +120,13 @@ fieldset {
     padding: 10px;
 }
 
+
 #update-event {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     line-height: 1.5em;
-    max-width: 15em;
+    max-width: 20rem;
 }
 
 /* User section styling*/
