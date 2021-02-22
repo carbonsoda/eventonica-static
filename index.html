@@ -141,7 +141,7 @@
                     <form id="set-current-user" action="#">
                         <fieldset>
                             <label for="current-user-select">Choose user</label>
-                            <select id="current-user-select">
+                            <select id="current-user-select" class='user-select'>
                                 <option value="">----Pick a user-----</option>
                                 <!--Display all users here-->
                             </select>
@@ -173,6 +173,10 @@
                         <fieldset>
                             <label for="delete-user-id">User ID</label>
                             <input type="number" min="200" pattern=".{3,}" id="delete-user-id" />
+                            <select id="delete-user-id2" class='user-select'>
+                                <option value="">----Pick a user-----</option>
+                                <!--Display all users here-->
+                            </select>
                         </fieldset>
                         <input type="submit" />
                     </form>

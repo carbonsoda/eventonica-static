@@ -2,19 +2,23 @@
  * Add all your DOM event handlers and other UI code in this file.
  */
 
-let currentUser = '';
-
 function eventOutputFormat(eventObj) {
     let output = `${eventObj.name} (id: ${eventObj.id})`;
-    
+
     if (eventObj.date) {
         output += ` on ${eventObj.date.toDateString()}`;
     }
     return output;
 }
 
-// Sets dropdown options for either users or events
-// returns formatted html string
+/* 
+Sets dropdown options for either users or events
+returns formatted html string
+
+allObjs = either Event.all or User.all
+
+@return populated <select> html as string
+*/
 function dropdownFormat(allObjs, defaultOption) {
     let htmlSelect = `<option value="">----Pick ${defaultOption}-----</option>`;
 
@@ -25,6 +29,16 @@ function dropdownFormat(allObjs, defaultOption) {
     return htmlSelect;
 }
 
+// Separate just for now/until fully stable
+function setSelectDropdown(selectObjTag, allObjs, defaultOption) {
+    const allObjDropdowns = document.querySelectorAll(selectObjTag);
+    const htmlDropdown = dropdownFormat(allObjs, defaultOption);
+
+    for (let dropdown of allObjDropdowns) {
+        dropdown.innerHTML = htmlDropdown;
+    }
+}
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const app = new Eventonica();
@@ -32,14 +46,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // Builds HTML list for all events
     // Call after update, add, or remove an event
     const refreshEventsList = () => {
-        
+
         document.querySelector("#events-list").
-        innerHTML = Event.all
-            .map((event) =>
-                `<li>
+            innerHTML = Event.all
+                .map((event) =>
+                    `<li>
                 ${eventOutputFormat(event)}
                 </li>`
-            ).join("\n");
+                ).join("\n");
         if (Event.all.length < 1) {
             document.querySelector("#events-list").
                 innerHTML = 'No events planned yet';
@@ -54,14 +68,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 `<li>
                 ${user.name}  <small>(id: ${user.id})</small>
                 </li>`
-        ).join('\n');
-        
+            ).join('\n');
+
         if (User.all.length < 1) {
             document.querySelector("#users-list").
                 innerHTML = 'No users registered yet';
         } else {
+            // also refresh all users dropdowns
+            setSelectDropdown('.user-select', User.all, 'a user');
             // also refresh choose users dropdown
-            document.querySelector('#current-user-select').innerHTML = dropdownFormat(User.all, 'a user');
+            // document.querySelector('#current-user-select').innerHTML = dropdownFormat(User.all, 'a user');
         }
     };
 
@@ -133,13 +149,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         userHandle(submitEvent, 'updateUser', '#update-user-id', 'User updated', 'name', userNewName);
         updateUserForm.reset();
-    });
-
-
-    currentUserForm.addEventListener('submit', (submitEvent) => {
-        submitEvent.preventDefault();
-        const userSelect = document.querySelector('#set-current-user');
-        let select
     });
 
 });
