@@ -27,6 +27,11 @@ footer {
     color: gray;
 }
 
+.current-user {
+    display: flex;
+    justify-content: space-between;
+}
+
 .events-overview {
     border: 2px gray solid;
 }
