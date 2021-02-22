@@ -123,7 +123,7 @@ class Event {
     static _nextId = 100;
 
     // empty values for now
-    constructor(name, date = new Date(), time = '', category = '', location = '', details = '') {
+    constructor(name, date = '', time = '', category = '', location = '', details = '') {
         this.id = Event._nextId++;
         this.name = name;
         this.date = date;
@@ -138,14 +138,13 @@ class Event {
 
     static findByDate(searchDate) {
         let results = []
-
         // Assuming same timezone for now
-        for (let event in this.all) {
+        for (let event of Event.all) {
             if (event.date.valueOf() == searchDate.valueOf()) {
                 results.add(event);
             }
         }
-
+        console.log(results);
         return results;
     }
 

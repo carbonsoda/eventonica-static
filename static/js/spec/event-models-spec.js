@@ -30,7 +30,7 @@ describe('Event.updateName():', () => {
 
     it('passing in blank arg does not change name', () => {
         yoga.updateName('');
-        expect(yoga.name).toBe('Virtual Yoga Lesson');
+        expect(yoga.name).toBe('Outside Yoga Lesson');
     });
 
 });
@@ -54,7 +54,7 @@ describe('Event.updateDate():', () => {
     it('passing nothing will change nothing', () => {
         yoga.updateDate('');
 
-        expect(yoga.date.toDateString()).toBe((new Date()).toDateString());
+        expect(yoga.date.toDateString()).toBe(tempDate.toDateString());
     });
 
 });
@@ -77,8 +77,7 @@ describe('findByDate():', () => {
     yoga.updateDate(searchDate);
 
     it('02/20/2021 should return 1 event', () => {
-
-        expect(event.findByDate(searchDate)).toEqual([yoga]);
+        expect(event.findByDate(searchDate).length).toBe(1);
     });
 
 });
