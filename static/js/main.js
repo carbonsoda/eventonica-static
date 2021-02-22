@@ -74,12 +74,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // Handle USER form submit by calling our instance of Eventonica, `app`
-    const userHandle = (submitEvent, userAction, nameSelector, logMsg) => {
+    const userHandle = (submitEvent, userAction, nameSelector, logMsg, ...otherChanges) => {
         submitEvent.preventDefault();
         // nameID == entered value, either a User's name or ID
         const nameID = document.querySelector(nameSelector).value;
         if (nameID) {
-            app[userAction](nameID);
+            app[userAction](nameID, ...otherChanges);
             console.log(logMsg);
             refreshUserList();
         }
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // USER FORM'S EVENT LISTENERS
     addUserForm.addEventListener('submit', (submitEvent) => {
-        userHandle(submitEvent, 'addUser', "#add-user-name", 'Added user ');
+        userHandle(submitEvent, 'addUser', '#add-user-name', 'Added user ');
         addUserForm.reset();
     });
 
@@ -102,15 +102,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     updateUserForm.addEventListener('submit', (submitEvent) => {
-        submitEvent.preventDefault();
-        const userID = document.querySelector('#update-user-id').value;
-        console.log(userID);
         const userNewName = document.querySelector('#update-user-name').value;
-        if (userID && userNewName) {
-            app['updateUser'](userID, 'name', userNewName);
-            console.log('User updated to ');
-            refreshUserList();
-        }
+
+        userHandle(submitEvent, 'updateUser', '#update-user-id', 'User updated', 'name', userNewName);
         updateUserForm.reset();
     });
 });
