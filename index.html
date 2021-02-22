@@ -137,10 +137,13 @@
         <section class="user-management">
             <h2>User Management</h2>
 
-            <ul id="users-list">
+            <div class="user-overview">
+                <ul id="users-list">
                 <!-- display all existing Users here -->
                 <li>...</li>
-            </ul>
+                </ul>
+            </div>
+            
 
             <!--ALL USER CHANGES/FUNCTIONS-->
             <section class="user-changes">
@@ -150,7 +153,7 @@
                     <h3>Set current user</h3>
                     <form id="set-current-user" action="#" class="edit-user">
                         <fieldset>
-                            <label for="current-user-select">Choose user</label>
+                            <label for="current-user-select">User</label>
                             <select id="current-user-select" class='user-select'>
                                 <option value="">----Pick a user-----</option>
                                 <!--Display all users here-->
@@ -158,8 +161,8 @@
                         </fieldset>
                         <input type="submit" />
                     </form>
-
-
+                
+                
                 </div>
 
                 <!--ADD NEW USER-->
@@ -172,7 +175,7 @@
                         </fieldset>
 
                         <!-- Add more form fields here -->
-                        <input type="submit" value="Add" />
+                        <input type="submit" />
                     </form>
                 </div>
 
@@ -181,7 +184,7 @@
                     <h3>Delete User</h3>
                     <form id="delete-user" action="#" class="edit-user">
                         <fieldset>
-                            <label for="delete-user-id">User ID</label>
+                            <label for="delete-user-id">User</label>
                             <select id="delete-user-id" class='user-select'>
                                 <option value="">----Pick a user-----</option>
                                 <!--Display all users here-->
