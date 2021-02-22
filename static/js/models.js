@@ -244,11 +244,11 @@ if (typeof module !== 'undefined') {
 // COMMENT OUT BEFORE JASMINE TESTS
 // Example events + users for now
 
-// new Event('Virtual Guided Meditation');
-// new Event('Outside Yoga Lesson');
+new Event('Virtual Guided Meditation');
+new Event('Outside Yoga Lesson');
 
 
-// new User('Avery');
-// new User('Mark');
-// new User('Tanya');
-// new User('Cool-Beans');
+new User('Avery');
+new User('Mark');
+new User('Tanya');
+new User('Cool-Beans');
