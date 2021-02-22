@@ -2,7 +2,14 @@
  * Add all your DOM event handlers and other UI code in this file.
  */
 
-
+function eventOutputFormat(eventObj) {
+    let output = `${eventObj.name} (id: ${eventObj.id})`;
+    
+    if (eventObj.date) {
+        output += ` on ${eventObj.date.toDateString()}`;
+    }
+    return output;
+}
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -16,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
         innerHTML = Event.all
             .map((event) =>
                 `<li>
-                ${event.name} (id: ${event.id})
+                ${eventOutputFormat(event)}
                 </li>`
             ).join("\n");
         if (Event.all.length < 1) {
@@ -64,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // EVENT FORM'S EVENT LISTENERS
     addEventForm.addEventListener('submit', (submitEvent) => {
         let eventDate = document.querySelector('#add-event-date').value;
-        
+
         eventHandle(submitEvent, 'addEvent', "#add-event-name", 'Added event', eventDate);
         addEventForm.reset();
     });
