@@ -74,7 +74,10 @@
                 <form id="delete-event" action="#" class="edit-event">
                     <fieldset>
                         <label>Event ID</label>
-                        <input type="number" min="1" id="delete-event-id" />
+                        <select id="delete-event-id" class='event-select'>
+                            <option value="">----Pick an event-----</option>
+                            <!--Display all events here-->
+                        </select>
                     </fieldset>
                     <input type="submit" />
                 </form>
