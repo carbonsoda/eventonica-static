@@ -11,13 +11,26 @@ function eventOutputFormat(eventObj) {
     return output;
 }
 
-/* 
-Sets dropdown options for either users or events
-returns formatted html string
+
+// Sets dropdown options for either users or events
+function setSelectOptions(selectObjTag, allObjs, defaultOption) {
+    // all relevant select-input elements
+    const selectOptionsAll = document.querySelectorAll(selectObjTag);
+
+    // formatted options to be inserted in each element
+    const htmlDropdown = dropdownFormat(allObjs, defaultOption);
+
+    for (let dropdown of selectOptionsAll) {
+        dropdown.innerHTML = htmlDropdown;
+    }
+}
+
+/*
+returns string of all <options> for <select>
+including all list of users or events
 
 allObjs = either Event.all or User.all
-
-@return populated <select> html as string
+defaultOptions = string, for "Pick ${defaultOption}"
 */
 function dropdownFormat(allObjs, defaultOption) {
     let htmlSelect = `<option value="">----Pick ${defaultOption}-----</option>`;
@@ -27,16 +40,6 @@ function dropdownFormat(allObjs, defaultOption) {
     ).join('\n');
 
     return htmlSelect;
-}
-
-// Separate just for now/until fully stable
-function setSelectDropdown(selectObjTag, allObjs, defaultOption) {
-    const allObjDropdowns = document.querySelectorAll(selectObjTag);
-    const htmlDropdown = dropdownFormat(allObjs, defaultOption);
-
-    for (let dropdown of allObjDropdowns) {
-        dropdown.innerHTML = htmlDropdown;
-    }
 }
 
 
@@ -75,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 innerHTML = 'No users registered yet';
         } else {
             // also refresh all users select-dropdowns
-            setSelectDropdown('.user-select', User.all, 'a user');
+            setSelectOptions('.user-select', User.all, 'a user');
         }
     };
 
@@ -138,8 +141,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     removeUserForm.addEventListener('submit', (submitEvent) => {
-        userHandle(submitEvent, 'deleteUser', "#delete-user-id", 'Removed user ');
-        removeUserForm.reset();
+        submitEvent.preventDefault();
+        const selectUsers = document.querySelector('#delete-user-id');
+        let user = selectUsers.options[selectUsers.selectedIndex];
+
+        if (user.value) {
+            app.deleteUser(user.value);
+            console.log('Deleted user', user.value);
+            refreshUserList();
+        }
     });
 
     updateUserForm.addEventListener('submit', (submitEvent) => {
