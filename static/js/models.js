@@ -1,5 +1,6 @@
 
 class Eventonica {
+    static currentUser;
 
     // Add event
     // Name is required
@@ -90,6 +91,20 @@ class Eventonica {
             User.all.splice(userIdx, 1);
         } else {
             // some error message here
+        }
+    }
+
+    // Handles adding/removing favorites
+    // ideally passed in a currentUser object
+    // eventIDs = array of ids
+    updateUserFavorites(currentUser, eventIDs) { }
+
+    // returns a user object based on a userID
+    setCurrentUser(userID) {
+        let userIdx = this.indexLookup(User.all, userID);
+
+        if (userIdx >= 0) {
+            currentUser = User.all[userIdx];
         }
     }
 
