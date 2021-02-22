@@ -107,6 +107,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const addUserForm = document.querySelector('#add-user');
     const removeUserForm = document.querySelector('#delete-user');
     const updateUserForm = document.querySelector('#update-user');
+    const currentUserForm = document.querySelector('#set-current-user');
+    let currentUser = '';
 
     // USER FORM'S EVENT LISTENERS
     addUserForm.addEventListener('submit', (submitEvent) => {
@@ -125,4 +127,8 @@ document.addEventListener("DOMContentLoaded", () => {
         userHandle(submitEvent, 'updateUser', '#update-user-id', 'User updated', 'name', userNewName);
         updateUserForm.reset();
     });
+
+    // TO - DO
+    // IMPLEMENT SET CURRENT USER EVENT LISTENER
+
 });
