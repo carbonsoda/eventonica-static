@@ -37,6 +37,16 @@ h2, h3, h4 {
     text-decoration: underline #b3b3b3 0.2rem;
 }
 
+h2 {
+    font-size: 1.9rem;
+    /* padding-left: 0.5rem; */
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-top: 0.2rem;
+}
+
 body {
     background-color: #3b2c35ff;
 }
@@ -82,7 +92,6 @@ button, input[type=submit] {
     margin-right: 4em;
 }
 
-
 fieldset {
     max-width: 15em;
     margin-left: 8px;
@@ -92,11 +101,11 @@ fieldset {
     font-family: 'Roboto', sans-serif;
 } */
 
-.events-overview {
+.events-display {
     border: 2px gray solid;
 }
 
-.event-changes {
+.events-manage {
     border: 2px gray dotted;
     padding: 10px;
 }
@@ -107,10 +116,4 @@ fieldset {
     justify-content: center;
     line-height: 1.5em;
     max-width: 15em;
-}
-
-#update-fields {
-    border: 2px gray dotted;
-    display: flex;
-    flex-direction: column;
 }
