@@ -63,7 +63,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // EVENT FORM'S EVENT LISTENERS
     addEventForm.addEventListener('submit', (submitEvent) => {
-        eventHandle(submitEvent, 'addEvent', "#add-event-name", 'Added event');
+        let eventDate = document.querySelector('#add-event-date').value;
+        
+        eventHandle(submitEvent, 'addEvent', "#add-event-name", 'Added event', eventDate);
         addEventForm.reset();
     });
 
