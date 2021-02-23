@@ -57,6 +57,7 @@
             <section class="events-manage">
                 <h3>Event Management</h3>
 
+                <!--ADD EVENT-->
                 <div>
                     <h4>Add Event</h4>
                     <form id="add-event" action="#" class="edit-event">
@@ -72,6 +73,7 @@
                     </form>
                 </div>
 
+                <!--DELETE EVENT-->
                 <div>
                     <h4>Delete Event</h4>
                     <form id="delete-event" action="#" class="edit-event">
@@ -86,12 +88,30 @@
                     </form>
                 </div>
 
+                <!--FAVORITE/UNFAVORITE-->
+                <div>
+                    <h4>Favorite Event</h4>
+                    <form id="fave-event" action="#" class="edit-event">
+                        <fieldset>
+                            <label>Event</label>
+                            <select id="fave-event-id" class='event-select'>
+                                <option value="">----Pick an event-----</option>
+                                <!--Display all events here-->
+                            </select>
+                        </fieldset>
+                        <input type="submit" />
+                    </form>
+                </div>
+
                 <div>
                     <h4>Update Event</h4>
                     <form id="update-event" action="#" class="edit-event">
                         <fieldset>
                             <label>Event ID</label>
-                            <input type="number" min="1" id="update-event-ID" />
+                            <select id="update-event-ID" class='event-select'>
+                                <option value="">----Pick an event-----</option>
+                                <!--Display all events here-->
+                            </select>
 
                             <!--Activate once event ID entered-->
                             <label for="update-event-select">Update </label>
@@ -139,11 +159,11 @@
 
             <div class="user-overview">
                 <ul id="users-list">
-                <!-- display all existing Users here -->
-                <li>...</li>
+                    <!-- display all existing Users here -->
+                    <li>...</li>
                 </ul>
             </div>
-            
+
 
             <!--ALL USER CHANGES/FUNCTIONS-->
             <section class="user-changes">
@@ -161,8 +181,8 @@
                         </fieldset>
                         <input type="submit" />
                     </form>
-                
-                
+
+
                 </div>
 
                 <!--ADD NEW USER-->

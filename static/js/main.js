@@ -7,6 +7,10 @@
   * To make the DOMContentLoaded section easier to read
   * + make formatting easier to manage
   */
+function toggleFavorites(selectorTag) {
+    let eventID = document.querySelector('selectorTag')
+}
+
 function eventOutputFormat(eventObj) {
     let output = `${eventObj.name} (id: ${eventObj.id})`;
 
@@ -135,7 +139,9 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // EVENT-RELATED FORMS
     const addEventForm = document.querySelector("#add-event");
-    const removeEventForm = document.querySelector('#delete-event')
+    const removeEventForm = document.querySelector('#delete-event');
+    const faveEventForm = document.querySelector('#fave-event');
+    const updateEventForm = document.querySelector('#fave-event');
 
     // EVENT FORM'S EVENT LISTENERS
     addEventForm.addEventListener('submit', (submitEvent) => {
@@ -149,7 +155,12 @@ document.addEventListener("DOMContentLoaded", () => {
     removeEventForm.addEventListener('submit', (submitEvent) => {
         selectHandler(submitEvent, 'deleteEvent', "#delete-event-id", 'Deleted event');
         refreshEventsList();
-        addEventForm.reset();
+    });
+
+    faveEventForm.addEventListener('submit', (submitEvent) => {
+        selectHandler(submitEvent, 'updateUserFavorites', "#fave-event-id", 'Favorite event added/removed');
+
+        console.log(`${app.currentUser.name} favorites are ${[...app.currentUser.favorites].join(', ')}`);
     });
 
     /**
