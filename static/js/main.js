@@ -12,7 +12,7 @@ function toggleFavorites(selectorTag) {
 }
 
 function eventOutputFormat(eventObj) {
-    let output = `${eventObj.name} (id: ${eventObj.id})`;
+    let output = `${eventObj.name}`;
 
     if (eventObj.date) {
         output += ` on ${eventObj.date.toDateString()}`;
@@ -60,40 +60,40 @@ document.addEventListener("DOMContentLoaded", () => {
     // Builds HTML list for all events
     // Call after update, add, or remove an event
     const refreshEventsList = () => {
-
-        document.querySelector("#events-list").
-            innerHTML = Event.all
-                .map((event) =>
-                    `<li>
+        let eventsListHTML = Event.all.map((event) =>
+                `<li>
                 ${eventOutputFormat(event)}
                 </li>`
-                ).join("\n");
+        ).join("\n");
+        
         if (Event.all.length < 1) {
-            document.querySelector("#events-list").
-                innerHTML = 'No events planned yet';
+            eventsListHTML = 'No events planned yet';
         } else {
             // also refresh all users select-dropdowns
             setSelectOptions('.event-select', Event.all, 'an event');
         }
+        document.querySelector("#events-list").
+            innerHTML = eventsListHTML;
     };
 
     // Builds HTML list for all users.
     // Call after update, add, or remove a user
     const refreshUserList = () => {
-        document.querySelector("#users-list").innerHTML = User.all
-            .map((user) =>
+        
+        let usersListHTML = User.all.map((user) =>
                 `<li>
                 ${user.name}  <small>(id: ${user.id})</small>
                 </li>`
             ).join('\n');
 
         if (User.all.length < 1) {
-            document.querySelector("#users-list").
-                innerHTML = 'No users registered yet';
+            usersListHTML = 'No users registered yet';
         } else {
-            // also refresh all users select-dropdowns
+            // also refresh all users-select dropdowns
             setSelectOptions('.user-select', User.all, 'a user');
         }
+        // set the users-list's html to usersListHTML
+        document.querySelector('#users-list').innerHTML = usersListHTML;
     };
 
     // Loading page for first time
