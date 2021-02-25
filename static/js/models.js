@@ -144,6 +144,9 @@ class Eventonica {
 class Event {
     static all = [];
     static _nextId = 100;
+    static categories = [
+        'Workshop', 'Presentation', 'Seminar', 'Concert', '1:1'
+    ];
 
     // empty values for now
     constructor(name, date = '', time = '', category = '', location = '', details = '') {
@@ -154,6 +157,7 @@ class Event {
         this.category = new Set().add(category);
         this.location = location;
         this.details = details;
+        this.faveCount = 0;
 
         // if actual date string passed in
         if (this.date) this.date = new Date(date);
