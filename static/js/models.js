@@ -72,21 +72,14 @@ class Eventonica {
     }
 
     // Update existing User
-    updateUser(userID, updateProperty, ...changes) {
+    updateUser(userID, name='') {
         let userIdx = this.indexLookup(User.all, userID);
 
         // User not found
         if (userIdx < 0) return;
 
-        switch (updateProperty) {
-            case 'name':
-                User.all[userIdx].updateName(...changes);
-                break;
-            case 'favorites':
-                User.all[userIdx].updateFavorites(...changes);
-                break;
-            default:
-                break;
+        if (name) {
+            User.all[userIdx].updateName(name);
         }
     }
 
