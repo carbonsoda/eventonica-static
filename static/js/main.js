@@ -15,6 +15,8 @@ const updateEventForm = document.querySelector('#update-event');
  * USER ELEMENTS
  */
 
+let usersList = document.querySelector('#users-list');
+
 // FORMS
 const currentUserForm = document.querySelector('#set-current-user');
 const addUserForm = document.querySelector('#add-user');
@@ -34,7 +36,7 @@ const whiteStar = '\u2606';
 const blackStar = '\u2605';
 
 function toggleFave(selectorTag) {
-    let eventID = document.querySelector('selectorTag')
+    let eventID = document.querySelector(selectorTag);
 }
 
 
@@ -53,12 +55,12 @@ function eventOutputFormat(eventObj) {
 }
 
 // Sets dropdown options for either users or events
-function setSelectOptions(selectObjTag, allObjs, defaultOption) {
+function setSelectOptions(selectObjTag, allObjs, defaultOption, isCategory = false) {
     // all relevant select-input elements
     const selectOptionsAll = document.querySelectorAll(selectObjTag);
 
     // formatted options to be inserted in each element
-    const htmlDropdown = optionsFormat(allObjs, defaultOption);
+    const htmlDropdown = optionsFormat(allObjs, defaultOption, isCategory);
 
     for (let dropdown of selectOptionsAll) {
         dropdown.innerHTML = htmlDropdown;
@@ -72,12 +74,17 @@ including all list of users or events
 allObjs = either Event.all or User.all
 defaultOptions = string, for "Pick ${defaultOption}"
 */
-function optionsFormat(allObjs, defaultOption) {
+function optionsFormat(allObjs, defaultOption, isCategory) {
     let htmlSelect = `<option value="">----Pick ${defaultOption}-----</option>`;
 
-    htmlSelect += allObjs.map((obj) =>
-        `<option value=${obj.id}> ${obj.name} (id: ${obj.id}) </option>`
-    ).join('\n');
+    if (isCategory) {
+        htmlSelect += allObjs.map((category) => `<option value='${category}'> ${category} </option>`
+        ).join('\n');
+    } else {
+        htmlSelect += allObjs.map((obj) =>
+            `<option value=${obj.id}> ${obj.name} (id: ${obj.id}) </option>`
+        ).join('\n');
+    }
 
     return htmlSelect;
 }
@@ -98,12 +105,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // Call after update, add, or remove an event
     const refreshEventsList = () => {
         let eventsListHTML = Event.all.map((event) =>
-                `<li>
+            `<li>
                 <button class="fave-event" value="${event.id}"> ${blackStar} </button>
                 ${eventOutputFormat(event)}
                 </li>`
         ).join("\n");
-        
+
         if (Event.all.length < 1) {
             eventsListHTML = 'No events planned yet';
         } else {
@@ -112,19 +119,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // set event-list to display the new html
-        document.querySelector("#events-list").
-            innerHTML = eventsListHTML;
+        eventsList.innerHTML = eventsListHTML;
     };
 
     // Builds HTML list for all users.
     // Call after update, add, or remove a user
     const refreshUserList = () => {
-        
         let usersListHTML = User.all.map((user) =>
-                `<li>
+            `<li>
                 ${user.name}  <small>(id: ${user.id})</small>
                 </li>`
-            ).join('\n');
+        ).join('\n');
 
         if (User.all.length < 1) {
             usersListHTML = 'No users registered yet';
@@ -133,12 +138,14 @@ document.addEventListener("DOMContentLoaded", () => {
             setSelectOptions('.user-select', User.all, 'a user');
         }
         // set users-list to display the new html
-        document.querySelector('#users-list').innerHTML = usersListHTML;
+        usersList.innerHTML = usersListHTML;
     };
 
     // Loading page for first time
     refreshEventsList();
     refreshUserList();
+
+    setSelectOptions('.category-select', Event.categories, 'a category', isCategory=true);
 
 
     /** 
@@ -155,7 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // pass in the ID + any other parameters as needed (all other changes)
 
             const itemChanged = app[whichAction](elementID, ...changes);
-            
+
             console.log(logMsg, elementID, itemChanged);
             // true = refresh list of events/users
             return true;
@@ -201,7 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let category = parseSelect('#add-event-category');
 
         // submit request
-        defaultHandler(submitEvent, 'addEvent', 'Added event', name, date, time, category);
+        defaultHandler('addEvent', 'Added event', name, date, time, category);
 
         refreshEventsList();
         addEventForm.reset();
@@ -233,9 +240,9 @@ document.addEventListener("DOMContentLoaded", () => {
     removeEventForm.addEventListener('submit', (submitEvent) => {
         submitEvent.preventDefault();
         let eventID = parseInput('#delete-event-id');
-        
+
         // submit request
-        defaultHandler(submitEvent, 'deleteEvent', 'Deleted event', eventID);
+        defaultHandler('deleteEvent', 'Deleted event', eventID);
 
         // refresh
         refreshEventsList();
@@ -244,9 +251,16 @@ document.addEventListener("DOMContentLoaded", () => {
     // FAVORITE/UNFAVORITE EVENT
 
     faveEventForm.addEventListener('submit', (submitEvent) => {
-        selectHandler(submitEvent, 'updateUserFavorites', "#fave-event-id", 'Favorite event added/removed');
+        submitEvent.preventDefault();
 
-        console.log(`${app.currentUser.name} favorites are ${[...app.currentUser.favorites].join(', ')}`);
+        if (app.currentUser) {
+            let eventID = parseSelect('#fave-event-id');
+
+            defaultHandler('updateUserFavorites', 'Favorite event added/removed', eventID);
+
+            console.log(`${app.currentUser.name} favorites are ${[...app.currentUser.favorites].join(', ')}`);
+        }
+        
     });
 
 
@@ -257,7 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // USER FORM'S EVENT LISTENERS
     addUserForm.addEventListener('submit', (submitEvent) => {
-        let newAdded = defaultHandler(submitEvent, 'addUser', '#add-user-name', 'Added user ');
+        let newAdded = defaultHandler('addUser', '#add-user-name', 'Added user ');
 
         if (newAdded) {
             refreshUserList();
@@ -267,17 +281,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // REMOVE USER
     removeUserForm.addEventListener('submit', (submitEvent) => {
-        let deleted = selectHandler(submitEvent, 'deleteUser', '#delete-user-id', 'Deleted user');
-        
-        if(deleted) refreshUserList();
+        let deleted = selectHandler('deleteUser', '#delete-user-id', 'Deleted user');
+
+        if (deleted) refreshUserList();
     });
 
     // UPDATE USER
     updateUserForm.addEventListener('submit', (submitEvent) => {
         const userNewName = document.querySelector('#update-user-name').value;
 
-        let updated = defaultHandler(submitEvent, 'updateUser', '#update-user-id', 'User updated', 'name', userNewName);
-        
+        let updated = defaultHandler('updateUser', '#update-user-id', 'User updated', 'name', userNewName);
+
         if (updated) {
             refreshUserList();
             updateUserForm.reset();
@@ -287,8 +301,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // CHANGE CURRENT USER
     currentUserForm.addEventListener('submit', (submitEvent) => {
 
-        let newCurrent = selectHandler(submitEvent, 'setCurrentUser', '#current-user-select', 'Current user now');
-        
+        let newCurrent = selectHandler('setCurrentUser', '#current-user-select', 'Current user now');
+
         if (newCurrent && app.currentUser) {
             document.querySelector('#display-current-user').innerHTML += `${app.currentUser.name}`;
         }
