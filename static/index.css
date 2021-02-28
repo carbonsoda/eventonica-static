@@ -1,3 +1,8 @@
+/*
+Google Fonts + Bootstrap Icons
+*/
+@import url('https://fonts.googleapis.com/css2?family=Exo&family=Public+Sans&family=Roboto&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css");
 /* 
 Colors from coolors.com
 --desert-sand: #ecc8afff;
@@ -8,7 +13,6 @@ Colors from coolors.com
 */
 
 header {
-    /* For more about flexbox, see https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
     display: flex;
     flex-direction: column;
     align-items: center;
