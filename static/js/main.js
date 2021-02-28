@@ -61,7 +61,7 @@ function dropdownFormat(allObjs, defaultOption) {
 
 
 /**
- * MAIN
+ * MAIN FUNCTIONS
  */
 document.addEventListener("DOMContentLoaded", () => {
     const app = new Eventonica();
@@ -111,39 +111,47 @@ document.addEventListener("DOMContentLoaded", () => {
     refreshUserList();
 
 
-    /** EVENTLISTENER HANDLERS
+    /** 
      * 
-     * Handles User/Event form submits by calling our instance of Eventonica, `app`
+     * INPUT HANDLING
+     * 
      */
 
-     
-    // handles generic input
-    const defaultHandler = (submitEvent, eventAction, eventSelector, logMsg, ...otherChanges) => {
-        submitEvent.preventDefault();
-        // nameID == either a user/event name or ID
-        const nameID = document.querySelector(eventSelector).value;
-        if (nameID) {
+    //  Handles User/Event form submits by calling our instance of Eventonica, 'app'
+    function defaultHandler(whichAction, logMsg, elementID, ...changes) {
+        // an ID of an event, or user
+        // unless adding event/user, then its a name
+        if (elementID) {
             // pass in the ID + any other parameters as needed (all other changes)
-            const itemChanged = app[eventAction](nameID, ...otherChanges);
 
-            console.log(logMsg, itemChanged, nameID);
+            const itemChanged = app[whichAction](elementID, ...changes);
+            
+            console.log(logMsg, elementID, itemChanged);
             // true = refresh list of events/users
             return true;
         }
-    };
+    }
 
-    // handles select menu inputs
-    function selectHandler(submitEvent, appAction, selectorTag, logMsg) {
-        submitEvent.preventDefault();
-        const selectItems = document.querySelector(selectorTag);
+    // Handles string/value inputs
+    function parseInput(elementTag) {
+        let item = document.querySelector(elementTag);
+
+        if (!item) {
+            return '';
+        }
+        return item.value;
+    }
+
+    // Handles select-menu input/chosen option
+    function parseSelect(elementTag) {
+        const selectItems = document.querySelector(elementTag);
         const item = selectItems.options[selectItems.selectedIndex];
 
-        if (item.value) {
-            app[appAction](item.value);
-            console.log(logMsg, item.value);
-            // true = refresh list
-            return true;
+        if (!item.value) {
+            return '';
         }
+
+        return item.value;
     }
 
     /** 
@@ -154,7 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const addEventForm = document.querySelector("#add-event");
     const removeEventForm = document.querySelector('#delete-event');
     const faveEventForm = document.querySelector('#fave-event');
-    const updateEventForm = document.querySelector('#fave-event');
+    const updateEventForm = document.querySelector('#update-event');
 
     // EVENT-LIST
     let eventsList = document.querySelector('#events-list');
@@ -162,26 +170,53 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // EVENT FORM'S EVENT LISTENERS
     addEventForm.addEventListener('submit', (submitEvent) => {
-        let eventDate = document.querySelector('#add-event-date').value;
+        submitEvent.preventDefault();
+        // required
+        let name = parseInput('#add-event-name');
 
-        defaultHandler(submitEvent, 'addEvent', "#add-event-name", 'Added event', eventDate);
+        // optional
+        let date = parseInput('#add-event-date');
+        let time = parseInput('#add-event-time');
+        let category = parseSelect('#add-event-category');
+
+        // submit request
+        defaultHandler(submitEvent, 'addEvent', 'Added event', name, date, time, category);
+
+        refreshEventsList();
+        addEventForm.reset();
+    });
+
+    updateEventForm.addEventListener('submit', (submitEvent) => {
+        submitEvent.preventDefault();
+        // required
+        let eventID = parseInput('#update-event-id');
+
+        // optional
+        let name = parseInput('#update-event-name')
+        let date = parseInput('#update-event-date');
+        let time = parseInput('#update-event-time');
+        let category = parseSelect('#update-event-category');
+
+        // submit request
+        defaultHandler(submitEvent,
+            'updateEvent', 'Updated event', eventID,
+            name, date, time, category
+        );
+
         refreshEventsList();
         addEventForm.reset();
     });
 
     removeEventForm.addEventListener('submit', (submitEvent) => {
-        selectHandler(submitEvent, 'deleteEvent', "#delete-event-id", 'Deleted event');
+        submitEvent.preventDefault();
+        let eventID = parseInput('#delete-event-id');
+        
+        // submit request
+        defaultHandler(submitEvent, 'deleteEvent', 'Deleted event', eventID);
+
+        // refresh
         refreshEventsList();
     });
-
-    updateEventForm.addEventListener('submit', (submitEvent) => {
-        const selectItems = document.querySelector(selectorTag);
-        const item = selectItems.options[selectItems.selectedIndex];
-
-        if (item.value) {
-            // actions here
-        }
-    })
 
     faveEventForm.addEventListener('submit', (submitEvent) => {
         selectHandler(submitEvent, 'updateUserFavorites', "#fave-event-id", 'Favorite event added/removed');

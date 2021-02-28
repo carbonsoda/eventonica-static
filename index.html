@@ -64,11 +64,56 @@
                         <fieldset>
                             <label>Name</label>
                             <input type="text" id="add-event-name" placeholder="Virtual corgi meetup" />
+
                             <label for="add-event-date">Date</label>
                             <input type="date" id="add-event-date" placeholder="YYYY-MM-DD" />
+
+                            <label for="add-event-time">Time</label>
+                            <input type="time" id="add-event-time" />
+
+                            <label>Category</label>
+                            <select id="add-event-category" class='category-select'>
+                                <option value="">----Pick a category-----</option>
+                                <!--Display all categories here-->
+                            </select>
                         </fieldset>
 
                         <!-- Add more form fields here -->
+                        <input type="submit" />
+                    </form>
+                </div>
+
+                <!--UPDATE EVENT-->
+                <div>
+                    <h4>Update Event</h4>
+                    <form id="update-event" action="#" class="edit-event">
+                        <fieldset id="update-fields">
+                            <label>Event</label>
+                            <select id="update-event-id" class='event-select'>
+                                <option value="">----Pick an event-----</option>
+                                <!--Display all events here-->
+                            </select>
+                
+                
+                
+                            <label for="event-update-name">Name</label>
+                            <input type="text" id="update-event-name" />
+                
+                
+                            <label for="event-update-date">Date</label>
+                            <input type="date" id="event-update-date" placeholder="YYYY-MM-DD" />
+                
+                            <label for="update-event-time">Time</label>
+                            <input type="time" id="update-event-time" />
+                
+                            <label>Category</label>
+                            <select id="update-event-category" class='category-select'>
+                                <option value="">----Pick a category-----</option>
+                                <!--Display all categories here-->
+                            </select>
+                
+                        </fieldset>
+                
                         <input type="submit" />
                     </form>
                 </div>
@@ -99,53 +144,6 @@
                                 <!--Display all events here-->
                             </select>
                         </fieldset>
-                        <input type="submit" />
-                    </form>
-                </div>
-
-                <div>
-                    <h4>Update Event</h4>
-                    <form id="update-event" action="#" class="edit-event">
-                        <fieldset>
-                            <label>Event ID</label>
-                            <select id="update-event-ID" class='event-select'>
-                                <option value="">----Pick an event-----</option>
-                                <!--Display all events here-->
-                            </select>
-
-                            <!--Activate once event ID entered-->
-                            <label for="update-event-select">Update </label>
-                            <select id="update-event-select">
-                                <option value="">--Choose an event field--</option>
-                                <option value="name">Name</option>
-                                <option value="date">Date</option>
-                                <option value="time">Time</option>
-                                <option value="location">Location</option>
-                                <option value="category">Category</option>
-                                <option value="details">Details</option>
-                            </select>
-                        </fieldset>
-
-
-                        <fieldset id="update-fields">
-                            <!--Ideally populate fields based on what user selected in dropdown-->
-                            <!--TODO: ADD TIME + LOCATION + DETAILS-->
-                            <label for="event-update-name">Name</label>
-                            <input type="text" id="event-update-name" />
-
-
-                            <label for="event-update-date">Date</label>
-                            <input type="date" id="event-update-date" placeholder="YYYY-MM-DD" />
-
-                            <!-- <label for="event-update-time">Time</label>
-                        <input type="time" id="event-update-time" required
-           pattern="[0-9]{2}:[0-9]{2}" step="60"/> -->
-
-                            <label for="event-update-category">Category</label>
-                            <input type="text" id="event-update-category" />
-
-                        </fieldset>
-
                         <input type="submit" />
                     </form>
                 </div>
