@@ -1,12 +1,34 @@
-/**
- * Add all your DOM event handlers and other UI code in this file.
+
+/** 
+ * EVENT ELEMENTS
  */
 
- /**
-  * HELPER FUNCTIONS
-  * To make the DOMContentLoaded section easier to read
-  * + make formatting easier to manage
-  */
+let eventsList = document.querySelector('#events-list');
+
+// FORMS
+const addEventForm = document.querySelector("#add-event");
+const removeEventForm = document.querySelector('#delete-event');
+const faveEventForm = document.querySelector('#fave-event');
+const updateEventForm = document.querySelector('#update-event');
+
+/**
+ * USER ELEMENTS
+ */
+
+// FORMS
+const currentUserForm = document.querySelector('#set-current-user');
+const addUserForm = document.querySelector('#add-user');
+const removeUserForm = document.querySelector('#delete-user');
+const updateUserForm = document.querySelector('#update-user');
+
+
+
+/**
+ * GENERAL STYLING
+ * 
+ * - Elements
+ * - Functions
+ */
 
 const whiteStar = '\u2606';
 const blackStar = '\u2605';
@@ -15,8 +37,10 @@ function toggleFave(selectorTag) {
     let eventID = document.querySelector('selectorTag')
 }
 
+
+
 /**
- * STYLING SPECIFIC
+ * RESPONSE-RESULTS STYLING
  */
 
 function eventOutputFormat(eventObj) {
@@ -27,7 +51,6 @@ function eventOutputFormat(eventObj) {
     }
     return output;
 }
-
 
 // Sets dropdown options for either users or events
 function setSelectOptions(selectObjTag, allObjs, defaultOption) {
@@ -62,6 +85,11 @@ function optionsFormat(allObjs, defaultOption) {
 
 /**
  * MAIN FUNCTIONS
+ * 
+ * - UI Updates
+ * - Input(s) Parsing 
+ * - Submit request handling
+ * - EventListeners
  */
 document.addEventListener("DOMContentLoaded", () => {
     const app = new Eventonica();
@@ -79,9 +107,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (Event.all.length < 1) {
             eventsListHTML = 'No events planned yet';
         } else {
-            // also refresh all users select-dropdowns
+            // also refresh all event select menus
             setSelectOptions('.event-select', Event.all, 'an event');
         }
+
+        // set event-list to display the new html
         document.querySelector("#events-list").
             innerHTML = eventsListHTML;
     };
@@ -99,10 +129,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (User.all.length < 1) {
             usersListHTML = 'No users registered yet';
         } else {
-            // also refresh all users-select dropdowns
+            // also refresh all user select menus
             setSelectOptions('.user-select', User.all, 'a user');
         }
-        // set the users-list's html to usersListHTML
+        // set users-list to display the new html
         document.querySelector('#users-list').innerHTML = usersListHTML;
     };
 
@@ -154,21 +184,12 @@ document.addEventListener("DOMContentLoaded", () => {
         return item.value;
     }
 
-    /** 
-     * EVENT ELEMENTS
+    /**
+     * EVENT RELATED
+     * EVENTLISTENERS
      */
-    
-    // EVENT-RELATED FORMS
-    const addEventForm = document.querySelector("#add-event");
-    const removeEventForm = document.querySelector('#delete-event');
-    const faveEventForm = document.querySelector('#fave-event');
-    const updateEventForm = document.querySelector('#update-event');
 
-    // EVENT-LIST
-    let eventsList = document.querySelector('#events-list');
-
-
-    // EVENT FORM'S EVENT LISTENERS
+    // ADD EVENT
     addEventForm.addEventListener('submit', (submitEvent) => {
         submitEvent.preventDefault();
         // required
@@ -186,6 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
         addEventForm.reset();
     });
 
+    // UPDATE EVENT
     updateEventForm.addEventListener('submit', (submitEvent) => {
         submitEvent.preventDefault();
         // required
@@ -207,6 +229,7 @@ document.addEventListener("DOMContentLoaded", () => {
         addEventForm.reset();
     });
 
+    // DELETE EVENT
     removeEventForm.addEventListener('submit', (submitEvent) => {
         submitEvent.preventDefault();
         let eventID = parseInput('#delete-event-id');
@@ -218,6 +241,8 @@ document.addEventListener("DOMContentLoaded", () => {
         refreshEventsList();
     });
 
+    // FAVORITE/UNFAVORITE EVENT
+
     faveEventForm.addEventListener('submit', (submitEvent) => {
         selectHandler(submitEvent, 'updateUserFavorites', "#fave-event-id", 'Favorite event added/removed');
 
@@ -226,14 +251,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /**
-     * USER ELEMENTS
+     * USER RELATED
+     * EVENTLISTENERS
      */
-
-    // USER-RELATED FORMS
-    const addUserForm = document.querySelector('#add-user');
-    const removeUserForm = document.querySelector('#delete-user');
-    const updateUserForm = document.querySelector('#update-user');
-    const currentUserForm = document.querySelector('#set-current-user');
 
     // USER FORM'S EVENT LISTENERS
     addUserForm.addEventListener('submit', (submitEvent) => {
