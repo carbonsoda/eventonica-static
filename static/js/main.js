@@ -271,7 +271,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // USER FORM'S EVENT LISTENERS
     addUserForm.addEventListener('submit', (submitEvent) => {
-        let newAdded = defaultHandler('addUser', '#add-user-name', 'Added user ');
+        submitEvent.preventDefault();
+        let name = parseInput('#add-user-name');
+        
+        // Attempt add
+        let newAdded = defaultHandler('addUser', 'Added user ', name);
 
         if (newAdded) {
             refreshUserList();
@@ -281,16 +285,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // REMOVE USER
     removeUserForm.addEventListener('submit', (submitEvent) => {
-        let deleted = selectHandler('deleteUser', '#delete-user-id', 'Deleted user');
+        submitEvent.preventDefault();
+        // Which user
+        let userID = parseSelect('#delete-user-id');
 
-        if (deleted) refreshUserList();
+        // Attempt delete
+        let deleted = defaultHandler('deleteUser', 'Deleted user', userID);
+
+        if (deleted) {
+            refreshUserList();
+            removeUserForm.reset();
+        };
     });
 
     // UPDATE USER
     updateUserForm.addEventListener('submit', (submitEvent) => {
+        submitEvent.preventDefault();
+        // Which user
+        const userID = parseSelect('#update-user-id');
         const userNewName = document.querySelector('#update-user-name').value;
 
-        let updated = defaultHandler('updateUser', '#update-user-id', 'User updated', 'name', userNewName);
+        // Attempt update
+        let updated = defaultHandler('updateUser', 'User updated', userID, userNewName);
 
         if (updated) {
             refreshUserList();
@@ -300,11 +316,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // CHANGE CURRENT USER
     currentUserForm.addEventListener('submit', (submitEvent) => {
+        submitEvent.preventDefault();
+        // Which user
+        const userID = parseSelect('#current-user-select');
 
-        let newCurrent = selectHandler('setCurrentUser', '#current-user-select', 'Current user now');
+        // Attempt switch current user
+        let newCurrent = defaultHandler('setCurrentUser', 'Current user is now ', userID);
 
         if (newCurrent && app.currentUser) {
             document.querySelector('#display-current-user').innerHTML += `${app.currentUser.name}`;
+
+            currentUserForm.reset();
         }
     });
 

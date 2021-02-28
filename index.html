@@ -217,8 +217,13 @@
                     <h3>Update User</h3>
                     <form id="update-user" action="#" class="edit-user">
                         <fieldset>
-                            <label for="update-user-id">User ID</label>
-                            <input type="number" min="200" pattern=".{3,}" id="update-user-id" />
+                            <label for="update-user-id">User</label>
+                            <select id="update-user-id" class='user-select'>
+                                <option value="">----Pick a user-----</option>
+                                <!--Display all users here-->
+                            </select>
+
+                            
                             <label for="update-user-name">Name</label>
                             <input type="text" placeholder="New Name" id="update-user-name" />
                         </fieldset>
