@@ -35,7 +35,7 @@ function setSelectOptions(selectObjTag, allObjs, defaultOption) {
     const selectOptionsAll = document.querySelectorAll(selectObjTag);
 
     // formatted options to be inserted in each element
-    const htmlDropdown = dropdownFormat(allObjs, defaultOption);
+    const htmlDropdown = optionsFormat(allObjs, defaultOption);
 
     for (let dropdown of selectOptionsAll) {
         dropdown.innerHTML = htmlDropdown;
@@ -49,7 +49,7 @@ including all list of users or events
 allObjs = either Event.all or User.all
 defaultOptions = string, for "Pick ${defaultOption}"
 */
-function dropdownFormat(allObjs, defaultOption) {
+function optionsFormat(allObjs, defaultOption) {
     let htmlSelect = `<option value="">----Pick ${defaultOption}-----</option>`;
 
     htmlSelect += allObjs.map((obj) =>
