@@ -13,30 +13,33 @@ class Eventonica {
     }
 
     // Update existing Event
-    updateEvent(eventID, updateProperty, ...changes) {
+    updateEvent(eventID, date = '', time = '', category = '', location = '', details = '') {
         let eventIdx = this.indexLookup(Event.all, eventID);
 
-        // Use a switch case with updateProperty to call appropriate func
-        switch (updateProperty) {
-            case 'name':
-                Event.all[eventIdx].updateName(...changes);
-                break;
-            case 'date':
-                Event.all[eventIdx].updateDate(...changes);
-                break;
-            case 'time':
-                Event.all[eventIdx].updateTime(...changes);
-                break;
-            case 'category':
-                Event.all[eventIdx].updateCategory(...changes);
-                break;
-            case 'location':
-                Event.all[eventIdx].updateLocation(...changes);
-                break;
-            case 'details':
-                Event.all[eventIdx].updateDetails(...changes);
-                break;
+        let currEvent = Event.all[eventIdx];
+
+        // Check through each parameter
+        // If not blank, then it update that field
+        if (date) {
+            currEvent.updateDate(date);
         }
+        if (time) {
+            currEvent.updateTime(time);
+        }
+        if (category) {
+            currEvent.updateCategory(category);
+        }
+
+        if (location) {
+            currEvent.updateLocation(location);
+        }
+
+        if (details) {
+            currEvent.updateDetails(details);
+        }
+
+        // overwrite the old event
+        Event.all[eventIdx] = currEvent;
     }
 
     // Deletes Event
