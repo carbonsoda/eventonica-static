@@ -116,15 +116,18 @@ document.addEventListener("DOMContentLoaded", () => {
      * Handles User/Event form submits by calling our instance of Eventonica, `app`
      */
 
+     
     // handles generic input
     const defaultHandler = (submitEvent, eventAction, eventSelector, logMsg, ...otherChanges) => {
         submitEvent.preventDefault();
         // nameID == either a user/event name or ID
         const nameID = document.querySelector(eventSelector).value;
         if (nameID) {
+            // pass in the ID + any other parameters as needed (all other changes)
             const itemChanged = app[eventAction](nameID, ...otherChanges);
+
             console.log(logMsg, itemChanged, nameID);
-            // true = refresh list
+            // true = refresh list of events/users
             return true;
         }
     };
@@ -171,11 +174,21 @@ document.addEventListener("DOMContentLoaded", () => {
         refreshEventsList();
     });
 
+    updateEventForm.addEventListener('submit', (submitEvent) => {
+        const selectItems = document.querySelector(selectorTag);
+        const item = selectItems.options[selectItems.selectedIndex];
+
+        if (item.value) {
+            // actions here
+        }
+    })
+
     faveEventForm.addEventListener('submit', (submitEvent) => {
         selectHandler(submitEvent, 'updateUserFavorites', "#fave-event-id", 'Favorite event added/removed');
 
         console.log(`${app.currentUser.name} favorites are ${[...app.currentUser.favorites].join(', ')}`);
     });
+
 
     /**
      * USER ELEMENTS

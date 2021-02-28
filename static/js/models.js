@@ -13,13 +13,16 @@ class Eventonica {
     }
 
     // Update existing Event
-    updateEvent(eventID, date = '', time = '', category = '', location = '', details = '') {
+    updateEvent(eventID, name = '', date = '', time = '', category = '', location = '', details = '') {
         let eventIdx = this.indexLookup(Event.all, eventID);
 
         let currEvent = Event.all[eventIdx];
 
         // Check through each parameter
         // If not blank, then it update that field
+        if (name) {
+            currEvent.updateName(name);
+        }
         if (date) {
             currEvent.updateDate(date);
         }
@@ -29,11 +32,9 @@ class Eventonica {
         if (category) {
             currEvent.updateCategory(category);
         }
-
         if (location) {
             currEvent.updateLocation(location);
         }
-
         if (details) {
             currEvent.updateDetails(details);
         }
