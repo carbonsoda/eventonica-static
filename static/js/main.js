@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
     refreshEventsList();
     refreshUserList();
 
-    setSelectOptions('.category-select', Event.categories, 'a category', isCategory=true);
+    setSelectOptions('.category-select', Event.categories, 'a category', isCategory = true);
 
 
     /** 
@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /**
-     * EVENT RELATED
+     * EVENT FORMS'
      * EVENTLISTENERS
      */
 
@@ -260,12 +260,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             console.log(`${app.currentUser.name} favorites are ${[...app.currentUser.favorites].join(', ')}`);
         }
-        
+
     });
 
-
     /**
-     * USER RELATED
+     * USER FORMS'
      * EVENTLISTENERS
      */
 
@@ -273,7 +272,7 @@ document.addEventListener("DOMContentLoaded", () => {
     addUserForm.addEventListener('submit', (submitEvent) => {
         submitEvent.preventDefault();
         let name = parseInput('#add-user-name');
-        
+
         // Attempt add
         let newAdded = defaultHandler('addUser', 'Added user ', name);
 

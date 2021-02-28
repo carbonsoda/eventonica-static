@@ -72,7 +72,7 @@ class Eventonica {
     }
 
     // Update existing User
-    updateUser(userID, name='') {
+    updateUser(userID, name = '') {
         let userIdx = this.indexLookup(User.all, userID);
 
         // User not found
@@ -107,7 +107,7 @@ class Eventonica {
     // returns a user object based on a userID
     setCurrentUser(userID) {
         let userIdx = this.indexLookup(User.all, userID);
-        
+
         if (userIdx >= 0) {
             this.currentUser = User.all[userIdx];
         }
@@ -133,7 +133,7 @@ class Eventonica {
                 minIdx = midIdx + 1;
             }
         }
-        
+
         return -1;
     }
 }
@@ -247,7 +247,7 @@ class User {
 
     updateName(newName) {
         if (!newName) return;
-        this.name = newName;        
+        this.name = newName;
     }
 
     // Add/removes an event from user.favorites
