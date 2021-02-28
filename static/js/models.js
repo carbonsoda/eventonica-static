@@ -276,6 +276,7 @@ if (typeof module !== 'undefined') {
 
 new Event('Virtual Guided Meditation');
 new Event('Outside Yoga Lesson');
+new Event('Drawing Workshop', '2021-02-21');
 
 
 new User('Avery');

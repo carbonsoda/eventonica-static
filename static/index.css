@@ -76,18 +76,6 @@ footer {
     color: gray;
 }
 
-/* Input-interactive styling*/
-
-button, input[type=submit] {
-    /* color: white; */
-    background: #ecc8afff;
-    ;
-    font-size: .85em;
-    padding: .65em 1em;
-    margin: 0 .5rem 0 .5rem;
-    border-radius: .5em;
-}
-
 /* Trying to figure out option word wrap*/
 
 input, select {
@@ -171,4 +159,22 @@ option {
 .edit-user>fieldset {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+}
+
+/* Input-interactive styling*/
+
+button, input[type=submit] {
+    background: #ecc8afff;
+    ;
+    font-size: .85em;
+    padding: .65em 1em;
+    margin: 0 .5rem 0 .5rem;
+    border-radius: .5em;
+}
+
+.fave-event {
+    /* strip button format*/
+    all: initial !important;
+    color: #ecc8afff!important;
+    font-size: 1.5em!important;
 }

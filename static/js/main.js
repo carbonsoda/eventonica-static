@@ -7,15 +7,23 @@
   * To make the DOMContentLoaded section easier to read
   * + make formatting easier to manage
   */
-function toggleFavorites(selectorTag) {
+
+const whiteStar = '\u2606';
+const blackStar = '\u2605';
+
+function toggleFave(selectorTag) {
     let eventID = document.querySelector('selectorTag')
 }
+
+/**
+ * STYLING SPECIFIC
+ */
 
 function eventOutputFormat(eventObj) {
     let output = `${eventObj.name}`;
 
     if (eventObj.date) {
-        output += ` on ${eventObj.date.toDateString()}`;
+        output += ` — ${eventObj.date.toDateString()}`;
     }
     return output;
 }
@@ -51,6 +59,7 @@ function dropdownFormat(allObjs, defaultOption) {
     return htmlSelect;
 }
 
+
 /**
  * MAIN
  */
@@ -62,6 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const refreshEventsList = () => {
         let eventsListHTML = Event.all.map((event) =>
                 `<li>
+                <button class="fave-event" value="${event.id}"> ${blackStar} </button>
                 ${eventOutputFormat(event)}
                 </li>`
         ).join("\n");
@@ -142,6 +152,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const removeEventForm = document.querySelector('#delete-event');
     const faveEventForm = document.querySelector('#fave-event');
     const updateEventForm = document.querySelector('#fave-event');
+
+    // EVENT-LIST
+    let eventsList = document.querySelector('#events-list');
+
 
     // EVENT FORM'S EVENT LISTENERS
     addEventForm.addEventListener('submit', (submitEvent) => {
