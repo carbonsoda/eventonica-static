@@ -212,7 +212,12 @@ class Event {
 
     // update event category labels
     updateCategory(newCategory) {
-        this.category.add(newCategory);
+        if (this.category.has(newCategory)) {
+            this.category.delete(newCategory);
+        } else {
+            this.category.add(newCategory);
+        }
+        
     }
 
     // update event location
@@ -275,6 +280,7 @@ if (typeof module !== 'undefined') {
 new Event('Virtual Guided Meditation');
 new Event('Outside Yoga Lesson');
 new Event('Drawing Workshop', '2021-02-21');
+new Event('Twitter Security 101', '2021-3-1', "1:00pm","Seminar");
 
 
 new User('Avery');

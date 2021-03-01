@@ -53,9 +53,22 @@ function eventListOutput(event) {
 function eventOutputFormat(eventObj) {
     let output = `${eventObj.name}`;
 
+    if (eventObj.category) {
+        let categories = [...eventObj.category].join(', ');
+        if (categories) {
+            // If a category is later added
+            // The first element is empty in the set 
+            // and there's a leading ', '
+            if (categories[0] == ',') {
+                categories = categories.slice(2);
+            }
+            output += ` (${categories})`;
+        }
+        
+    }
     if (eventObj.date) {
         output += ` — ${eventObj.date.toDateString()}`;
-    }
+    } 
 
     return output;
 }
@@ -242,7 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateEventForm.addEventListener("submit", (submitEvent) => {
         submitEvent.preventDefault();
         // required
-        let eventID = parseInput("#update-event-id");
+        let eventID = parseSelect("#update-event-id");
 
         // optional
         let name = parseInput("#update-event-name");
@@ -252,7 +265,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // submit request
         defaultHandler(
-            submitEvent,
             "updateEvent",
             "Updated event",
             eventID,
