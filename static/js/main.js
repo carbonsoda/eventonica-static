@@ -6,8 +6,6 @@ let eventsList = document.querySelector("#events-list");
 
 // FORMS
 const addEventForm = document.querySelector("#add-event");
-const removeEventForm = document.querySelector("#delete-event");
-const faveEventForm = document.querySelector("#fave-event");
 const updateEventForm = document.querySelector("#update-event");
 
 /**
@@ -268,38 +266,6 @@ document.addEventListener("DOMContentLoaded", () => {
         addEventForm.reset();
     });
 
-    // DELETE EVENT
-    removeEventForm.addEventListener("submit", (submitEvent) => {
-        submitEvent.preventDefault();
-        let eventID = parseSelect("#delete-event-id");
-
-        // submit request
-        defaultHandler("deleteEvent", "Deleted event", eventID);
-
-        // refresh
-        refreshEventsList();
-    });
-
-    // FAVORITE/UNFAVORITE EVENT
-
-    faveEventForm.addEventListener("submit", (submitEvent) => {
-        submitEvent.preventDefault();
-
-        if (app.currentUser) {
-            let eventID = parseSelect("#fave-event-id");
-
-            defaultHandler(
-                "updateUserFavorites",
-                "Favorite event added/removed",
-                eventID
-            );
-
-            console.log(
-                `${app.currentUser.name} favorites are ${[app.currentUser.favorites,
-                ].join(", ")}`
-            );
-        }
-    });
 
     /**
      * USER FORMS'
@@ -400,6 +366,9 @@ document.addEventListener("DOMContentLoaded", () => {
             if (deleted) {
                 // Remove the closest li ancestor to the clicked element
                 event.target.closest("li").remove();
+
+                //refresh all event select menus
+                setSelectOptions(".event-select", Event.all, "an event");
             }
 
         }
@@ -415,13 +384,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
                 console.log(
-                    `${app.currentUser.name} favorites are ${[
-                        ...app.currentUser.favorites,
-                    ].join(", ")}`
+                    `${app.currentUser.name} favorites are 
+                    ${[...app.currentUser.favorites].join(", ")}`
                 );
+
+                console.log(app.currentUser.favorites);
+                console.log(app.currentUser);
             }
         }
     }
+
     eventsList.addEventListener("click", eventListClick);
 
 });
