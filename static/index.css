@@ -119,6 +119,13 @@ option {
     border: 2px gray solid;
 }
 
+.events-list {
+    /* Remove bullets */
+    list-style-type: none;
+    padding: 0;
+    margin: 0.5rem;
+}
+
 .events-manage {
     border: 2px gray dotted;
     padding: 1rem;
@@ -177,15 +184,13 @@ button, input[type=submit] {
 /* .fave {
     /* strip button format*/
 
-color: #ecc8afff!important;
+/* color: #ecc8afff!important;
 font-size: 1.5em!important;
-}
+} */
 
-*/ li>button {
+.li>button {
     display: inline-block;
-    content: "";
     vertical-align: -.125em;
     background-repeat: no-repeat;
     background-size: 1rem 1rem;
 }
-

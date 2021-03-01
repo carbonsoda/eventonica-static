@@ -2,7 +2,7 @@
  * EVENT ELEMENTS
  */
 
-let eventsList = document.querySelector("#events-list");
+let eventsList = document.querySelector(".events-list");
 
 // FORMS
 const addEventForm = document.querySelector("#add-event");
