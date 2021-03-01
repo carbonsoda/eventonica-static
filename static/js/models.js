@@ -277,13 +277,13 @@ if (typeof module !== 'undefined') {
 // COMMENT OUT BEFORE JASMINE TESTS
 // Example events + users for now
 
-new Event('Virtual Guided Meditation');
-new Event('Outside Yoga Lesson');
-new Event('Drawing Workshop', '2021-02-21');
-new Event('Twitter Security 101', '2021-3-1', "1:00pm","Seminar");
+// new Event('Virtual Guided Meditation');
+// new Event('Outside Yoga Lesson');
+// new Event('Drawing Workshop', '2021-02-21');
+// new Event('Twitter Security 101', '2021-3-1', "1:00pm","Seminar");
 
 
-new User('Avery');
-new User('Mark');
-new User('Tanya');
-new User('Cool-Beans');
+// new User('Avery');
+// new User('Mark');
+// new User('Tanya');
+// new User('Cool-Beans');

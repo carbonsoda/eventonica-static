@@ -5,6 +5,8 @@ const event = models.Event;
 
 let meditate = new event('Virtual Guided Meditation');
 let yoga = new event('Outside Yoga Lesson');
+let drawing = new event('Drawing Workshop', '2021-02-21');
+let seminar = new event('Twitter Security 101', '2021-3-1', "1:00pm","Seminar");
 
 // General
 describe('Event ', () => {
@@ -15,8 +17,8 @@ describe('Event ', () => {
     it('meditate is first one in Event.all[]', () => {
         expect(event.all[0]).toEqual(meditate);
     });
-    it('all[] contains 2 events', () => {
-        expect(event.all.length).toBe(2);
+    it('all[] contains 4 events', () => {
+        expect(event.all.length).toBe(4);
     });
 });
 
@@ -65,6 +67,7 @@ describe('Event.updateDate():', () => {
 
 
 // TO-DO
+
 // updateCategory(newCategory)
 // updateDetails(newDetails)
 
