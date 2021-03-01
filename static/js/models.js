@@ -99,7 +99,8 @@ class Eventonica {
     // eventIDs = array of ids
     updateUserFavorites(eventIDs) {
         // for now make it just single variable
-        if (this.currentUser && eventIDs.length > 0) {
+
+        if (this.currentUser && eventIDs) {
             this.currentUser.updateFavorites(eventIDs);
         }
     }

@@ -389,7 +389,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
                 console.log(app.currentUser.favorites);
-                console.log(app.currentUser);
             }
         }
     }
