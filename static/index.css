@@ -126,6 +126,11 @@ option {
     margin: 0.5rem;
 }
 
+.delete{
+    margin-right: 1rem;
+}
+
+
 .events-manage {
     border: 2px gray dotted;
     padding: 1rem;
@@ -187,10 +192,3 @@ button, input[type=submit] {
 /* color: #ecc8afff!important;
 font-size: 1.5em!important;
 } */
-
-.li>button {
-    display: inline-block;
-    vertical-align: -.125em;
-    background-repeat: no-repeat;
-    background-size: 1rem 1rem;
-}

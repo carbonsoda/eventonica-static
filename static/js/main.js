@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .map(
                 (user) =>
                     `<li>
-                ${user.name}  <small>(id: ${user.id})</small>
+                ${user.name}</small>
                 </li>`
             )
             .join("\n");
