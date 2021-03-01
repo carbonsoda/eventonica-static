@@ -22,36 +22,52 @@ const addUserForm = document.querySelector("#add-user");
 const removeUserForm = document.querySelector("#delete-user");
 const updateUserForm = document.querySelector("#update-user");
 
+
 /**
- * GENERAL STYLING
- *
- * - Elements
- * - Functions
+ * EVENTS-LIST STYLING
  */
 
-const whiteStar = "\u2606";
-const blackStar = "\u2605";
+// let eventBtns(eventId, ariaLbl)
+function eventListOutput(event) {
+    let eventHtml = '';
 
-function toggleFave(selectorTag) {
-    let eventID = document.querySelector(selectorTag);
+    // favorites-button
+    eventHtml += `<button 
+    class="fave bi bi-heart"
+    value="${event.id}"
+    aria-label="Favorite Event">
+        </button>`;
+
+    // delete button
+    eventHtml += `<button
+    class="delete bi bi-trash"
+    value="${event.id}"
+    aria-label="Delete Event">
+    </button>`;
+
+
+    eventHtml += eventOutputFormat(event);
+    return eventHtml;
 }
 
-/**
- * RESPONSE-RESULTS STYLING
- */
-
 // Returns string containing all event details
+// TODO: ADD SUPPORT FOR OTHER DETAILS
 function eventOutputFormat(eventObj) {
     let output = `${eventObj.name}`;
 
     if (eventObj.date) {
         output += ` — ${eventObj.date.toDateString()}`;
     }
+
     return output;
 }
 
+/**
+ * MENU OPTIONS STYLING
+ */
+
 // Sets dropdown options for either users or events
-function setSelectOptions(selectObjTag, allObjs,defaultOption, isCategory = false) {
+function setSelectOptions(selectObjTag, allObjs, defaultOption, isCategory = false) {
     // all relevant select-input elements
     const selectOptionsAll = document.querySelectorAll(selectObjTag);
 
@@ -107,10 +123,8 @@ document.addEventListener("DOMContentLoaded", () => {
         let eventsListHTML = Event.all
             .map(
                 (event) =>
-                    `<li>
-                <button class="fave-event" value="${event.id
-                    }"> ${blackStar} </button>
-                ${eventOutputFormat(event)}
+                    `<li value="${event.id}">
+                ${eventListOutput(event)}
                 </li>`
             )
             .join("\n");
@@ -152,6 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
     refreshEventsList();
     refreshUserList();
 
+    // Initialize category select-menu
     setSelectOptions(
         ".category-select",
         Event.categories,
@@ -256,7 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // DELETE EVENT
     removeEventForm.addEventListener("submit", (submitEvent) => {
         submitEvent.preventDefault();
-        let eventID = parseInput("#delete-event-id");
+        let eventID = parseSelect("#delete-event-id");
 
         // submit request
         defaultHandler("deleteEvent", "Deleted event", eventID);
@@ -280,8 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
             console.log(
-                `${app.currentUser.name} favorites are ${[
-                    ...app.currentUser.favorites,
+                `${app.currentUser.name} favorites are ${[app.currentUser.favorites,
                 ].join(", ")}`
             );
         }
@@ -363,5 +377,51 @@ document.addEventListener("DOMContentLoaded", () => {
             currentUserForm.reset();
         }
     });
+
+    /**
+     * EVENT BUTTONS
+     * 
+     * Source: Scott Marcus
+     * https://stackoverflow.com/a/59506192
+     */
+
+    // Either delete or add event to favorites
+    function eventListClick(event) {
+
+        // Check if delete button was clicked
+        if (event.target.classList.contains("delete")) {
+            // Retrieve eventID stored in the button
+            let eventID = event.target.closest("li").value;
+
+            // Attempt delete
+            let deleted = defaultHandler("deleteEvent", "Deleted event", eventID);
+
+            // successful deletion
+            if (deleted) {
+                // Remove the closest li ancestor to the clicked element
+                event.target.closest("li").remove();
+            }
+
+        }
+        // Check if fave button was clicked
+        else if (event.target.classList.contains("fave")) {
+            let eventID = event.target.closest("li").value;
+
+            if (app.currentUser) {
+                defaultHandler(
+                    "updateUserFavorites",
+                    "Favorite event added/removed",
+                    eventID
+                );
+
+                console.log(
+                    `${app.currentUser.name} favorites are ${[
+                        ...app.currentUser.favorites,
+                    ].join(", ")}`
+                );
+            }
+        }
+    }
+    eventsList.addEventListener("click", eventListClick);
 
 });

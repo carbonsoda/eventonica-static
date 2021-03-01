@@ -174,9 +174,18 @@ button, input[type=submit] {
     border-radius: .5em;
 }
 
-.fave-event {
+
+/* .fave {
     /* strip button format*/
-    all: initial !important;
     color: #ecc8afff!important;
     font-size: 1.5em!important;
+} */
+
+li > button {
+    display: inline-block;
+    content: "";
+    vertical-align: -.125em;
+    
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
 }
