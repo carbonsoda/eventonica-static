@@ -211,7 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let item = document.querySelector(elementTag);
 
         if (!item) {
-            return "";
+            return '';
         }
         return item.value;
     }
@@ -275,7 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         refreshEventsList();
-        addEventForm.reset();
+        updateEventForm.reset();
     });
 
 
