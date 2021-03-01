@@ -241,7 +241,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // optional
         let date = parseInput("#add-event-date");
-        let time = parseInput("#add-event-time");
+        // let time = parseInput("#add-event-time");
+        let time = ''; // disabled
         let category = parseSelect("#add-event-category");
 
         // submit request
@@ -260,7 +261,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // optional
         let name = parseInput("#update-event-name");
         let date = parseInput("#update-event-date");
-        let time = parseInput("#update-event-time");
+        // let time = parseInput("#update-event-time");
+        let time = ''; // disabled
         let category = parseSelect("#update-event-category");
 
         // submit request

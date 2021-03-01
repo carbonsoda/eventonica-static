@@ -20,3 +20,9 @@ The project is split into seven parts.
   - The findByDate and findByCategory are still a work in progress
   - I want to display events as a [listbox](https://a11y-guidelines.orange.com/en/web/components-examples/listbox/), ideally one with [checkboxes](https://a11y-guidelines.orange.com/en/web/components-examples/listbox-with-checkboxes/). The a11y reference materials use jQuery and the [MDN documents](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/listbox_role) have a setup of the sorts, so I need to study them further to figure out how to implement it without jQuery.
 - Jasmine tests are partially setup
+
+### Bugs
+
+- Input "time"
+  - On certain versions of Chrome, you can input the "seconds" field and it will reject it no matter what/mark as invalid
+  - There is also the issue of Safari support, for now I will keep it disabled.
