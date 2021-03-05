@@ -57,13 +57,35 @@ class Eventonica {
 
     // Return items in Event.all with a specified date
     findEventsByDate(findDate) {
-        // TO-DO: ensure findDate's format
-        return Event.findByDate(findDate);
+        searchDate = new Date(findDate);
+
+        let results = []
+
+        // Assuming same timezone for now
+        for (let event of Event.all) {
+            if (
+                event.date.getMonth() == searchDate.getMonth()
+                && event.date.getDay() == searchDate.getDay()
+                && event.date.getYear() == searchDate.getYear()
+            ) {
+                results.add(event);
+            }
+        }
+        console.log(results);
+        return results;
     }
 
     findEventsByCategory(findCategory) {
         // Return items in Event.all with a specified category
-        return Event.findByCategory(findCategory);
+        let results = []
+
+        for (let event in all) {
+            if (event.category.has(searchCategory)) {
+                results.add(event);
+            }
+        }
+
+        return results;
     }
 
     // Add new User
@@ -166,9 +188,14 @@ class Event {
 
     static findByDate(searchDate) {
         let results = []
+
         // Assuming same timezone for now
-        for (let event of Event.all) {
-            if (event.date.valueOf() == searchDate.valueOf()) {
+        for (let event of this.all) {
+            if (
+                event.date.getMonth() == searchDate.getMonth()
+                && event.date.getDay() == searchDate.getDay()
+                && event.date.getYear() == searchDate.getYear()
+            ){
                 results.add(event);
             }
         }
@@ -277,13 +304,13 @@ if (typeof module !== 'undefined') {
 // COMMENT OUT BEFORE JASMINE TESTS
 // Example events + users for now
 
-// new Event('Virtual Guided Meditation');
-// new Event('Outside Yoga Lesson');
-// new Event('Drawing Workshop', '2021-02-21');
-// new Event('Twitter Security 101', '2021-3-1', "1:00pm","Seminar");
+new Event('Virtual Guided Meditation');
+new Event('Outside Yoga Lesson');
+new Event('Drawing Workshop', '2021-02-21');
+new Event('Twitter Security 101', '2021-3-1', "1:00pm","Seminar");
 
 
-// new User('Avery');
-// new User('Mark');
-// new User('Tanya');
-// new User('Cool-Beans');
+new User('Avery');
+new User('Mark');
+new User('Tanya');
+new User('Cool-Beans');
