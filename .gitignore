@@ -1,4 +1,5 @@
 .vscode/
+.idea/
 eventonica.code-workspace
 scrap.js
 scrap.html
