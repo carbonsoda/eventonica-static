@@ -205,10 +205,11 @@
                     <fieldset>
                         <label for="date-search">Date</label>
                         <input type="date" id="date-search" placeholder="YYYY-MM-DD" />
-                    </fieldset>
-                    <fieldset>
                         <label for="category-search">Category</label>
-                        <input type="text" id="category-search" />
+                        <select id="category-search" class='category-select'>
+                            <option value="">----Pick a category-----</option>
+                            <!--Display all categories here-->
+                        </select>
                     </fieldset>
 
                     <input type="submit" value="Search" />

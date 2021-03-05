@@ -8,6 +8,8 @@ let eventsList = document.querySelector(".events-list");
 const addEventForm = document.querySelector("#add-event");
 const updateEventForm = document.querySelector("#update-event");
 
+const searchEventForm = document.querySelector('#search');
+
 /**
  * USER ELEMENTS
  */
@@ -408,5 +410,38 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     eventsList.addEventListener("click", eventListClick);
+
+
+    function findEvents(submitEvent) {
+        submitEvent.preventDefault();
+
+        let date = parseInput('#date-search');
+        let category = parseSelect('#category-search');
+
+        let results = 'Nothing found';
+        if (date) {
+            results = app.findEventsByDate(date);
+        } else if (category) {
+            results = app.findEventsByCategory(category);
+        }
+
+        console.log(results);
+    }
+
+    searchEventForm.addEventListener('submit', (submitEvent) => {
+        submitEvent.preventDefault();
+
+        let date = parseInput('#date-search');
+        let category = parseSelect('#category-search');
+
+        let results = 'aa';
+        if (date) {
+            results = app.findEventsByDate(date);
+        } else if (category) {
+            results = app.findEventsByCategory(category);
+        }
+
+        console.log(results);
+    });
 
 });
