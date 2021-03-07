@@ -55,6 +55,11 @@ class Eventonica {
         }
     }
 
+    // Get all existing events
+    getAllEvents() {
+        return Event.all;
+    }
+
     // Return items in Event.all with a specified date
     findEventsByDate(findDate) {
         searchDate = new Date(findDate);
@@ -115,6 +120,11 @@ class Eventonica {
         } else {
             // some error message here
         }
+    }
+
+    // Get all existing users
+    getAllUsers() {
+        return User.all;
     }
 
     // Handles adding/removing favorites
