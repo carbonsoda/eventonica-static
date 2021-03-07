@@ -85,7 +85,7 @@ class Eventonica {
         let results = []
 
         for (let event in all) {
-            if (event.category.has(searchCategory)) {
+            if (event.category.has(findCategory)) {
                 results.add(event);
             }
         }
