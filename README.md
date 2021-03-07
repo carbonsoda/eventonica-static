@@ -5,6 +5,7 @@
 
   - [Description](#description)
   - [Requirements](#project-requirements)
+  - [Build Instructions]()
   - [Progress](#progress)
 
 
@@ -28,6 +29,15 @@ The project is split into multiple parts.
     - *favorite* an Event
     - *unfavorite* an Event
     - view their list of previously favorite events
+
+#### Build instructions
+
+At the moment, to run `index.js` properly you will need Node.
+
+Once Node is installed, install the two following packages from your terminal:
+```
+npm install express body-parser
+```
 
 
 ### Progress
