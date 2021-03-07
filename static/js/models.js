@@ -55,6 +55,11 @@ class Eventonica {
         }
     }
 
+    // Get all existing events
+    getAllEvents() {
+        return Event.all;
+    }
+
     // Return items in Event.all with a specified date
     findEventsByDate(findDate) {
         searchDate = new Date(findDate);
@@ -115,6 +120,11 @@ class Eventonica {
         } else {
             // some error message here
         }
+    }
+
+    // Get all existing users
+    getAllUsers() {
+        return User.all;
     }
 
     // Handles adding/removing favorites
@@ -195,7 +205,7 @@ class Event {
                 event.date.getMonth() == searchDate.getMonth()
                 && event.date.getDay() == searchDate.getDay()
                 && event.date.getYear() == searchDate.getYear()
-            ){
+            ) {
                 results.add(event);
             }
         }
@@ -244,7 +254,7 @@ class Event {
         } else {
             this.category.add(newCategory);
         }
-        
+
     }
 
     // update event location
@@ -307,7 +317,7 @@ if (typeof module !== 'undefined') {
 new Event('Virtual Guided Meditation');
 new Event('Outside Yoga Lesson');
 new Event('Drawing Workshop', '2021-02-21');
-new Event('Twitter Security 101', '2021-3-1', "1:00pm","Seminar");
+new Event('Twitter Security 101', '2021-3-1', "1:00pm", "Seminar");
 
 
 new User('Avery');
