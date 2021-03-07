@@ -50,9 +50,10 @@ class Eventonica {
         // if event correctly found
         if (eventIdx >= 0) {
             Event.all.splice(eventIdx, 1);
-        } else {
-            // some error message here
+            return true;
         }
+
+        return false;
     }
 
     // Get all existing events
@@ -117,9 +118,10 @@ class Eventonica {
         // if user correctly found
         if (userIdx >= 0) {
             User.all.splice(userIdx, 1);
-        } else {
-            // some error message here
+            return true;
         }
+
+        return false;
     }
 
     // Get all existing users
