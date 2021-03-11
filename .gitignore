@@ -3,3 +3,6 @@
 eventonica.code-workspace
 scrap.js
 scrap.html
+node_modules/
+package-lock.json
+package.json
