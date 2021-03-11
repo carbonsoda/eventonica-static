@@ -61,6 +61,11 @@ class Eventonica {
         return Event.all;
     }
 
+    // Get all existing events
+    getAllEvents() {
+        return Event.all;
+    }
+
     // Return items in Event.all with a specified date
     findEventsByDate(findDate) {
         searchDate = new Date(findDate);
@@ -86,7 +91,7 @@ class Eventonica {
         let results = []
 
         for (let event in all) {
-            if (event.category.has(searchCategory)) {
+            if (event.category.has(findCategory)) {
                 results.add(event);
             }
         }
@@ -122,6 +127,11 @@ class Eventonica {
         }
 
         return false;
+    }
+
+    // Get all existing users
+    getAllUsers() {
+        return User.all;
     }
 
     // Get all existing users
