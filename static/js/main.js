@@ -66,11 +66,11 @@ function eventOutputFormat(eventObj) {
             }
             output += ` (${categories})`;
         }
-        
+
     }
     if (eventObj.date) {
         output += ` — ${eventObj.date.toDateString()}`;
-    } 
+    }
 
     return output;
 }
@@ -97,7 +97,7 @@ function setSelectOptions(selectObjTag, allObjs, defaultOption, isCategory = fal
 returns string of all <options> for <select>
 including all list of users or events
 
-allObjs = either Event.all or User.all
+allObjs = either all events or all users
 defaultOptions = string, for "Pick ${defaultOption}"
 */
 function selectFormat(allObjs, defaultOption, isCategory) {
@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Builds HTML list for all events
     // Call after update, add, or remove an event
     const refreshEventsList = () => {
-        let eventsListHTML = Event.all
+        let eventsListHTML = app.getAllEvents()
             .map(
                 (event) =>
                     `<li value="${event.id}">
@@ -142,11 +142,11 @@ document.addEventListener("DOMContentLoaded", () => {
             )
             .join("\n");
 
-        if (Event.all.length < 1) {
+        if (app.getAllEvents().length < 1) {
             eventsListHTML = "No events planned yet";
         } else {
             // also refresh all event select menus
-            setSelectOptions(".event-select", Event.all, "an event");
+            setSelectOptions(".event-select", app.getAllEvents(), "an event");
         }
 
         // set event-list to display the new html
@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Builds HTML list for all users.
     // Call after update, add, or remove a user
     const refreshUserList = () => {
-        let usersListHTML = User.all
+        let usersListHTML = app.getAllUsers()
             .map(
                 (user) =>
                     `<li>
@@ -165,11 +165,11 @@ document.addEventListener("DOMContentLoaded", () => {
             )
             .join("\n");
 
-        if (User.all.length < 1) {
+        if (app.getAllUsers().length < 1) {
             usersListHTML = "No users registered yet";
         } else {
             // also refresh all user select menus
-            setSelectOptions(".user-select", User.all, "a user");
+            setSelectOptions(".user-select", app.getAllUsers(), "a user");
         }
         // set users-list to display the new html
         usersList.innerHTML = usersListHTML;
@@ -384,7 +384,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 event.target.closest("li").remove();
 
                 //refresh all event select menus
-                setSelectOptions(".event-select", Event.all, "an event");
+                setSelectOptions(".event-select", app.getAllEvents(), "an event");
             }
 
         }

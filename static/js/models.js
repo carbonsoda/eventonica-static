@@ -50,9 +50,20 @@ class Eventonica {
         // if event correctly found
         if (eventIdx >= 0) {
             Event.all.splice(eventIdx, 1);
-        } else {
-            // some error message here
+            return true;
         }
+
+        return false;
+    }
+
+    // Get all existing events
+    getAllEvents() {
+        return Event.all;
+    }
+
+    // Get all existing events
+    getAllEvents() {
+        return Event.all;
     }
 
     // Return items in Event.all with a specified date
@@ -80,7 +91,7 @@ class Eventonica {
         let results = []
 
         for (let event in all) {
-            if (event.category.has(searchCategory)) {
+            if (event.category.has(findCategory)) {
                 results.add(event);
             }
         }
@@ -112,9 +123,20 @@ class Eventonica {
         // if user correctly found
         if (userIdx >= 0) {
             User.all.splice(userIdx, 1);
-        } else {
-            // some error message here
+            return true;
         }
+
+        return false;
+    }
+
+    // Get all existing users
+    getAllUsers() {
+        return User.all;
+    }
+
+    // Get all existing users
+    getAllUsers() {
+        return User.all;
     }
 
     // Handles adding/removing favorites
@@ -195,7 +217,7 @@ class Event {
                 event.date.getMonth() == searchDate.getMonth()
                 && event.date.getDay() == searchDate.getDay()
                 && event.date.getYear() == searchDate.getYear()
-            ){
+            ) {
                 results.add(event);
             }
         }
@@ -244,7 +266,7 @@ class Event {
         } else {
             this.category.add(newCategory);
         }
-        
+
     }
 
     // update event location
@@ -307,7 +329,7 @@ if (typeof module !== 'undefined') {
 new Event('Virtual Guided Meditation');
 new Event('Outside Yoga Lesson');
 new Event('Drawing Workshop', '2021-02-21');
-new Event('Twitter Security 101', '2021-3-1', "1:00pm","Seminar");
+new Event('Twitter Security 101', '2021-3-1', "1:00pm", "Seminar");
 
 
 new User('Avery');
