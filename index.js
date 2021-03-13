@@ -2,18 +2,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { Eventonica, User, Event} = require('./static/js/models');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('static'));
 app.listen(port, () => {
     console.log(`Server running on port ${port}...`);
 });
 
 
 const eventonica = new Eventonica();
-
 
 /*
  * ROUTES
