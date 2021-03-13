@@ -53,3 +53,9 @@ npm install
 - Input "time"
   - On certain versions of Chrome, you can input the "seconds" field and it will reject it no matter what/mark as invalid
   -  In HTML5 the input type="time" is [unsupported in Safari](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time#browser_compatibility). I'll need to further consider input and validation. For now it will be disabled.
+
+- Set objects unsupported by JSON
+  - Seems like Maps and related objects aren't supported yet by JSON ([link](https://stackoverflow.com/a/46634512)). So the search-by-category and updateCategory functions would need to be reworked.
+  - The next part will be adding postgres, so I'll wait until then to do so.
+  
+  

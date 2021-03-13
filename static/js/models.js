@@ -196,16 +196,16 @@ class Event {
         this.name = name;
         this.date = date;
         this.time = time; // could be all day too
-        this.category = new Set().add(category);
+        this.category = category;
         this.location = location;
         this.details = details;
         this.faveCount = 0;
 
         // if actual date string passed in
-        if (this.date) this.date = new Date(date);
+        if (date) this.date = new Date(date);
 
-        Event.all.push(this);
         // keep track of all created instances
+        Event.all.push(this);
     }
 
     static findByDate(searchDate) {
@@ -234,7 +234,6 @@ class Event {
                 results.add(event);
             }
         }
-
         return results;
     }
 
@@ -261,11 +260,9 @@ class Event {
 
     // update event category labels
     updateCategory(newCategory) {
-        if (this.category.has(newCategory)) {
-            this.category.delete(newCategory);
-        } else {
-            this.category.add(newCategory);
-        }
+        if (!newCategory) return;
+
+        this.category = newCategory;
 
     }
 
@@ -328,7 +325,7 @@ if (typeof module !== 'undefined') {
 
 new Event('Virtual Guided Meditation');
 new Event('Outside Yoga Lesson');
-new Event('Drawing Workshop', '2021-02-21');
+new Event('Drawing Workshop', '2021-02-21', '', 'Workshop');
 new Event('Twitter Security 101', '2021-3-1', "1:00pm", "Seminar");
 
 
