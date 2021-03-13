@@ -66,7 +66,7 @@ function eventOutputFormat(eventObj) {
             }
             output += ` (${categories})`;
         }
-
+on
     }
     if (eventObj.date) {
         output += ` — ${eventObj.date.toDateString()}`;
@@ -132,26 +132,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Builds HTML list for all events
     // Call after update, add, or remove an event
-    const refreshEventsList = () => {
-        let eventsListHTML = app.getAllEvents()
-            .map(
-                (event) =>
-                    `<li value="${event.id}">
-                ${eventListOutput(event)}
-                </li>`
-            )
-            .join("\n");
+    // const refreshEventsList = () => {
+    //     let eventsListHTML = app.getAllEvents()
+    //         .map(
+    //             (event) =>
+    //                 `<li value="${event.id}">
+    //             ${eventListOutput(event)}
+    //             </li>`
+    //         )
+    //         .join("\n");
 
-        if (app.getAllEvents().length < 1) {
-            eventsListHTML = "No events planned yet";
-        } else {
-            // also refresh all event select menus
-            setSelectOptions(".event-select", app.getAllEvents(), "an event");
-        }
+    //     if (app.getAllEvents().length < 1) {
+    //         eventsListHTML = "No events planned yet";
+    //     } else {
+    //         // also refresh all event select menus
+    //         setSelectOptions(".event-select", app.getAllEvents(), "an event");
+    //     }
 
-        // set event-list to display the new html
-        eventsList.innerHTML = eventsListHTML;
-    };
+    //     // set event-list to display the new html
+    //     eventsList.innerHTML = eventsListHTML;
+    // };
+
+    function refreshEventsList() {
+        fetch('/events')
+            .then(response => response.json())
+            .then(allEventData => {
+                console.log(allEventData);
+                // Formatting
+                let newhtml = allEventData.map(
+                    (event) => `<li 
+                    value="${event.id}">
+                    ${eventListOutput(event)}
+                    </li>`
+                ).join("\n");
+
+                if (allEventData.length < 1) {
+                    newhtml = "No events planned yet";
+                } else {
+                    // also refresh all event select menus
+                    setSelectOptions(".event-select", allEventData, "an event");
+                }
+                eventsList.innerHTML = newhtml;
+            });
+    }
 
     // Builds HTML list for all users.
     // Call after update, add, or remove a user

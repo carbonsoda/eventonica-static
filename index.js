@@ -55,6 +55,11 @@ app.route('/events/:id').get((req, res) => {
 
 app.route('/users').get((req, res) => {
     res.send(eventonica.getAllUsers());
+}).post((req, res) => {
+    console.log('heres the req.body');
+    console.log(req.body);
+    console.log('oki');
+
 })
 
 app.route('/users/:id').get((req, res) => {
