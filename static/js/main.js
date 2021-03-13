@@ -56,20 +56,13 @@ function eventOutputFormat(eventObj) {
     let output = `${eventObj.name}`;
 
     if (eventObj.category) {
-        let categories = [...eventObj.category].join(', ');
-        if (categories) {
-            // If a category is later added
-            // The first element is empty in the set 
-            // and there's a leading ', '
-            if (categories[0] == ',') {
-                categories = categories.slice(2);
-            }
-            output += ` (${categories})`;
-        }
-on
+        // assume just one category for now
+        output += ` (${eventObj.category})`;
     }
     if (eventObj.date) {
-        output += ` — ${eventObj.date.toDateString()}`;
+        // convert from string to date to formatted dateString
+        const date = new Date(eventObj.date);
+        output += ` — ${date.toDateString()}`;
     }
 
     return output;
@@ -132,34 +125,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Builds HTML list for all events
     // Call after update, add, or remove an event
-    // const refreshEventsList = () => {
-    //     let eventsListHTML = app.getAllEvents()
-    //         .map(
-    //             (event) =>
-    //                 `<li value="${event.id}">
-    //             ${eventListOutput(event)}
-    //             </li>`
-    //         )
-    //         .join("\n");
-
-    //     if (app.getAllEvents().length < 1) {
-    //         eventsListHTML = "No events planned yet";
-    //     } else {
-    //         // also refresh all event select menus
-    //         setSelectOptions(".event-select", app.getAllEvents(), "an event");
-    //     }
-
-    //     // set event-list to display the new html
-    //     eventsList.innerHTML = eventsListHTML;
-    // };
-
     function refreshEventsList() {
         fetch('/events')
             .then(response => response.json())
             .then(allEventData => {
-                console.log(allEventData);
                 // Formatting
-                let newhtml = allEventData.map(
+                let newEventHtml = allEventData.map(
                     (event) => `<li 
                     value="${event.id}">
                     ${eventListOutput(event)}
@@ -167,12 +138,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 ).join("\n");
 
                 if (allEventData.length < 1) {
-                    newhtml = "No events planned yet";
+                    newEventHtml = "No events planned yet";
                 } else {
                     // also refresh all event select menus
                     setSelectOptions(".event-select", allEventData, "an event");
                 }
-                eventsList.innerHTML = newhtml;
+                eventsList.innerHTML = newEventHtml;
             });
     }
 
