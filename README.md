@@ -34,9 +34,9 @@ The project is split into multiple parts.
 
 At the moment, to run `index.js` properly you will need Node.
 
-Once Node is installed, install the two following packages from your terminal:
+All the required packages can be installed using the following command in the project directory:
 ```
-npm install express body-parser
+npm install
 ```
 
 
