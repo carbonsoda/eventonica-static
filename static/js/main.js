@@ -137,6 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     </li>`
                 ).join("\n");
 
+                // No events exist yet
                 if (allEventData.length < 1) {
                     newEventHtml = "No events planned yet";
                 } else {
@@ -149,24 +150,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Builds HTML list for all users.
     // Call after update, add, or remove a user
-    const refreshUserList = () => {
-        let usersListHTML = app.getAllUsers()
-            .map(
-                (user) =>
-                    `<li>
-                ${user.name}</small>
-                </li>`
-            )
-            .join("\n");
+    function refreshUserList() {
+        fetch('/users')
+            .then(response => response.json())
+            .then(allUsers => {
+                // Formatting
+                let userListHtml = allUsers.map(
+                    (user) => `<li> ${user.name} </li>`
+                ).join("\n");
 
-        if (app.getAllUsers().length < 1) {
-            usersListHTML = "No users registered yet";
-        } else {
-            // also refresh all user select menus
-            setSelectOptions(".user-select", app.getAllUsers(), "a user");
-        }
-        // set users-list to display the new html
-        usersList.innerHTML = usersListHTML;
+                // No users exist yet
+                if (allUsers.length < 1) {
+                    usersListHTML = "No users registered yet";
+                } else {
+                    // also refresh all user select menus
+                    setSelectOptions(".user-select", allUsers, "a user");
+                }
+                // set users-list to display the new html
+                usersList.innerHTML = userListHtml;
+            });
     };
 
     // Loading page for first time
