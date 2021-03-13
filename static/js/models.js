@@ -61,9 +61,8 @@ class Eventonica {
         return Event.all;
     }
 
-    // Get all existing events
-    getAllEvents() {
-        return Event.all;
+    getEventCategories() {
+        return Event.categories;
     }
 
     // Return items in Event.all with a specified date

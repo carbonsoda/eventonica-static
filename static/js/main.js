@@ -176,11 +176,12 @@ document.addEventListener("DOMContentLoaded", () => {
     refreshUserList();
 
     // Initialize category select-menu
+    // TODO: update to do fetch 
     setSelectOptions(
         ".category-select",
         Event.categories,
         "a category",
-        (isCategory = true)
+        isCategory = true
     );
 
     /**
