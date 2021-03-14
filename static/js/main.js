@@ -285,19 +285,33 @@ document.addEventListener("DOMContentLoaded", () => {
      * EVENTLISTENERS
      */
 
-    // USER FORM'S EVENT LISTENERS
     addUserForm.addEventListener("submit", (submitEvent) => {
         submitEvent.preventDefault();
         let name = parseInput("#add-user-name");
 
-        // Attempt add
-        let newAdded = defaultHandler("addUser", "Added user ", name);
+        if (name) {
+            let data = {
+                "name": name
+            }
 
-        if (newAdded) {
-            refreshUserList();
-            addUserForm.reset();
+            fetch('/users',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then((response) => {
+                    if (response.status == 201) {
+                        refreshUserList();
+                        addUserForm.reset();
+                    }
+                });
         }
-    });
+
+
+    })
 
     // REMOVE USER
     removeUserForm.addEventListener("submit", (submitEvent) => {

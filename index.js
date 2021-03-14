@@ -1,7 +1,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const { Eventonica, User, Event} = require('./static/js/models');
+const { Eventonica, User, Event } = require('./static/js/models');
 const port = process.env.PORT || 5000;
 
 const app = express();
@@ -53,39 +53,54 @@ app.route('/events/:id').get((req, res) => {
 
 
 
-app.route('/users').get((req, res) => {
-    res.send(eventonica.getAllUsers());
-}).post((req, res) => {
-    console.log('heres the req.body');
-    console.log(req.body);
-    console.log('oki');
+app.route('/users')
+    .get((req, res) => {
+        res.send(eventonica.getAllUsers());
+    })
+    .post((req, res) => {  // Adding users
+        let userName = req.body.name;
+        let status = 200;
+        let response = `User "${userName}" could not be added`;
 
-})
+        if (userName) {
+            eventonica.addUser(userName);
 
-app.route('/users/:id').get((req, res) => {
-    let userId = req.params.id;
-    let status = 404;
-    let response = 'Unable to fetch data!';
-
-
-    eventonica.getAllUsers().forEach((user) => {
-        if (user.id == userId) {
-            status = 200;
-            response = user;
+            // if name of the last added user == input name
+            if (eventonica.getAllUsers().slice(-1)[0].name == userName) {
+                status = 201;
+                response = `User "${userName}" was added!`;
+            }
         }
+
+        res.status(status).send(response);
+
     })
 
-    res.status(status).send(response);
-}).delete((req, res) => {
-    let userId = req.params.id;
-    let status = 404;
-    let response = 'Unable to fetch data!';
+app.route('/users/:id')
+    .get((req, res) => {
+        let userId = req.params.id;
+        let status = 404;
+        let response = 'Unable to fetch data!';
 
-    if (eventonica.deleteUser(userId)) {
-        status = 200;
-        response = 'User successfully deleted';
-    }
+        eventonica.getAllUsers().forEach((user) => {
+            if (user.id == userId) {
+                status = 200;
+                response = user;
+            }
+        })
 
-    res.status(status).send(response);
+        res.status(status).send(response);
+    })
+    .delete((req, res) => {
+        let userId = req.params.id;
+        let status = 404;
+        let response = 'Unable to fetch data!';
 
-})
+        if (eventonica.deleteUser(userId)) {
+            status = 200;
+            response = 'User successfully deleted';
+        }
+
+        res.status(status).send(response);
+
+    })
