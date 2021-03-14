@@ -126,9 +126,9 @@ app.route('/users/:id')
 
     })
 
-app.route('/current-user')
+app.route('/current-user/:id')
     .put((req, res) => {
-        let userId = req.body.id;
+        let userId = req.params.id;
         let status = 404;
         let response = 'Unable to fetch user!';
 
