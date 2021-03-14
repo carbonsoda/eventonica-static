@@ -16,6 +16,8 @@ class Eventonica {
     updateEvent(eventID, name = '', date = '', time = '', category = '', location = '', details = '') {
         let eventIdx = this.indexLookup(Event.all, eventID);
 
+        if (eventIdx < 0) return false;
+
         let currEvent = Event.all[eventIdx];
 
         // Check through each parameter
@@ -41,6 +43,8 @@ class Eventonica {
 
         // overwrite the old event
         Event.all[eventIdx] = currEvent;
+        
+        return true;
     }
 
     // Deletes Event
