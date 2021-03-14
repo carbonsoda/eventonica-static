@@ -107,12 +107,13 @@ class Eventonica {
     updateUser(userID, name = '') {
         let userIdx = this.indexLookup(User.all, userID);
 
-        // User not found
-        if (userIdx < 0) return;
-
-        if (name) {
+        // User found
+        if (userIdx > 0 && name) {
             User.all[userIdx].updateName(name);
+            return true;
         }
+
+        return false;
     }
 
     // Deletes User
