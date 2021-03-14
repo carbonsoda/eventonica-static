@@ -108,7 +108,7 @@ class Eventonica {
         let userIdx = this.indexLookup(User.all, userID);
 
         // User found
-        if (userIdx > 0 && name) {
+        if (userIdx > -1 && name) {
             User.all[userIdx].updateName(name);
             return true;
         }
