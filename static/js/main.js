@@ -368,19 +368,19 @@ document.addEventListener("DOMContentLoaded", () => {
         // Which user
         const userID = parseSelect("#current-user-select");
 
-        // Attempt switch current user
-        let newCurrent = defaultHandler(
-            "setCurrentUser",
-            "Current user is now ",
-            userID
-        );
+        if (userID) {
+            const userUrl = `/current-user/${userID}`;
 
-        if (newCurrent && app.currentUser) {
-            document.querySelector(
-                "#display-current-user"
-            ).innerHTML += `${app.currentUser.name}`;
-
-            currentUserForm.reset();
+            // Not sure if need to add another get call for the user
+            // because if no user found, response.json() creates error
+            fetch(userUrl, { method: 'PUT' })
+                .then((response) => response.json())
+                .then((user) => {
+                    document.querySelector(
+                        "#display-current-user"
+                    ).innerHTML += user.name;
+                    currentUserForm.reset();
+                });
         }
     });
 

@@ -127,6 +127,9 @@ app.route('/users/:id')
     })
 
 app.route('/current-user/:id')
+    .get((req, res) => {
+        res.send(eventonica.currentUser);
+    })
     .put((req, res) => {
         let userId = req.params.id;
         let status = 404;
@@ -134,8 +137,8 @@ app.route('/current-user/:id')
 
         if (eventonica.setCurrentUser(userId)) {
             status = 200;
-            response = `Current user is now ${eventonica.currentUser.name}`;
+            response = eventonica.currentUser;
         }
 
-        res.status(status).send(response);
+        res.send(response);
     })
