@@ -84,7 +84,7 @@ app.route('/users/:id')
     .get((req, res) => {
         let userId = req.params.id;
         let status = 404;
-        let response = 'Unable to fetch data!';
+        let response = 'Unable to fetch user!';
 
         eventonica.getAllUsers().forEach((user) => {
             if (user.id == userId) {
@@ -124,4 +124,18 @@ app.route('/users/:id')
 
         res.status(status).send(response);
 
+    })
+
+app.route('/current-user')
+    .put((req, res) => {
+        let userId = req.body.id;
+        let status = 404;
+        let response = 'Unable to fetch user!';
+
+        if (eventonica.setCurrentUser(userId)) {
+            status = 200;
+            response = `Current user is now ${eventonica.currentUser.name}`;
+        }
+
+        res.status(status).send(response);
     })
