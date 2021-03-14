@@ -287,7 +287,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     addUserForm.addEventListener("submit", (submitEvent) => {
         submitEvent.preventDefault();
-        let name = parseInput("#add-user-name");
+        const name = parseInput("#add-user-name");
 
         if (name) {
             let data = {
@@ -317,10 +317,10 @@ document.addEventListener("DOMContentLoaded", () => {
     removeUserForm.addEventListener("submit", (submitEvent) => {
         submitEvent.preventDefault();
         // Which user
-        let userID = parseSelect("#delete-user-id");
+        const userID = parseSelect("#delete-user-id");
 
         if (userID) {
-            let userUrl = `/users/${userID}`;
+            const userUrl = `/users/${userID}`;
 
             fetch(userUrl, { method: 'DELETE' })
                 .then((response) => {
@@ -340,7 +340,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const userNewName = document.querySelector("#update-user-name").value;
 
         if (userID && userNewName) {
-            let userUrl = `/users/${userID}`;
+            const userUrl = `/users/${userID}`;
             let data = {
                 "name": userNewName
             }
