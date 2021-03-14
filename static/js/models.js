@@ -108,7 +108,7 @@ class Eventonica {
         let userIdx = this.indexLookup(User.all, userID);
 
         // User found
-        if (userIdx > -1 && name) {
+        if (userIdx >= 0 && name) {
             User.all[userIdx].updateName(name);
             return true;
         }
@@ -155,7 +155,12 @@ class Eventonica {
 
         if (userIdx >= 0) {
             this.currentUser = User.all[userIdx];
+            
+            // confirm who current user is
+            return this.currentUser.id == userID;
         }
+
+        return false;
     }
 
     // Find the index of a user or event object
