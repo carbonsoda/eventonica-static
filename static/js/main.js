@@ -319,12 +319,16 @@ document.addEventListener("DOMContentLoaded", () => {
         // Which user
         let userID = parseSelect("#delete-user-id");
 
-        // Attempt delete
-        let deleted = defaultHandler("deleteUser", "Deleted user", userID);
+        if (userID) {
+            let userUrl = `/users/${userID}`;
 
-        if (deleted) {
-            refreshUserList();
-            removeUserForm.reset();
+            fetch(userUrl, { method: 'DELETE' })
+                .then((response) => {
+                    if (response.status == 200) {
+                        refreshUserList();
+                        removeUserForm.reset();
+                    }
+                })
         }
     });
 

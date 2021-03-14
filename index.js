@@ -94,7 +94,7 @@ app.route('/users/:id')
     .delete((req, res) => {
         let userId = req.params.id;
         let status = 404;
-        let response = 'Unable to fetch data!';
+        let response = 'Unable to fetch user!';
 
         if (eventonica.deleteUser(userId)) {
             status = 200;
