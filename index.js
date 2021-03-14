@@ -91,7 +91,22 @@ app.route('/users/:id')
 
         res.status(status).send(response);
     })
-    .delete((req, res) => {
+    .put((req, res) => {  // update a user
+        let userId = req.params.id;
+        let newName = req.body.name;
+        let status = 404;
+        let response = 'Unable to fetch user!';
+
+        console.log(newName);
+
+        if (eventonica.updateUser(userId, newName)) {
+            status = 200;
+            response = 'User successfully updated';
+        }
+
+        res.status(status).send(response);
+    })
+    .delete((req, res) => {  // delete a user
         let userId = req.params.id;
         let status = 404;
         let response = 'Unable to fetch user!';

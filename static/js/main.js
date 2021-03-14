@@ -339,17 +339,26 @@ document.addEventListener("DOMContentLoaded", () => {
         const userID = parseSelect("#update-user-id");
         const userNewName = document.querySelector("#update-user-name").value;
 
-        // Attempt update
-        let updated = defaultHandler(
-            "updateUser",
-            "User updated",
-            userID,
-            userNewName
-        );
+        if (userID && userNewName) {
+            let userUrl = `/users/${userID}`;
+            let data = {
+                "name": userNewName
+            }
 
-        if (updated) {
-            refreshUserList();
-            updateUserForm.reset();
+            fetch(userUrl,
+                {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then((response) => {
+                    if (response.status == 200) {
+                        refreshUserList();
+                        updateUserForm.reset();
+                    }
+                });
         }
     });
 
