@@ -15,13 +15,14 @@ app.listen(port, () => {
 
 const eventonica = new Eventonica();
 
-/*
- * ROUTES
+/**
+ * EVENT ROUTES
  */
 
-app.route('/events').get((req, res) => {
-    res.send(eventonica.getAllEvents());
-})
+app.route('/events')
+    .get((req, res) => {
+        res.send(eventonica.getAllEvents());
+    })
 
 app.route('/events/:id')
     .get((req, res) => {
@@ -55,6 +56,9 @@ app.route('/events/:id')
     })
 
 
+/**
+ * USER ROUTES
+ */
 
 app.route('/users')
     .get((req, res) => {
