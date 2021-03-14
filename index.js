@@ -23,33 +23,36 @@ app.route('/events').get((req, res) => {
     res.send(eventonica.getAllEvents());
 })
 
-app.route('/events/:id').get((req, res) => {
-    let eventId = req.params.id;
-    let status = 404;
-    let response = 'Unable to fetch data!';
+app.route('/events/:id')
+    .get((req, res) => {
+        let eventId = req.params.id;
+        let status = 404;
+        let response = 'Unable to fetch data!';
 
 
-    eventonica.getAllEvents().forEach((event) => {
-        if (event.id == eventId) {
-            status = 200;
-            response = event;
-        }
+        eventonica.getAllEvents().forEach((event) => {
+            if (event.id == eventId) {
+                status = 200;
+                response = event;
+            }
+        })
+
+        res.status(status).send(response);
     })
+    // DELETE EVENT
+    .delete((req, res) => {
+        let eventId = req.params.id;
+        let status = 404;
+        let response = 'Unable to fetch data!';
 
-    res.status(status).send(response);
-}).delete((req, res) => {
-    let eventId = req.params.id;
-    let status = 404;
-    let response = 'Unable to fetch data!';
+        if (eventonica.deleteEvent(eventId)) {
+            status = 204;
+            response = 'Event successfully deleted';
+        }
 
-    if (eventonica.deleteEvent(eventId)) {
-        status = 200;
-        response = 'Event successfully deleted';
-    }
+        res.status(status).send(response);
 
-    res.status(status).send(response);
-
-})
+    })
 
 
 
@@ -57,7 +60,8 @@ app.route('/users')
     .get((req, res) => {
         res.send(eventonica.getAllUsers());
     })
-    .post((req, res) => {  // Adding users
+    // ADD NEW USER
+    .post((req, res) => {
         let userName = req.body.name;
         let status = 200;
         let response = `User "${userName}" could not be added`;
@@ -91,7 +95,8 @@ app.route('/users/:id')
 
         res.status(status).send(response);
     })
-    .put((req, res) => {  // update a user
+    // UPDATE USER
+    .put((req, res) => {
         let userId = req.params.id;
         let newName = req.body.name;
         let status = 404;
@@ -100,19 +105,20 @@ app.route('/users/:id')
         console.log(newName);
 
         if (eventonica.updateUser(userId, newName)) {
-            status = 200;
+            status = 204;
             response = 'User successfully updated';
         }
 
         res.status(status).send(response);
     })
-    .delete((req, res) => {  // delete a user
+    // DELETE USER
+    .delete((req, res) => {
         let userId = req.params.id;
         let status = 404;
         let response = 'Unable to fetch user!';
 
         if (eventonica.deleteUser(userId)) {
-            status = 200;
+            status = 204;
             response = 'User successfully deleted';
         }
 
