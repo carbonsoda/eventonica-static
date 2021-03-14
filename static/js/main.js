@@ -235,20 +235,32 @@ document.addEventListener("DOMContentLoaded", () => {
     // ADD EVENT
     addEventForm.addEventListener("submit", (submitEvent) => {
         submitEvent.preventDefault();
-        // required
-        let name = parseInput("#add-event-name");
 
-        // optional
-        let date = parseInput("#add-event-date");
-        // let time = parseInput("#add-event-time");
-        let time = ''; // disabled
-        let category = parseSelect("#add-event-category");
+        // only name is required
+        // time is disabled for now
+        let data = {
+            "name": parseInput("#add-event-name"),
+            "details": {
+                "date": parseInput("#add-event-date"),
+                "time": '',
+                "category": parseSelect("#add-event-category")
+            }
+        }
 
-        // submit request
-        defaultHandler("addEvent", "Added event", name, date, time, category);
-
-        refreshEventsList();
-        addEventForm.reset();
+        fetch('/events',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then((response) => {
+                if (response.status == 201) {
+                    refreshEventsList();
+                    addEventForm.reset();
+                }
+            });
     });
 
     // UPDATE EVENT
@@ -371,8 +383,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (userID) {
             const userUrl = `/current-user/${userID}`;
 
-            // Not sure if need to add another get call for the user
-            // because if no user found, response.json() creates error
+            // Not sure if need to add a GET call for the user
+            // because if no user found, response.json() throws error
             fetch(userUrl, { method: 'PUT' })
                 .then((response) => response.json())
                 .then((user) => {

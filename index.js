@@ -23,6 +23,28 @@ app.route('/events')
     .get((req, res) => {
         res.send(eventonica.getAllEvents());
     })
+    .post((req, res) => {
+        let eventName = req.body.name;
+        let status = 200;
+        let response = `Event ${eventName} could not be added`;
+
+        if (eventName) {
+            // name is required
+            // all other info kept in 'details'
+            eventonica.addEvent(
+                eventName,
+                ...Object.values(req.body.details)
+            );
+
+            // compare last element
+            if (eventonica.getAllEvents().slice(-1)[0].name == eventName) {
+                status = 201;
+                response = `Event ${eventName} was successfully added`;
+            }
+        }
+
+        res.status(status).send(response);
+    })
 
 app.route('/events/:id')
     .get((req, res) => {
@@ -52,7 +74,6 @@ app.route('/events/:id')
         }
 
         res.status(status).send(response);
-
     })
 
 
@@ -81,7 +102,6 @@ app.route('/users')
         }
 
         res.status(status).send(response);
-
     })
 
 app.route('/users/:id')
@@ -127,7 +147,6 @@ app.route('/users/:id')
         }
 
         res.status(status).send(response);
-
     })
 
 app.route('/current-user/:id')
