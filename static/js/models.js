@@ -207,7 +207,7 @@ class Event {
         this.faveCount = 0;
 
         // if actual date string passed in
-        if (date) this.date = new Date(date);
+        if (date.length > 1) this.date = new Date(date);
 
         // keep track of all created instances
         Event.all.push(this);
