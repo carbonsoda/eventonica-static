@@ -126,6 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Builds HTML list for all events
     // Call after update, add, or remove an event
     function refreshEventsList() {
+
         fetch('/events')
             .then(response => response.json())
             .then(allEventData => {
@@ -292,7 +293,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         updateEventForm.reset();
                     }
                 })
-        });
+        }
+    });
     
     
 
@@ -408,6 +410,23 @@ document.addEventListener("DOMContentLoaded", () => {
      * https://stackoverflow.com/a/59506192
      */
 
+    function deleteEvent(eventID) {
+
+        const eventUrl = `/events/${eventID}`;
+
+        fetch(eventUrl, { method: 'DELETE' })
+            .then((response) => {
+                if (response.status == 204) {
+                    // event deleted
+                    refreshEventsList();
+                    return true;
+                }
+            });
+        
+        // event not deleted
+        return false;
+    }
+
     // Either delete or add event to favorites
     function eventListClick(event) {
 
@@ -416,16 +435,10 @@ document.addEventListener("DOMContentLoaded", () => {
             // Retrieve eventID stored in the button
             let eventID = event.target.closest("li").value;
 
-            // Attempt delete
-            let deleted = defaultHandler("deleteEvent", "Deleted event", eventID);
-
             // successful deletion
-            if (deleted) {
+            if (deleteEvent(eventID)) {
                 // Remove the closest li ancestor to the clicked element
                 event.target.closest("li").remove();
-
-                //refresh all event select menus
-                setSelectOptions(".event-select", app.getAllEvents(), "an event");
             }
 
         }
