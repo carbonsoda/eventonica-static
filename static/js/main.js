@@ -436,7 +436,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function favoriteEvent(eventID, heartBtn) {
 
-        fetch('/update-favorites', {
+        fetch('/user/favorites/', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

@@ -183,17 +183,17 @@ app.route('/current-user/:id')
         res.send(response);
     })
 
-app.route('/user/:id/favorites')
+app.route('/user/favorites/:id?')
     .get((req, res) => {
         let userId = req.params.id;
 
-        let userObj = eventonica.getUser(userId);
-
-        // convert set to an array
-        res.send([...userObj.favorites]);
+        if (userId) {
+            let userObj = eventonica.getUser(userId);
+            // convert set to an array
+            res.send([...userObj.favorites]);
+        }
     })
-// ADD/REMOVE FAVORITE EVENT
-app.route('/update-favorites')
+    // ADD/REMOVE FAVORITE EVENT
     .put((req, res) => {
         let eventId = req.body.id;
         let status = 200;
