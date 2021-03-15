@@ -179,3 +179,12 @@ app.route('/current-user/:id')
 
         res.send(response);
     })
+
+app.route('/user/:id/favorites')
+    .get((req, res) => {
+        let userId = req.params.id;
+
+        // return entire user obj for now
+        res.send(eventonica.getUser(userId));
+    })
+
