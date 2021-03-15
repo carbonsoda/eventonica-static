@@ -1,7 +1,7 @@
 .vscode/
 .idea/
+node_modules/
 eventonica.code-workspace
 scrap.js
 scrap.html
-node_modules/
 package-lock.json

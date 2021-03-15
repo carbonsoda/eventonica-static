@@ -11,9 +11,21 @@ class Eventonica {
         return new Event(name, ...moreDetails);
     }
 
+    getEvent(eventID) {
+        let eventIdx = this.indexLookup(Event.all, eventID);
+
+        // Event not found
+        if (eventIdx < 0) return;
+
+        // Event found
+        return Event.all[eventIdx];
+    }
+
     // Update existing Event
     updateEvent(eventID, name = '', date = '', time = '', category = '', location = '', details = '') {
         let eventIdx = this.indexLookup(Event.all, eventID);
+
+        if (eventIdx < 0) return false;
 
         let currEvent = Event.all[eventIdx];
 
@@ -40,23 +52,30 @@ class Eventonica {
 
         // overwrite the old event
         Event.all[eventIdx] = currEvent;
+
+        return true;
     }
 
     // Deletes Event
     deleteEvent(eventID) {
-        let eventIdx = this.indexLookup(Event.all, eventID)
+        let eventIdx = this.indexLookup(Event.all, eventID);
 
         // if event correctly found
         if (eventIdx >= 0) {
             Event.all.splice(eventIdx, 1);
-        } else {
-            // some error message here
+            return true;
         }
+
+        return false;
     }
 
     // Get all existing events
     getAllEvents() {
         return Event.all;
+    }
+
+    getEventCategories() {
+        return Event.categories;
     }
 
     // Return items in Event.all with a specified date
@@ -97,16 +116,27 @@ class Eventonica {
         return new User(name);
     }
 
-    // Update existing User
-    updateUser(userID, name = '') {
+    // Get User
+    getUser(userID) {
         let userIdx = this.indexLookup(User.all, userID);
 
         // User not found
         if (userIdx < 0) return;
 
-        if (name) {
+        return User.all[userIdx];
+    }
+
+    // Update existing User
+    updateUser(userID, name = '') {
+        let userIdx = this.indexLookup(User.all, userID);
+
+        // User found
+        if (userIdx >= 0 && name) {
             User.all[userIdx].updateName(name);
+            return true;
         }
+
+        return false;
     }
 
     // Deletes User
@@ -116,9 +146,15 @@ class Eventonica {
         // if user correctly found
         if (userIdx >= 0) {
             User.all.splice(userIdx, 1);
-        } else {
-            // some error message here
+            return true;
         }
+
+        return false;
+    }
+
+    // Get all existing users
+    getAllUsers() {
+        return User.all;
     }
 
     // Get all existing users
@@ -127,13 +163,13 @@ class Eventonica {
     }
 
     // Handles adding/removing favorites
-    // eventIDs = array of ids
-    updateUserFavorites(eventIDs) {
-        // for now make it just single variable
-
-        if (this.currentUser && eventIDs) {
-            this.currentUser.updateFavorites(eventIDs);
+    updateUserFavorites(eventID) {
+        
+        if (this.currentUser && eventID) {
+            this.currentUser.updateFavorites(eventID);
+            return true;
         }
+        return false;
     }
 
     // returns a user object based on a userID
@@ -142,7 +178,12 @@ class Eventonica {
 
         if (userIdx >= 0) {
             this.currentUser = User.all[userIdx];
+
+            // confirm who current user is
+            return this.currentUser.id == userID;
         }
+
+        return false;
     }
 
     // Find the index of a user or event object
@@ -183,16 +224,16 @@ class Event {
         this.name = name;
         this.date = date;
         this.time = time; // could be all day too
-        this.category = new Set().add(category);
+        this.category = category;
         this.location = location;
         this.details = details;
         this.faveCount = 0;
 
         // if actual date string passed in
-        if (this.date) this.date = new Date(date);
+        if (date.length > 1) this.date = new Date(date);
 
-        Event.all.push(this);
         // keep track of all created instances
+        Event.all.push(this);
     }
 
     static findByDate(searchDate) {
@@ -221,7 +262,6 @@ class Event {
                 results.add(event);
             }
         }
-
         return results;
     }
 
@@ -248,11 +288,9 @@ class Event {
 
     // update event category labels
     updateCategory(newCategory) {
-        if (this.category.has(newCategory)) {
-            this.category.delete(newCategory);
-        } else {
-            this.category.add(newCategory);
-        }
+        if (!newCategory) return;
+
+        this.category = newCategory;
 
     }
 
@@ -315,7 +353,7 @@ if (typeof module !== 'undefined') {
 
 new Event('Virtual Guided Meditation');
 new Event('Outside Yoga Lesson');
-new Event('Drawing Workshop', '2021-02-21');
+new Event('Drawing Workshop', '2021-02-21', '', 'Workshop');
 new Event('Twitter Security 101', '2021-3-1', "1:00pm", "Seminar");
 
 
