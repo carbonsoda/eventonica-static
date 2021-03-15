@@ -434,6 +434,32 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     }
 
+    function favoriteEvent(eventID, heartBtn) {
+
+        fetch('/update-favorites', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ "id": eventID })
+        }).then((response) => {
+            if (response.status == 204) {
+                // event added/removed
+                toggleHeart(heartBtn.classList);
+            }
+        })
+    }
+
+    // Helper function
+    function toggleHeart(classList) {
+        if (classList.contains('bi-heart')) {
+            classList.replace('bi-heart', 'bi-heart-fill');
+        } else {
+            classList.replace('bi-heart-fill', 'bi-heart');
+        }
+    }
+
+
     // Either delete or add event to favorites
     function eventListClick(event) {
 
@@ -447,21 +473,9 @@ document.addEventListener("DOMContentLoaded", () => {
         // Check if fave button was clicked
         else if (event.target.classList.contains("fave")) {
             let eventID = event.target.closest("li").value;
+            let heartBtn = event.target.closest("li").childNodes[1];
 
-            if (app.currentUser) {
-                defaultHandler(
-                    "updateUserFavorites",
-                    "Favorite event added/removed",
-                    eventID
-                );
-
-                console.log(
-                    `${app.currentUser.name} favorites are 
-                    ${[...app.currentUser.favorites].join(", ")}`
-                );
-
-                console.log(app.currentUser.favorites);
-            }
+            favoriteEvent(eventID, heartBtn);
         }
     }
 
