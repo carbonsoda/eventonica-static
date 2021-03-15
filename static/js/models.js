@@ -164,13 +164,13 @@ class Eventonica {
     }
 
     // Handles adding/removing favorites
-    // eventIDs = array of ids
-    updateUserFavorites(eventIDs) {
-        // for now make it just single variable
-
-        if (this.currentUser && eventIDs) {
+    updateUserFavorites(eventID) {
+        
+        if (this.currentUser && eventId) {
             this.currentUser.updateFavorites(eventIDs);
+            return true;
         }
+        return false;
     }
 
     // returns a user object based on a userID
