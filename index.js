@@ -192,8 +192,23 @@ app.route('/user/:id/favorites')
         // convert set to an array
         res.send([...userObj.favorites]);
     })
-    
+// ADD/REMOVE FAVORITE EVENT
+app.route('/update-favorites')
+    .put((req, res) => {
+        let eventId = req.body.id;
+        let status = 200;
+        let response = 'Event not added/removed';
+
+        // only add if a current user is set
+        if (eventonica.currentUser) {
+            if (eventonica.updateUserFavorites(eventId)) {
+                status = 204;
+                response = 'Event added/removed from favorites';
+            }
+        }
+
+        res.status(status).send(response);
+    })
 
 
 
-    
