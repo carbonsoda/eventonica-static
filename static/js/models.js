@@ -12,6 +12,16 @@ class Eventonica {
         return new Event(name, ...moreDetails);
     }
 
+    getEvent(eventID) {
+        let eventIdx = this.indexLookup(Event.all, eventID);
+
+        // Event not found
+        if (eventIdx < 0) return;
+
+        // Event found
+        return Event.all[eventIdx];
+    }
+
     // Update existing Event
     updateEvent(eventID, name = '', date = '', time = '', category = '', location = '', details = '') {
         let eventIdx = this.indexLookup(Event.all, eventID);
@@ -43,13 +53,13 @@ class Eventonica {
 
         // overwrite the old event
         Event.all[eventIdx] = currEvent;
-        
+
         return true;
     }
 
     // Deletes Event
     deleteEvent(eventID) {
-        let eventIdx = this.indexLookup(Event.all, eventID)
+        let eventIdx = this.indexLookup(Event.all, eventID);
 
         // if event correctly found
         if (eventIdx >= 0) {
@@ -107,6 +117,16 @@ class Eventonica {
         return new User(name);
     }
 
+    // Get User
+    getUser(userID) {
+        let userIdx = this.indexLookup(User.all, userID);
+
+        // User not found
+        if (userIdx < 0) return;
+
+        return User.all[userIdx];
+    }
+
     // Update existing User
     updateUser(userID, name = '') {
         let userIdx = this.indexLookup(User.all, userID);
@@ -159,7 +179,7 @@ class Eventonica {
 
         if (userIdx >= 0) {
             this.currentUser = User.all[userIdx];
-            
+
             // confirm who current user is
             return this.currentUser.id == userID;
         }
