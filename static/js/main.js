@@ -419,21 +419,19 @@ document.addEventListener("DOMContentLoaded", () => {
      * https://stackoverflow.com/a/59506192
      */
 
-    function deleteEvent(eventID) {
+    function deleteEvent(eventID, listItem) {
 
         const eventUrl = `/events/${eventID}`;
 
         fetch(eventUrl, { method: 'DELETE' })
             .then((response) => {
                 if (response.status == 204) {
+                    // Remove the closest li ancestor to the clicked element
                     // event deleted
-                    refreshEventsList();
-                    return true;
+                    refreshEventsList(updateAllFields = false);
+                    listItem.remove();
                 }
             });
-        
-        // event not deleted
-        return false;
     }
 
     // Either delete or add event to favorites
@@ -443,12 +441,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.target.classList.contains("delete")) {
             // Retrieve eventID stored in the button
             let eventID = event.target.closest("li").value;
-
-            // successful deletion
-            if (deleteEvent(eventID)) {
-                // Remove the closest li ancestor to the clicked element
-                event.target.closest("li").remove();
-            }
+            deleteEvent(eventID, event.target.closest("li"))
 
         }
         // Check if fave button was clicked
