@@ -1,12 +1,11 @@
-
 const express = require('express');
 const bodyParser = require('body-parser');
-const { Eventonica, User, Event } = require('./static/js/models');
+const {Eventonica, User, Event} = require('./static/js/models');
 const port = process.env.PORT || 5000;
 
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/'));
 app.listen(port, () => {
     console.log(`Server running on port ${port}...`);
@@ -69,7 +68,7 @@ app.route('/events/:id')
         let status = 404;
         let response = 'Unable to fetch event!';
 
-        if (eventonica.updateEvent(eventId,...eventUpdates)) {
+        if (eventonica.updateEvent(eventId, ...eventUpdates)) {
             status = 201;
             response = `Event updated`;
         }
@@ -126,7 +125,7 @@ app.route('/users/:id')
         let userId = req.params.id;
         let status = 404;
         let response = 'Unable to fetch user!';
-        
+
         eventonica.getAllUsers().forEach((user) => {
             if (user.id == userId) {
                 status = 200;
@@ -180,7 +179,7 @@ app.route('/current-user/:id')
             response = eventonica.currentUser;
         }
 
-        res.send(response);
+        res.status(status).send(response);
     })
 
 app.route('/user/favorites/:id?')

@@ -164,7 +164,7 @@ class Eventonica {
 
     // Handles adding/removing favorites
     updateUserFavorites(eventID) {
-        
+
         if (this.currentUser && eventID) {
             this.currentUser.updateFavorites(eventID);
             return true;
@@ -345,7 +345,7 @@ class User {
 
 // JASMINE TESTING
 if (typeof module !== 'undefined') {
-    module.exports = {Eventonica, User, Event};
+    module.exports = { Eventonica, User, Event };
 }
 
 // COMMENT OUT BEFORE JASMINE TESTS
