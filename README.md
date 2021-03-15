@@ -7,6 +7,8 @@
   - [Requirements](#project-requirements)
   - [Build Instructions](#build-instructions)
   - [Progress](#progress)
+    - [To-dos](#to-dos)
+    - [Bugs](#bugs)
 
 
 ### Description
@@ -32,13 +34,14 @@ The project is split into multiple parts.
 
 #### Build instructions
 
-At the moment, to run `index.js` properly you will need Node.
-
 All the required packages can be installed using the following command in the project directory:
 ```
 npm install
 ```
-
+Run the project by using:
+```
+node index.js
+```
 
 ### Progress
 
@@ -54,7 +57,7 @@ npm install
 - The findByDate and findByCategory are still a work in progress
     - In the next part I will be adding Postgres, which should help me implement these better.
 
-### Bugs
+#### Bugs
 
 - Input "time"
   - On certain versions of Chrome, you can input the "seconds" field and it will reject it no matter what/mark as invalid
