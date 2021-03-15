@@ -266,30 +266,35 @@ document.addEventListener("DOMContentLoaded", () => {
     // UPDATE EVENT
     updateEventForm.addEventListener("submit", (submitEvent) => {
         submitEvent.preventDefault();
-        // required
+        // eventID required
         let eventID = parseSelect("#update-event-id");
 
-        // optional
-        let name = parseInput("#update-event-name");
-        let date = parseInput("#update-event-date");
-        // let time = parseInput("#update-event-time");
-        let time = ''; // disabled
-        let category = parseSelect("#update-event-category");
+        if (eventID) {
+            const eventUrl = `/events/${eventID}`;
+            let data = {
+                "name": parseInput("#update-event-name"),
+                "date": parseInput("#update-event-date"),
+                "time": '',
+                "category": parseSelect("#update-event-category")
+            };
 
-        // submit request
-        defaultHandler(
-            "updateEvent",
-            "Updated event",
-            eventID,
-            name,
-            date,
-            time,
-            category
-        );
-
-        refreshEventsList();
-        updateEventForm.reset();
-    });
+            fetch(eventUrl,
+                {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then((response) => {
+                    if (response.status == 201) {
+                        refreshEventsList();
+                        updateEventForm.reset();
+                    }
+                })
+        });
+    
+    
 
 
     /**

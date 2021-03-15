@@ -62,11 +62,25 @@ app.route('/events/:id')
 
         res.status(status).send(response);
     })
+    // UPDATE EVENT
+    .put((req, res) => {
+        let eventId = req.params.id;
+        let eventUpdates = Object.values(req.body);
+        let status = 404;
+        let response = 'Unable to fetch event!';
+
+        if (eventonica.updateEvent(eventId,...eventUpdates)) {
+            status = 201;
+            response = `Event updated`;
+        }
+
+        res.status(status).send(response);
+    })
     // DELETE EVENT
     .delete((req, res) => {
         let eventId = req.params.id;
         let status = 404;
-        let response = 'Unable to fetch data!';
+        let response = 'Unable to fetch event!';
 
         if (eventonica.deleteEvent(eventId)) {
             status = 204;
