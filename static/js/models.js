@@ -166,8 +166,8 @@ class Eventonica {
     // Handles adding/removing favorites
     updateUserFavorites(eventID) {
         
-        if (this.currentUser && eventId) {
-            this.currentUser.updateFavorites(eventIDs);
+        if (this.currentUser && eventID) {
+            this.currentUser.updateFavorites(eventID);
             return true;
         }
         return false;
