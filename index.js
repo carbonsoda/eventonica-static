@@ -97,7 +97,15 @@ app.route('/events/:id')
 
 app.route('/users')
     .get((req, res) => {
-        res.send(eventonica.getAllUsers());
+        let allUsers = eventonica.getAllUsers();
+
+        // convert all favorites
+        // from sets to arrays since JSON can't parse them
+        allUsers.forEach((user) => {
+            user.favorites = [...user.favorites];
+        })
+
+        res.send(allUsers);
     })
     // ADD NEW USER
     .post((req, res) => {
@@ -185,6 +193,10 @@ app.route('/user/:id/favorites')
         let userId = req.params.id;
 
         // return entire user obj for now
-        res.send(eventonica.getUser(userId));
+        let userObj = eventonica.getUser(userId);
+        // convert set to an array
+        userObj.favorites = [...userObj.favorites];
+        res.send(userObj);
     })
+    
 
