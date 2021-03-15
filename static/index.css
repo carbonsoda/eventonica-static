@@ -4,7 +4,8 @@ Google Fonts + Bootstrap Icons
 
 @import url('https://fonts.googleapis.com/css2?family=Exo&family=Public+Sans&family=Roboto&display=swap');
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css");
-/* 
+
+/*
 Colors from coolors.com
 --desert-sand: #ecc8afff;
 --middle-red: #dc876aff;
@@ -44,7 +45,7 @@ h2, h3, h4 {
 }
 
 h2 {
-    font-size: 1.9em!important;
+    font-size: 1.9em !important;
     /* padding-left: 0.5rem; */
 }
 
@@ -85,7 +86,7 @@ footer {
 
 input, select {
     font-family: 'Roboto', sans-serif;
-    line-height: 1em!important;
+    line-height: 1em !important;
     font-size: 1rem;
     max-width: 12rem;
 }
@@ -106,7 +107,7 @@ option {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    font-size: 1.1 em;
+    font-size: 1.1em;
 }
 
 .current-user #display-current-user {
@@ -126,7 +127,7 @@ option {
     margin: 0.5rem;
 }
 
-.delete{
+.delete {
     margin-right: 1rem;
 }
 
@@ -141,7 +142,7 @@ option {
     /* display:grid; */
 }
 
-.events-manage>h3 {
+.events-manage > h3 {
     flex-basis: 100%;
     padding-bottom: 0rem;
 }
@@ -150,7 +151,7 @@ option {
     max-width: 20rem;
 }
 
-.edit-event>fieldset {
+.edit-event > fieldset {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     max-width: 20rem;
@@ -170,7 +171,7 @@ option {
     max-width: 20rem;
 }
 
-.edit-user>fieldset {
+.edit-user > fieldset {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 }
@@ -178,8 +179,7 @@ option {
 /* Input-interactive styling*/
 
 button, input[type=submit] {
-    background: #ecc8afff;
-    ;
+    background: #ecc8afff;;
     font-size: .85em;
     padding: .65em 1em;
     margin: 0 .5rem 0 .5rem;

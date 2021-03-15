@@ -66,11 +66,11 @@ function eventOutputFormat(eventObj) {
             }
             output += ` (${categories})`;
         }
-        
+
     }
     if (eventObj.date) {
         output += ` — ${eventObj.date.toDateString()}`;
-    } 
+    }
 
     return output;
 }
@@ -362,7 +362,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /**
      * EVENT BUTTONS
-     * 
+     *
      * Source: Scott Marcus
      * https://stackoverflow.com/a/59506192
      */

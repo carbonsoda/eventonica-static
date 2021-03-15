@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>Eventonica</title>
 
     <!--STYLING + ICON-->
-    <link rel="stylesheet" href="./static/index.css" />
-    <link rel="shortcut icon" href="./static/img/calendar.png" />
+    <link rel="stylesheet" href="./static/index.css"/>
+    <link rel="shortcut icon" href="./static/img/calendar.png"/>
 
     <!--SCRIPTS-->
     <script defer src="./static/js/models.js"></script>
@@ -15,217 +15,216 @@
 </head>
 
 <body>
-    <header>
-        <img src="./static/img/calendar.png" alt="Calendar Star Logo" />
-        <h1>Eventonica</h1>
-    </header>
+<header>
+    <img src="./static/img/calendar.png" alt="Calendar Star Logo"/>
+    <h1>Eventonica</h1>
+</header>
 
-    <main>
-        <div class="current-user">
+<main>
+    <div class="current-user">
             <span id="display-current-user">
                 <strong> Current user: </strong>
 
             </span>
 
-            <a href="#change-user">
-                <button>
-                    Change user
-                </button>
-            </a>
-        </div>
+        <a href="#change-user">
+            <button>
+                Change user
+            </button>
+        </a>
+    </div>
 
-        <!--EVENTS SECTION-->
-        <section class="events-overview">
-            <h2>Events</h2>
+    <!--EVENTS SECTION-->
+    <section class="events-overview">
+        <h2>Events</h2>
 
-            <!--View all events + individual details-->
-            <section class="events-display">
-                <ul class="events-list">
-                    <!-- Display all Events here -->
-                    <li>...</li>
-                </ul>
-            </section>
-
-
-            <!--FORMS FOR ALL EVENT CHANGES-->
-            <section class="events-manage">
-                <h3>Event Management</h3>
-
-                <!--ADD EVENT-->
-                <div>
-                    <h4>Add Event</h4>
-                    <form id="add-event" action="#" class="edit-event">
-                        <fieldset>
-                            <label>Name</label>
-                            <input type="text" id="add-event-name" placeholder="Virtual corgi meetup" />
-
-                            <label for="add-event-date">Date</label>
-                            <input type="date" id="add-event-date" placeholder="YYYY-MM-DD" />
-
-                            <!-- <label for="add-event-time">Time</label>
-                            <input type="time" id="add-event-time" /> -->
-
-                            <label>Category</label>
-                            <select id="add-event-category" class='category-select'>
-                                <option value="">----Pick a category-----</option>
-                                <!--Display all categories here-->
-                            </select>
-                        </fieldset>
-
-                        <!-- Add more form fields here -->
-                        <input type="submit" />
-                    </form>
-                </div>
-
-                <!--UPDATE EVENT-->
-                <div>
-                    <h4>Update Event</h4>
-                    <form id="update-event" action="#" class="edit-event">
-                        <fieldset id="update-fields">
-                            <label>Event</label>
-                            <select id="update-event-id" class='event-select'>
-                                <option value="">----Pick an event-----</option>
-                                <!--Display all events here-->
-                            </select>
-
-
-
-                            <label for="event-update-name">Name</label>
-                            <input type="text" id="update-event-name" />
-
-
-                            <label for="update-event-date">Date</label>
-                            <input type="date" id="update-event-date" placeholder="YYYY-MM-DD" />
-
-                            <!-- <label for="update-event-time">Time</label>
-                            <input type="time" id="update-event-time" step="60" /> -->
-
-                            <label>Category</label>
-                            <select id="update-event-category" class='category-select'>
-                                <option value="">----Pick a category-----</option>
-                                <!--Display all categories here-->
-                            </select>
-
-                        </fieldset>
-
-                        <input type="submit" />
-                    </form>
-                </div>
-
-            </section>
+        <!--View all events + individual details-->
+        <section class="events-display">
+            <ul class="events-list">
+                <!-- Display all Events here -->
+                <li>...</li>
+            </ul>
         </section>
 
-        <!--USER SECTION-->
-        <section class="user-management">
-            <h2>User Management</h2>
 
-            <div class="user-overview">
-                <ul id="users-list">
-                    <!-- display all existing Users here -->
-                    <li>...</li>
-                </ul>
-            </div>
+        <!--FORMS FOR ALL EVENT CHANGES-->
+        <section class="events-manage">
+            <h3>Event Management</h3>
 
-
-            <!--ALL USER CHANGES/FUNCTIONS-->
-            <section class="user-changes">
-
-                <!--SWITCH CURRENT USERS-->
-                <div id="change-user">
-                    <h3>Set current user</h3>
-                    <form id="set-current-user" action="#" class="edit-user">
-                        <fieldset>
-                            <label for="current-user-select">User</label>
-                            <select id="current-user-select" class='user-select'>
-                                <option value="">----Pick a user-----</option>
-                                <!--Display all users here-->
-                            </select>
-                        </fieldset>
-                        <input type="submit" />
-                    </form>
-
-
-                </div>
-
-                <!--ADD NEW USER-->
-                <div>
-                    <h3>Add User</h3>
-                    <form id="add-user" action="#" class="edit-user">
-                        <fieldset>
-                            <label>Name</label>
-                            <input type="text" id="add-user-name" />
-                        </fieldset>
-
-                        <!-- Add more form fields here -->
-                        <input type="submit" />
-                    </form>
-                </div>
-
-                <!--DELETE USER-->
-                <div>
-                    <h3>Delete User</h3>
-                    <form id="delete-user" action="#" class="edit-user">
-                        <fieldset>
-                            <label for="delete-user-id">User</label>
-                            <select id="delete-user-id" class='user-select'>
-                                <option value="">----Pick a user-----</option>
-                                <!--Display all users here-->
-                            </select>
-                        </fieldset>
-                        <input type="submit" />
-                    </form>
-                </div>
-
-                <!--UPDATE USER'S NAME-->
-                <div>
-                    <h3>Update User</h3>
-                    <form id="update-user" action="#" class="edit-user">
-                        <fieldset>
-                            <label for="update-user-id">User</label>
-                            <select id="update-user-id" class='user-select'>
-                                <option value="">----Pick a user-----</option>
-                                <!--Display all users here-->
-                            </select>
-
-
-                            <label for="update-user-name">Name</label>
-                            <input type="text" placeholder="New Name" id="update-user-name" />
-                        </fieldset>
-                        <input type="submit" />
-                    </form>
-                </div>
-            </section>
-        </section>
-
-        <!--SEARCH-->
-        <aside class="search-toolbar">
+            <!--ADD EVENT-->
             <div>
-                <h3>Find Events</h3>
-                <form id="search" action="#">
+                <h4>Add Event</h4>
+                <form id="add-event" action="#" class="edit-event">
                     <fieldset>
-                        <label for="date-search">Date</label>
-                        <input type="date" id="date-search" placeholder="YYYY-MM-DD" />
-                        <label for="category-search">Category</label>
-                        <select id="category-search" class='category-select'>
+                        <label>Name</label>
+                        <input type="text" id="add-event-name" placeholder="Virtual corgi meetup"/>
+
+                        <label for="add-event-date">Date</label>
+                        <input type="date" id="add-event-date" placeholder="YYYY-MM-DD"/>
+
+                        <!-- <label for="add-event-time">Time</label>
+                        <input type="time" id="add-event-time" /> -->
+
+                        <label>Category</label>
+                        <select id="add-event-category" class='category-select'>
                             <option value="">----Pick a category-----</option>
                             <!--Display all categories here-->
                         </select>
                     </fieldset>
 
-                    <input type="submit" value="Search" />
+                    <!-- Add more form fields here -->
+                    <input type="submit"/>
                 </form>
             </div>
-        </aside>
-    </main>
 
-    <footer>
-        <div>
-            Star Calendar favicon made by
-            <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a>
-            Find your own on
-            <a href="https://www.flaticon.com/" title="Flaticon">FlatIcon.com</a>
+            <!--UPDATE EVENT-->
+            <div>
+                <h4>Update Event</h4>
+                <form id="update-event" action="#" class="edit-event">
+                    <fieldset id="update-fields">
+                        <label>Event</label>
+                        <select id="update-event-id" class='event-select'>
+                            <option value="">----Pick an event-----</option>
+                            <!--Display all events here-->
+                        </select>
+
+
+                        <label for="update-event-name">Name</label>
+                        <input type="text" id="update-event-name"/>
+
+
+                        <label for="update-event-date">Date</label>
+                        <input type="date" id="update-event-date" placeholder="YYYY-MM-DD"/>
+
+                        <!-- <label for="update-event-time">Time</label>
+                        <input type="time" id="update-event-time" step="60" /> -->
+
+                        <label>Category</label>
+                        <select id="update-event-category" class='category-select'>
+                            <option value="">----Pick a category-----</option>
+                            <!--Display all categories here-->
+                        </select>
+
+                    </fieldset>
+
+                    <input type="submit"/>
+                </form>
+            </div>
+
+        </section>
+    </section>
+
+    <!--USER SECTION-->
+    <section class="user-management">
+        <h2>User Management</h2>
+
+        <div class="user-overview">
+            <ul id="users-list">
+                <!-- display all existing Users here -->
+                <li>...</li>
+            </ul>
         </div>
-    </footer>
+
+
+        <!--ALL USER CHANGES/FUNCTIONS-->
+        <section class="user-changes">
+
+            <!--SWITCH CURRENT USERS-->
+            <div id="change-user">
+                <h3>Set current user</h3>
+                <form id="set-current-user" action="#" class="edit-user">
+                    <fieldset>
+                        <label for="current-user-select">User</label>
+                        <select id="current-user-select" class='user-select'>
+                            <option value="">----Pick a user-----</option>
+                            <!--Display all users here-->
+                        </select>
+                    </fieldset>
+                    <input type="submit"/>
+                </form>
+
+
+            </div>
+
+            <!--ADD NEW USER-->
+            <div>
+                <h3>Add User</h3>
+                <form id="add-user" action="#" class="edit-user">
+                    <fieldset>
+                        <label>Name</label>
+                        <input type="text" id="add-user-name"/>
+                    </fieldset>
+
+                    <!-- Add more form fields here -->
+                    <input type="submit"/>
+                </form>
+            </div>
+
+            <!--DELETE USER-->
+            <div>
+                <h3>Delete User</h3>
+                <form id="delete-user" action="#" class="edit-user">
+                    <fieldset>
+                        <label for="delete-user-id">User</label>
+                        <select id="delete-user-id" class='user-select'>
+                            <option value="">----Pick a user-----</option>
+                            <!--Display all users here-->
+                        </select>
+                    </fieldset>
+                    <input type="submit"/>
+                </form>
+            </div>
+
+            <!--UPDATE USER'S NAME-->
+            <div>
+                <h3>Update User</h3>
+                <form id="update-user" action="#" class="edit-user">
+                    <fieldset>
+                        <label for="update-user-id">User</label>
+                        <select id="update-user-id" class='user-select'>
+                            <option value="">----Pick a user-----</option>
+                            <!--Display all users here-->
+                        </select>
+
+
+                        <label for="update-user-name">Name</label>
+                        <input type="text" placeholder="New Name" id="update-user-name"/>
+                    </fieldset>
+                    <input type="submit"/>
+                </form>
+            </div>
+        </section>
+    </section>
+
+    <!--SEARCH-->
+    <aside class="search-toolbar">
+        <div>
+            <h3>Find Events</h3>
+            <form id="search" action="#">
+                <fieldset>
+                    <label for="date-search">Date</label>
+                    <input type="date" id="date-search" placeholder="YYYY-MM-DD"/>
+                    <label for="category-search">Category</label>
+                    <select id="category-search" class='category-select'>
+                        <option value="">----Pick a category-----</option>
+                        <!--Display all categories here-->
+                    </select>
+                </fieldset>
+
+                <input type="submit" value="Search"/>
+            </form>
+        </div>
+    </aside>
+</main>
+
+<footer>
+    <div>
+        Star Calendar favicon made by
+        <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a>
+        Find your own on
+        <a href="https://www.flaticon.com/" title="Flaticon">FlatIcon.com</a>
+    </div>
+</footer>
 
 </body>
 

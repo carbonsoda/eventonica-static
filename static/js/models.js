@@ -1,4 +1,3 @@
-
 class Eventonica {
 
     constructor() {
@@ -205,7 +204,7 @@ class Event {
                 event.date.getMonth() == searchDate.getMonth()
                 && event.date.getDay() == searchDate.getDay()
                 && event.date.getYear() == searchDate.getYear()
-            ){
+            ) {
                 results.add(event);
             }
         }
@@ -254,7 +253,7 @@ class Event {
         } else {
             this.category.add(newCategory);
         }
-        
+
     }
 
     // update event location
@@ -308,7 +307,7 @@ class User {
 
 // JASMINE TESTING
 if (typeof module !== 'undefined') {
-    module.exports = { Eventonica, User, Event };
+    module.exports = {Eventonica, User, Event};
 }
 
 // COMMENT OUT BEFORE JASMINE TESTS
@@ -317,7 +316,7 @@ if (typeof module !== 'undefined') {
 new Event('Virtual Guided Meditation');
 new Event('Outside Yoga Lesson');
 new Event('Drawing Workshop', '2021-02-21');
-new Event('Twitter Security 101', '2021-3-1', "1:00pm","Seminar");
+new Event('Twitter Security 101', '2021-3-1', "1:00pm", "Seminar");
 
 
 new User('Avery');
