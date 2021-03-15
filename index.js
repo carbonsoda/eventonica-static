@@ -97,7 +97,7 @@ app.route('/events/:id')
 
 app.route('/users')
     .get((req, res) => {
-        let allUsers = eventonica.getAllUsers();
+        let allUsers = [...eventonica.getAllUsers()];
 
         // convert all favorites
         // from sets to arrays since JSON can't parse them
@@ -131,7 +131,7 @@ app.route('/users/:id')
         let userId = req.params.id;
         let status = 404;
         let response = 'Unable to fetch user!';
-
+        
         eventonica.getAllUsers().forEach((user) => {
             if (user.id == userId) {
                 status = 200;
@@ -192,11 +192,12 @@ app.route('/user/:id/favorites')
     .get((req, res) => {
         let userId = req.params.id;
 
-        // return entire user obj for now
         let userObj = eventonica.getUser(userId);
+
         // convert set to an array
-        userObj.favorites = [...userObj.favorites];
-        res.send(userObj);
+        res.send([...userObj.favorites]);
     })
+
+
     
 
