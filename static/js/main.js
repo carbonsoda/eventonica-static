@@ -77,6 +77,8 @@ function setSelectOptions(selectObjTag, allObjs, defaultOption, isCategory = fal
     // all relevant select-input elements
     const selectOptionsAll = document.querySelectorAll(selectObjTag);
 
+    if (allObjs.length < 1) return;
+
     // formatted options to be inserted in each element
     const htmlDropdown = selectFormat(allObjs, defaultOption, isCategory);
 
@@ -125,26 +127,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Builds HTML list for all events
     // Call after update, add, or remove an event
-    function refreshEventsList() {
+    // updateAllFields - update main list + all select menus
+    function refreshEventsList(updateAllFields = true) {
 
         fetch('/events')
             .then(response => response.json())
             .then(allEventData => {
-                // Formatting
-                let newEventHtml = allEventData.map(
-                    (event) => `<li 
+
+                // refresh all event select menus
+                setSelectOptions(".event-select", allEventData, "an event");
+
+                if (!updateAllFields) {
+                    // stop here
+                    return;
+                }
+
+                let newEventHtml = "No events planned yet";
+                
+                if (allEventData.length > 0) {
+                    // Formatting
+                    newEventHtml = allEventData.map(
+                        (event) => `<li 
                     value="${event.id}">
                     ${eventListOutput(event)}
                     </li>`
-                ).join("\n");
-
-                // No events exist yet
-                if (allEventData.length < 1) {
-                    newEventHtml = "No events planned yet";
-                } else {
-                    // also refresh all event select menus
-                    setSelectOptions(".event-select", allEventData, "an event");
+                    ).join("\n");
                 }
+
                 eventsList.innerHTML = newEventHtml;
             });
     }
@@ -295,8 +304,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
         }
     });
-    
-    
+
+
 
 
     /**
@@ -487,8 +496,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let date = parseInput('#date-search');
         let category = parseSelect('#category-search');
-
-        let results = 'aa';
         if (date) {
             results = app.findEventsByDate(date);
         } else if (category) {
