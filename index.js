@@ -97,15 +97,10 @@ app.route('/events/:id')
 
 app.route('/users')
     .get((req, res) => {
-        let allUsers = [...eventonica.getAllUsers()];
-
-        // convert all favorites
-        // from sets to arrays since JSON can't parse them
-        allUsers.forEach((user) => {
-            user.favorites = [...user.favorites];
-        })
-
-        res.send(allUsers);
+        // for now doesn't show favorites properly
+        // this will get reworked anyways
+        // when adding postgres later
+        res.send(eventonica.getAllUsers());
     })
     // ADD NEW USER
     .post((req, res) => {
@@ -197,7 +192,8 @@ app.route('/user/:id/favorites')
         // convert set to an array
         res.send([...userObj.favorites]);
     })
+    
+
 
 
     
-
