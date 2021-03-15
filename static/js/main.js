@@ -56,21 +56,14 @@ function eventOutputFormat(eventObj) {
     let output = `${eventObj.name}`;
 
     if (eventObj.category) {
-        let categories = [...eventObj.category].join(', ');
-        if (categories) {
-            // If a category is later added
-            // The first element is empty in the set 
-            // and there's a leading ', '
-            if (categories[0] == ',') {
-                categories = categories.slice(2);
-            }
-            output += ` (${categories})`;
-        }
-        
+        // assume just one category for now
+        output += ` (${eventObj.category})`;
     }
     if (eventObj.date) {
-        output += ` — ${eventObj.date.toDateString()}`;
-    } 
+        // convert from string to date to formatted dateString
+        const date = new Date(eventObj.date);
+        output += ` — ${date.toDateString()}`;
+    }
 
     return output;
 }
@@ -83,6 +76,8 @@ function eventOutputFormat(eventObj) {
 function setSelectOptions(selectObjTag, allObjs, defaultOption, isCategory = false) {
     // all relevant select-input elements
     const selectOptionsAll = document.querySelectorAll(selectObjTag);
+
+    if (allObjs.length < 1) return;
 
     // formatted options to be inserted in each element
     const htmlDropdown = selectFormat(allObjs, defaultOption, isCategory);
@@ -132,47 +127,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Builds HTML list for all events
     // Call after update, add, or remove an event
-    const refreshEventsList = () => {
-        let eventsListHTML = app.getAllEvents()
-            .map(
-                (event) =>
-                    `<li value="${event.id}">
-                ${eventListOutput(event)}
-                </li>`
-            )
-            .join("\n");
+    // updateAllFields - update main list + all select menus
+    function refreshEventsList(updateAllFields = true) {
 
-        if (app.getAllEvents().length < 1) {
-            eventsListHTML = "No events planned yet";
-        } else {
-            // also refresh all event select menus
-            setSelectOptions(".event-select", app.getAllEvents(), "an event");
-        }
+        fetch('/events')
+            .then(response => response.json())
+            .then(allEventData => {
 
-        // set event-list to display the new html
-        eventsList.innerHTML = eventsListHTML;
-    };
+                // refresh all event select menus
+                setSelectOptions(".event-select", allEventData, "an event");
+
+                if (!updateAllFields) {
+                    // stop here
+                    return;
+                }
+
+                let newEventHtml = "No events planned yet";
+                
+                if (allEventData.length > 0) {
+                    // Formatting
+                    newEventHtml = allEventData.map(
+                        (event) => `<li 
+                    value="${event.id}">
+                    ${eventListOutput(event)}
+                    </li>`
+                    ).join("\n");
+                }
+
+                eventsList.innerHTML = newEventHtml;
+            });
+    }
 
     // Builds HTML list for all users.
     // Call after update, add, or remove a user
-    const refreshUserList = () => {
-        let usersListHTML = app.getAllUsers()
-            .map(
-                (user) =>
-                    `<li>
-                ${user.name}</small>
-                </li>`
-            )
-            .join("\n");
+    function refreshUserList() {
+        fetch('/users')
+            .then(response => response.json())
+            .then(allUsers => {
+                // Formatting
+                let userListHtml = allUsers.map(
+                    (user) => `<li> ${user.name} </li>`
+                ).join("\n");
 
-        if (app.getAllUsers().length < 1) {
-            usersListHTML = "No users registered yet";
-        } else {
-            // also refresh all user select menus
-            setSelectOptions(".user-select", app.getAllUsers(), "a user");
-        }
-        // set users-list to display the new html
-        usersList.innerHTML = usersListHTML;
+                // No users exist yet
+                if (allUsers.length < 1) {
+                    usersListHTML = "No users registered yet";
+                } else {
+                    // also refresh all user select menus
+                    setSelectOptions(".user-select", allUsers, "a user");
+                }
+                // set users-list to display the new html
+                usersList.innerHTML = userListHtml;
+            });
     };
 
     // Loading page for first time
@@ -180,11 +186,12 @@ document.addEventListener("DOMContentLoaded", () => {
     refreshUserList();
 
     // Initialize category select-menu
+    // TODO: update to do fetch 
     setSelectOptions(
         ".category-select",
         Event.categories,
         "a category",
-        (isCategory = true)
+        isCategory = true
     );
 
     /**
@@ -238,49 +245,67 @@ document.addEventListener("DOMContentLoaded", () => {
     // ADD EVENT
     addEventForm.addEventListener("submit", (submitEvent) => {
         submitEvent.preventDefault();
-        // required
-        let name = parseInput("#add-event-name");
 
-        // optional
-        let date = parseInput("#add-event-date");
-        // let time = parseInput("#add-event-time");
-        let time = ''; // disabled
-        let category = parseSelect("#add-event-category");
+        // only name is required
+        // time is disabled for now
+        let data = {
+            "name": parseInput("#add-event-name"),
+            "details": {
+                "date": parseInput("#add-event-date"),
+                "time": '',
+                "category": parseSelect("#add-event-category")
+            }
+        }
 
-        // submit request
-        defaultHandler("addEvent", "Added event", name, date, time, category);
-
-        refreshEventsList();
-        addEventForm.reset();
+        fetch('/events',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then((response) => {
+                if (response.status == 201) {
+                    refreshEventsList();
+                    addEventForm.reset();
+                }
+            });
     });
 
     // UPDATE EVENT
     updateEventForm.addEventListener("submit", (submitEvent) => {
         submitEvent.preventDefault();
-        // required
+        // eventID required
         let eventID = parseSelect("#update-event-id");
 
-        // optional
-        let name = parseInput("#update-event-name");
-        let date = parseInput("#update-event-date");
-        // let time = parseInput("#update-event-time");
-        let time = ''; // disabled
-        let category = parseSelect("#update-event-category");
+        if (eventID) {
+            const eventUrl = `/events/${eventID}`;
+            let data = {
+                "name": parseInput("#update-event-name"),
+                "date": parseInput("#update-event-date"),
+                "time": '',
+                "category": parseSelect("#update-event-category")
+            };
 
-        // submit request
-        defaultHandler(
-            "updateEvent",
-            "Updated event",
-            eventID,
-            name,
-            date,
-            time,
-            category
-        );
-
-        refreshEventsList();
-        updateEventForm.reset();
+            fetch(eventUrl,
+                {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then((response) => {
+                    if (response.status == 201) {
+                        refreshEventsList();
+                        updateEventForm.reset();
+                    }
+                })
+        }
     });
+
+
 
 
     /**
@@ -288,32 +313,50 @@ document.addEventListener("DOMContentLoaded", () => {
      * EVENTLISTENERS
      */
 
-    // USER FORM'S EVENT LISTENERS
     addUserForm.addEventListener("submit", (submitEvent) => {
         submitEvent.preventDefault();
-        let name = parseInput("#add-user-name");
+        const name = parseInput("#add-user-name");
 
-        // Attempt add
-        let newAdded = defaultHandler("addUser", "Added user ", name);
+        if (name) {
+            let data = {
+                "name": name
+            }
 
-        if (newAdded) {
-            refreshUserList();
-            addUserForm.reset();
+            fetch('/users',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then((response) => {
+                    if (response.status == 201) {
+                        refreshUserList();
+                        addUserForm.reset();
+                    }
+                });
         }
-    });
+
+
+    })
 
     // REMOVE USER
     removeUserForm.addEventListener("submit", (submitEvent) => {
         submitEvent.preventDefault();
         // Which user
-        let userID = parseSelect("#delete-user-id");
+        const userID = parseSelect("#delete-user-id");
 
-        // Attempt delete
-        let deleted = defaultHandler("deleteUser", "Deleted user", userID);
+        if (userID) {
+            const userUrl = `/users/${userID}`;
 
-        if (deleted) {
-            refreshUserList();
-            removeUserForm.reset();
+            fetch(userUrl, { method: 'DELETE' })
+                .then((response) => {
+                    if (response.status == 200) {
+                        refreshUserList();
+                        removeUserForm.reset();
+                    }
+                })
         }
     });
 
@@ -324,17 +367,26 @@ document.addEventListener("DOMContentLoaded", () => {
         const userID = parseSelect("#update-user-id");
         const userNewName = document.querySelector("#update-user-name").value;
 
-        // Attempt update
-        let updated = defaultHandler(
-            "updateUser",
-            "User updated",
-            userID,
-            userNewName
-        );
+        if (userID && userNewName) {
+            const userUrl = `/users/${userID}`;
+            let data = {
+                "name": userNewName
+            }
 
-        if (updated) {
-            refreshUserList();
-            updateUserForm.reset();
+            fetch(userUrl,
+                {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then((response) => {
+                    if (response.status == 200) {
+                        refreshUserList();
+                        updateUserForm.reset();
+                    }
+                });
         }
     });
 
@@ -344,19 +396,19 @@ document.addEventListener("DOMContentLoaded", () => {
         // Which user
         const userID = parseSelect("#current-user-select");
 
-        // Attempt switch current user
-        let newCurrent = defaultHandler(
-            "setCurrentUser",
-            "Current user is now ",
-            userID
-        );
+        if (userID) {
+            const userUrl = `/current-user/${userID}`;
 
-        if (newCurrent && app.currentUser) {
-            document.querySelector(
-                "#display-current-user"
-            ).innerHTML += `${app.currentUser.name}`;
-
-            currentUserForm.reset();
+            // Not sure if need to add a GET call for the user
+            // because if no user found, response.json() throws error
+            fetch(userUrl, { method: 'PUT' })
+                .then((response) => response.json())
+                .then((user) => {
+                    document.querySelector(
+                        "#display-current-user"
+                    ).innerHTML += user.name;
+                    currentUserForm.reset();
+                });
         }
     });
 
@@ -367,6 +419,47 @@ document.addEventListener("DOMContentLoaded", () => {
      * https://stackoverflow.com/a/59506192
      */
 
+    function deleteEvent(eventID, listItem) {
+
+        const eventUrl = `/events/${eventID}`;
+
+        fetch(eventUrl, { method: 'DELETE' })
+            .then((response) => {
+                if (response.status == 204) {
+                    // Remove the closest li ancestor to the clicked element
+                    // event deleted
+                    refreshEventsList(updateAllFields = false);
+                    listItem.remove();
+                }
+            });
+    }
+
+    function favoriteEvent(eventID, heartBtn) {
+
+        fetch('/user/favorites/', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ "id": eventID })
+        }).then((response) => {
+            if (response.status == 204) {
+                // event added/removed
+                toggleHeart(heartBtn.classList);
+            }
+        })
+    }
+
+    // Helper function
+    function toggleHeart(classList) {
+        if (classList.contains('bi-heart')) {
+            classList.replace('bi-heart', 'bi-heart-fill');
+        } else {
+            classList.replace('bi-heart-fill', 'bi-heart');
+        }
+    }
+
+
     // Either delete or add event to favorites
     function eventListClick(event) {
 
@@ -374,38 +467,15 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.target.classList.contains("delete")) {
             // Retrieve eventID stored in the button
             let eventID = event.target.closest("li").value;
-
-            // Attempt delete
-            let deleted = defaultHandler("deleteEvent", "Deleted event", eventID);
-
-            // successful deletion
-            if (deleted) {
-                // Remove the closest li ancestor to the clicked element
-                event.target.closest("li").remove();
-
-                //refresh all event select menus
-                setSelectOptions(".event-select", app.getAllEvents(), "an event");
-            }
+            deleteEvent(eventID, event.target.closest("li"))
 
         }
         // Check if fave button was clicked
         else if (event.target.classList.contains("fave")) {
             let eventID = event.target.closest("li").value;
+            let heartBtn = event.target.closest("li").childNodes[1];
 
-            if (app.currentUser) {
-                defaultHandler(
-                    "updateUserFavorites",
-                    "Favorite event added/removed",
-                    eventID
-                );
-
-                console.log(
-                    `${app.currentUser.name} favorites are 
-                    ${[...app.currentUser.favorites].join(", ")}`
-                );
-
-                console.log(app.currentUser.favorites);
-            }
+            favoriteEvent(eventID, heartBtn);
         }
     }
 
@@ -433,8 +503,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let date = parseInput('#date-search');
         let category = parseSelect('#category-search');
-
-        let results = 'aa';
         if (date) {
             results = app.findEventsByDate(date);
         } else if (category) {
